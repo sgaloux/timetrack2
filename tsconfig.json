@@ -3,6 +3,7 @@
   "compilerOptions": {
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
-    "module": "esnext"
+    "module": "esnext",
+    "pretty": true
   }
 }
