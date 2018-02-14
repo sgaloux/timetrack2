@@ -1,12 +1,21 @@
 {
-  "name": "electron-webpack-quick-start",
-  "version": "0.0.0",
+  "name": "timetrack2",
+  "version": "0.0.1",
   "license": "MIT",
   "scripts": {
     "dev": "electron-webpack dev",
     "compile": "electron-webpack",
     "dist": "yarn compile && electron-builder",
     "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null"
+  },
+  "electronWebpack": {
+    "main": {
+      "webpackConfig": "custom.additions.webpack.js"
+    },
+    "renderer": {
+      "webpackConfig": "custom.additions.webpack.js",
+      "webpackDllConfig": "custom.additions.webpack.js"
+    }
   },
   "dependencies": {
     "react": "^16.2.0",
@@ -24,6 +33,7 @@
     "tslint": "^5.9.1",
     "typescript": "^2.7.1",
     "webpack": "^3.10.0",
-    "webpack-build-notifier": "^0.1.22"
+    "webpack-build-notifier": "^0.1.22",
+    "webpack-sources": "1.0.1"
   }
 }
