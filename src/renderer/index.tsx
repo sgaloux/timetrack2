@@ -1,4 +1,16 @@
+import { Provider } from 'mobx-react';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-ReactDOM.render(<div>React Applicdation</div>, document.getElementById('app'));
+import { RootStore } from './store';
+
+import Shell from './components/Shell';
+
+const store = RootStore.create();
+
+ReactDOM.render(
+  <Provider store={store}>
+    <Shell />
+  </Provider>,
+  document.getElementById('app'),
+);
