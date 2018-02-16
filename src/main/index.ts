@@ -1,6 +1,7 @@
 'use strict';
 
 import { app, BrowserWindow } from 'electron';
+import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 import * as path from 'path';
 import { format as formatUrl } from 'url';
 
@@ -57,7 +58,15 @@ app.on('activate', () => {
   }
 });
 
+function installExtensions() {
+  if (isDevelopment) {
+    installExtension(REACT_DEVELOPER_TOOLS);
+    installExtension('pfgnfdagidkfgccljigdamigbcnndkod');
+  }
+}
+
 // create main BrowserWindow when electron is ready
 app.on('ready', () => {
+  installExtensions();
   mainWindow = createMainWindow();
 });
