@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { applySnapshot, getSnapshot, onSnapshot, types } from 'mobx-state-tree';
+import { applySnapshot, getSnapshot, types } from 'mobx-state-tree';
 import { v4 } from 'node-uuid';
 import util from 'util';
 
