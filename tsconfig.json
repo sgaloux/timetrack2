@@ -6,7 +6,8 @@
     "module": "esnext",
     "pretty": true,
     "paths": {
-      "common": ["src/common"]
-    }
+      "common": ["./common"]
+    },
+    "baseUrl": "./src"
   }
 }

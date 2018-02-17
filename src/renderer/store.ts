@@ -1,17 +1,12 @@
-import fs from 'fs';
-import { applySnapshot, getSnapshot, types } from 'mobx-state-tree';
+import { exists, readFile, writeFile } from 'fs';
+import { getSnapshot, types, applySnapshot } from 'mobx-state-tree';
 import { v4 } from 'node-uuid';
-import util from 'util';
 
-import { getUserHome } from '../common/utils';
-
-const readFile = util.promisify(fs.readFile);
-const writeFile = util.promisify(fs.writeFile);
-const fileExists = util.promisify(fs.exists);
+import { getRootFolder } from 'common/utils';
 
 const PATHS = {
-  settingsFile: getUserHome('settings.json'),
-  dataPath: getUserHome('/data/'),
+  settingsFile: getRootFolder('settings.json'),
+  dataPath: getRootFolder('/data/'),
 };
 
 export const WorkItem = types.model({
@@ -27,28 +22,38 @@ export const Parameters = types
     inflowPassword: '',
   })
   .actions((self) => {
-    async function saveParameters() {
-      const jsonContent = getSnapshot(self);
-      await writeFile(PATHS.settingsFile, jsonContent);
+    function saveParameters() {
+      const jsonContent = JSON.stringify(self, null, 2);
+      writeFile(PATHS.settingsFile, jsonContent, { encoding: 'utf8' }, (error) => {
+        if (error) {
+          console.error('Unable to write parameter file', error);
+        }
+      });
     }
 
-    async function loadParameters() {
-      const parameterFileExists = await fileExists(PATHS.settingsFile);
-
-      if (!parameterFileExists) {
-        saveParameters();
-      }
-      const jsonSettingsContent = await readFile(PATHS.settingsFile);
-      applySnapshot(self, jsonSettingsContent);
+    function loadParametersFromFile() {
+      exists(PATHS.settingsFile, (fileExist) => {
+        if (!fileExist) {
+          saveParameters();
+        } else {
+          readFile(PATHS.settingsFile, { encoding: 'utf8' }, (err, data) => {
+            if (!err) {
+              const content = JSON.parse(data);
+              applySnapshot(self, content);
+            } else {
+              console.error('Unable to load settings file', err);
+            }
+          });
+        }
+      });
     }
 
     function afterCreate() {
-      loadParameters();
+      loadParametersFromFile();
     }
 
     return {
       saveParameters,
-      loadParameters,
       afterCreate,
     };
   });
@@ -57,7 +62,7 @@ export const RootStore = types
   .model({
     currentDay: types.optional(types.Date, new Date()),
     workItems: types.optional(types.map(WorkItem), {}),
-    parameters: Parameters.create(),
+    parameters: types.optional(Parameters, Parameters.create()),
   })
   .actions((self) => {
     function loadDate(nextDate: Date = new Date()) {

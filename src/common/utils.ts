@@ -1,6 +1,7 @@
+import fs from 'fs';
 import path from 'path';
 
-export function getUserHome(suffixPath: string) {
+function getUserHome(suffixPath: string) {
   let p;
   if (process.platform === 'win32') {
     p = process.env.USERPROFILE;
@@ -8,4 +9,19 @@ export function getUserHome(suffixPath: string) {
     p = process.env.HOME;
   }
   return path.join(p!, suffixPath);
+}
+
+function ensureDirectoryExistence(filePath: string) {
+  const dirname = path.dirname(filePath);
+  if (!fs.existsSync(dirname)) {
+    ensureDirectoryExistence(dirname);
+    fs.mkdirSync(dirname);
+  }
+}
+
+export function getRootFolder(suffixPath: string) {
+  const rootPath = getUserHome('/Documents/Timetrack2');
+  const finalPath = path.join(rootPath, suffixPath);
+  ensureDirectoryExistence(finalPath);
+  return finalPath;
 }
