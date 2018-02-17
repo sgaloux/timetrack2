@@ -1,10 +1,14 @@
 import { inject, observer } from 'mobx-react';
 import * as React from 'react';
-import { RootStore } from '../store';
+import { RootStore, WorkItem } from '../store';
 
 interface IShellProps {
   store?: typeof RootStore.Type;
 }
+
+const WorkItemView = observer((props: { item: typeof WorkItem.Type }) => (
+  <div>{props.item.id}</div>
+));
 
 @inject('store')
 @observer
@@ -15,9 +19,12 @@ export default class Shell extends React.Component<IShellProps> {
       <div>
         <h1>WorkItems</h1>
         <hr />
-        <ul>
-          {store!.workItems.values().map((item) => <li key={item.id.toString()}>{item.title}</li>)}
-        </ul>
+        <button onClick={store!.addNewWorkItem}>Add</button>
+        {store!.workItems.values().map((item) => (
+          <WorkItemView item={item} key={item.id.toString()}>
+            {item.title}
+          </WorkItemView>
+        ))}
       </div>
     );
   }
