@@ -1,10 +1,10 @@
-import { types } from 'mobx-state-tree';
-import { GetParameters } from '../utils';
+import { types } from "mobx-state-tree";
+import { GetParameters } from "../utils";
 
 export const WorkItem = types
   .model({
     id: types.identifier(),
-    title: '',
+    title: "",
     durationInSeconds: 0,
   })
   .actions((self) => {

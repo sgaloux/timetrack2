@@ -1,9 +1,9 @@
-import { Provider } from 'mobx-react';
-import { getSnapshot } from 'mobx-state-tree';
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import Shell from './components/Shell';
-import { RootStore } from './store/RootStore';
+import { Provider } from "mobx-react";
+import { getSnapshot } from "mobx-state-tree";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import { AppShell } from "./components/App";
+import { RootStore } from "./store/RootStore";
 
 const store = RootStore.create();
 
@@ -12,7 +12,7 @@ const store = RootStore.create();
 
 ReactDOM.render(
   <Provider store={store}>
-    <Shell />
+    <AppShell />
   </Provider>,
-  document.getElementById('app'),
+  document.getElementById("app"),
 );
