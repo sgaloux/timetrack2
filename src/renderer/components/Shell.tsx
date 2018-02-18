@@ -7,8 +7,11 @@ interface IShellProps {
   store?: typeof RootStore.Type;
 }
 
-const WorkItemView = observer((props: { item: typeof WorkItem.Type }) => (
-  <div>{props.item.id}</div>
+const WorkItemView = observer(({ item }: { item: typeof WorkItem.Type }) => (
+  <div>
+    {item.id}
+    <button onClick={item.uploadToInflow}>Upload</button>
+  </div>
 ));
 
 @inject('store')
