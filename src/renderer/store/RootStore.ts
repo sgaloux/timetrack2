@@ -1,5 +1,5 @@
 import { types } from 'mobx-state-tree';
-import { v4 } from 'node-uuid';
+import { v4 } from 'uuid';
 import { Parameters } from './models/Parameters';
 import { WorkItem } from './models/WorkItem';
 
