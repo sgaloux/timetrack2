@@ -4,10 +4,6 @@
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
     "module": "esnext",
-    "pretty": true,
-    "paths": {
-      "common": ["./common"]
-    },
-    "baseUrl": "./src"
+    "pretty": true
   }
 }

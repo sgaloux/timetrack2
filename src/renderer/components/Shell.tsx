@@ -1,6 +1,7 @@
 import { inject, observer } from 'mobx-react';
 import * as React from 'react';
-import { RootStore, WorkItem } from '../store';
+import { WorkItem } from '../store/models/WorkItem';
+import { RootStore } from '../store/RootStore';
 
 interface IShellProps {
   store?: typeof RootStore.Type;
