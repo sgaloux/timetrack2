@@ -1,5 +1,5 @@
 import { exists, readFile, writeFile } from "fs";
-import { applySnapshot, types } from "mobx-state-tree";
+import { applySnapshot, types, getSnapshot } from "mobx-state-tree";
 import { getRootFolder } from "../../../common/utils";
 
 const PATHS = {
@@ -7,13 +7,28 @@ const PATHS = {
   dataPath: getRootFolder("/data/"),
 };
 
-export const Parameters = types
+const ParametersState = types
   .model({
     inflowUrl: "",
     inflowUser: "",
     inflowPassword: "",
   })
+
+export type ParametersType = typeof ParametersState.Type;
+
+export const Parameters = ParametersState
+  .views((self) => ({
+    get allValues(): ParametersType {
+      return getSnapshot(self);
+    }
+  }))
   .actions((self) => {
+
+    function setNewParameters(newParams: typeof Parameters.Type) {
+      applySnapshot(self, newParams);
+      saveParameters();
+    }
+
     function saveParameters() {
       const jsonContent = JSON.stringify(self, null, 2);
       writeFile(PATHS.settingsFile, jsonContent, { encoding: "utf8" }, (error) => {
@@ -47,5 +62,6 @@ export const Parameters = types
     return {
       saveParameters,
       afterCreate,
+      setNewParameters
     };
   });

@@ -21,6 +21,7 @@
   "dependencies": {
     "@blueprintjs/core": "^1.35.5",
     "electron-devtools-installer": "^2.2.3",
+    "final-form": "^4.2.0",
     "glamor": "^2.20.40",
     "glamorous": "^4.11.6",
     "mobx": "^3.5.1",
@@ -29,6 +30,7 @@
     "react": "^16.2.0",
     "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^16.2.0",
+    "react-final-form": "^3.1.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "source-map-support": "^0.5.3",
