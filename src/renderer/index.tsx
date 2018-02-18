@@ -5,6 +5,9 @@ import * as ReactDOM from 'react-dom';
 import { AppShell } from './components/App';
 import { RootStore } from './store/RootStore';
 
+import '@blueprintjs/core/dist/blueprint.css';
+import 'normalize.css/normalize.css';
+
 import './index.css';
 
 const store = RootStore.create();
