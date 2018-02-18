@@ -1,7 +1,7 @@
-import { inject, observer } from "mobx-react";
-import React, { Component } from "react";
+import { inject, observer } from 'mobx-react';
+import React, { Component } from 'react';
 
-@inject("store")
+@inject('store')
 @observer
 class SettingsPage extends Component {
   public render() {
