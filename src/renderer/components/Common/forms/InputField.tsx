@@ -2,7 +2,7 @@ import { FormGroup, Intent } from '@blueprintjs/core';
 import React from 'react';
 import { Field } from 'react-final-form';
 
-interface IMyFieldProps {
+interface IInputFieldProps {
   label?: string;
   name: string;
   placeholder?: string;
@@ -19,7 +19,7 @@ const InputField = ({
   disabled = false,
   type = 'text',
   showErrorDirectly = false,
-}: IMyFieldProps) => (
+}: IInputFieldProps) => (
   <Field
     name={name}
     render={({ input, meta }) => (
