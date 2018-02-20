@@ -4,6 +4,8 @@ import { Form, Field } from 'react-final-form';
 import { Parameters, IParametersType } from '../../store/models/Parameters';
 import { FormGroup, Button, Intent } from '@blueprintjs/core';
 import glamorous from 'glamorous';
+import validator from 'validator';
+import InputField from '../Common/forms/InputField';
 
 interface IParametersFormProps {
   settings: IParametersType;
@@ -12,8 +14,16 @@ interface IParametersFormProps {
 
 const ButtonContainer = glamorous.div({
   display: 'flex',
-  justifyContent: 'flex-end'
-})
+  justifyContent: 'flex-end',
+});
+
+function validateForm(values: any): any {
+  const errors: any = {};
+  if (!validator.isURL(values.inflowUrl || '')) {
+    errors.inflowUrl = 'URL is invalid !';
+  }
+  return errors;
+}
 
 @observer
 export default class ParametersForm extends React.Component<IParametersFormProps> {
@@ -21,27 +31,22 @@ export default class ParametersForm extends React.Component<IParametersFormProps
     const { settings, onSubmit } = this.props;
     return (
       <Form
-        onSubmit={(values) => onSubmit(Parameters.create(values))}
+        onSubmit={values => onSubmit(Parameters.create(values))}
+        validate={validateForm}
         initialValues={settings}
-        render={({ handleSubmit }) => (
+        render={({ handleSubmit, valid }) => (
           <form onSubmit={handleSubmit}>
-            <FormGroup label='Inflow URL'  >
-              <Field name='inflowUrl' component="input" placeholder="Inflow URL" className="pt-input pt-fill" />
-            </FormGroup>
-            <FormGroup label='Inflow User'  >
-              <Field name='inflowUser' component="input" placeholder="Inflow URL" className="pt-input pt-fill" />
-            </FormGroup>
-            <FormGroup label='Inflow Password' >
-              <Field name='inflowPassword' component="input" placeholder="Inflow URL" className="pt-input pt-fill" type="password" />
-            </FormGroup>
+            <InputField name="inflowUrl" label="Inflow URL" showErrorDirectly />
+            <InputField name="inflowUser" label="Inflow User" />
+            <InputField name="inflowPassword" label="Inflow Password" type="password" />
             <ButtonContainer>
-              <Button intent={Intent.SUCCESS} type="submit">Save</Button>
+              <Button intent={Intent.SUCCESS} type="submit" disabled={!valid}>
+                Save
+              </Button>
             </ButtonContainer>
           </form>
         )}
       />
-
-
-    )
+    );
   }
 }

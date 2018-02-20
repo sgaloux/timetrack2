@@ -35,7 +35,8 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "source-map-support": "^0.5.3",
-    "uuid": "^3.2.1"
+    "uuid": "^3.2.1",
+    "validator": "^9.4.1"
   },
   "devDependencies": {
     "@types/electron-devtools-installer": "^2.0.2",
@@ -45,6 +46,7 @@
     "@types/react-router": "^4.0.22",
     "@types/react-router-dom": "^4.2.4",
     "@types/uuid": "^3.4.3",
+    "@types/validator": "^6.3.0",
     "babel-preset-react": "^6.24.1",
     "electron": "1.8.2",
     "electron-builder": "^20.0.4",
