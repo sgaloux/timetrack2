@@ -1,12 +1,19 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 import { Form, Field } from 'react-final-form';
-import { Parameters, ParametersType } from '../../store/models/Parameters';
+import { Parameters, IParametersType } from '../../store/models/Parameters';
+import { FormGroup, Button, Intent } from '@blueprintjs/core';
+import glamorous from 'glamorous';
 
 interface IParametersFormProps {
-  settings: ParametersType;
-  onSubmit(values: ParametersType): void;
+  settings: IParametersType;
+  onSubmit(values: IParametersType): void;
 }
+
+const ButtonContainer = glamorous.div({
+  display: 'flex',
+  justifyContent: 'flex-end'
+})
 
 @observer
 export default class ParametersForm extends React.Component<IParametersFormProps> {
@@ -18,10 +25,18 @@ export default class ParametersForm extends React.Component<IParametersFormProps
         initialValues={settings}
         render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
-            <Field name='inflowUrl' component="input" placeholder="Inflow URL" />
-            <Field name='inflowUser' component="input" placeholder="Inflow User" />
-            <Field name='inflowPassword' component="input" placeholder="Inflow Password" type="password" />
-            <button type='submit'>Save</button>
+            <FormGroup label='Inflow URL'  >
+              <Field name='inflowUrl' component="input" placeholder="Inflow URL" className="pt-input pt-fill" />
+            </FormGroup>
+            <FormGroup label='Inflow User'  >
+              <Field name='inflowUser' component="input" placeholder="Inflow URL" className="pt-input pt-fill" />
+            </FormGroup>
+            <FormGroup label='Inflow Password' >
+              <Field name='inflowPassword' component="input" placeholder="Inflow URL" className="pt-input pt-fill" type="password" />
+            </FormGroup>
+            <ButtonContainer>
+              <Button intent={Intent.SUCCESS} type="submit">Save</Button>
+            </ButtonContainer>
           </form>
         )}
       />

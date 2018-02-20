@@ -8,6 +8,7 @@ export const RootStore = types
     currentDay: types.optional(types.Date, new Date()),
     workItems: types.optional(types.map(WorkItem), {}),
     parameters: types.optional(Parameters, Parameters.create()),
+    notificationMessage: '',
   })
   .actions((self) => {
     function loadDate(nextDate: Date = new Date()) {

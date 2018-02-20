@@ -5,12 +5,20 @@ import { HashRouter } from 'react-router-dom';
 import { SettingsPage } from '../Settings';
 import { TrackerPage } from '../Tracker';
 import NavigationBar from './NavigationBar';
+import { inject, observer } from 'mobx-react';
+import { ICommonStoreProps } from '../../common/ICommonStoreProps';
 
 const ContainerDiv = glamorous.div({
   padding: '5px'
 });
 
-export default class AppShell extends React.Component {
+//const key = OurToaster.show({ message: "Toasted!" });
+//OurToaster.update(key, { message: "Still toasted!" });
+
+@inject('store')
+@observer
+export default class AppShell extends React.Component<ICommonStoreProps> {
+
   public render() {
     return (
       <HashRouter>

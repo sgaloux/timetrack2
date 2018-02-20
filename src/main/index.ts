@@ -13,7 +13,7 @@ let mainWindow: Electron.BrowserWindow | null;
 function createMainWindow() {
   const window = new BrowserWindow();
   if (isDevelopment) {
-    window.webContents.openDevTools();
+    window.webContents.openDevTools({ mode: 'bottom' })
   }
 
   if (isDevelopment) {
