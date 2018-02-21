@@ -1,7 +1,7 @@
 import { inject, observer } from 'mobx-react';
 import React, { Component, Fragment } from 'react';
 import { ICommonStoreProps } from '../../common/ICommonStoreProps';
-import SettingsForm from './ParametersForm';
+import SettingsForm from './SettingsForm';
 
 @inject('store')
 @observer
