@@ -1,18 +1,18 @@
 import { Provider } from 'mobx-react';
 import { getSnapshot } from 'mobx-state-tree';
+import { addMiddleware } from 'mobx-state-tree';
+import { actionLogger } from 'mst-middlewares';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { AppShell } from './components/App';
+import { AppShell } from './modules/App';
 import { RootStore } from './store/RootStore';
-import { actionLogger } from "mst-middlewares"
-import { addMiddleware } from 'mobx-state-tree';
 
 import '@blueprintjs/core/dist/blueprint.css';
 import 'normalize.css/normalize.css';
 
 import './index.css';
 
-let store = RootStore.create();
+const store = RootStore.create();
 addMiddleware(store, actionLogger);
 
 (window as any).rootStore = store;

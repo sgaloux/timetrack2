@@ -1,5 +1,3 @@
 {
-  "prettier.arrowParens": "always",
-  "editor.formatOnSave": false,
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "prettier.arrowParens": "always"
 }

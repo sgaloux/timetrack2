@@ -25,3 +25,8 @@ export function getRootFolder(suffixPath: string) {
   ensureDirectoryExistence(finalPath);
   return finalPath;
 }
+
+export const PATHS = {
+  settingsFile: getRootFolder('settings.json'),
+  dataPath: getRootFolder('/data/'),
+};

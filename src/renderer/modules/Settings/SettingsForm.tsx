@@ -4,12 +4,12 @@ import { observer } from 'mobx-react';
 import React from 'react';
 import { Form } from 'react-final-form';
 import validator from 'validator';
-import { IParametersType, Parameters } from '../../store/models/Parameters';
+import { Parameters, ParametersType } from '../../store/models/Parameters';
 import InputField from '../Common/forms/InputField';
 
 interface ISettingsFormProps {
-  settings: IParametersType;
-  onSubmit(values: IParametersType): void;
+  settings: ParametersType;
+  onSubmit(values: ParametersType): void;
 }
 
 const ButtonContainer = glamorous.div({

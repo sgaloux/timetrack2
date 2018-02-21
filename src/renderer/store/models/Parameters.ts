@@ -1,27 +1,21 @@
-import { exists, readFile, writeFile } from 'fs';
-import { applySnapshot, types, getSnapshot } from 'mobx-state-tree';
-import { getRootFolder } from '../../../common/utils';
-import { NotificationToast } from '../../components/Common';
 import { Intent } from '@blueprintjs/core';
-
-const PATHS = {
-  settingsFile: getRootFolder('settings.json'),
-  dataPath: getRootFolder('/data/'),
-};
+import { exists, readFile, writeFile } from 'fs';
+import { applySnapshot, getSnapshot, types } from 'mobx-state-tree';
+import { PATHS } from '../../../common/utils';
+import { NotificationToast } from '../../modules/Common';
 
 const ParametersState = types.model({
   inflowUrl: '',
   inflowUser: '',
   inflowPassword: '',
 });
-type ParametersType = typeof ParametersState.Type;
-export interface IParametersType extends ParametersType {}
+export type ParametersType = typeof ParametersState.Type;
 
-export const Parameters = ParametersState.views(self => ({
+export const Parameters = ParametersState.views((self) => ({
   get allValues(): ParametersType {
     return getSnapshot(self);
   },
-})).actions(self => {
+})).actions((self) => {
   function setNewParameters(newParams: typeof Parameters.Type) {
     applySnapshot(self, newParams);
     saveParameters();
@@ -29,7 +23,7 @@ export const Parameters = ParametersState.views(self => ({
 
   function saveParameters() {
     const jsonContent = JSON.stringify(self, null, 2);
-    writeFile(PATHS.settingsFile, jsonContent, { encoding: 'utf8' }, error => {
+    writeFile(PATHS.settingsFile, jsonContent, { encoding: 'utf8' }, (error) => {
       if (error) {
         console.error('Unable to write parameter file', error);
         NotificationToast.show({
@@ -42,7 +36,7 @@ export const Parameters = ParametersState.views(self => ({
   }
 
   function loadParametersFromFile() {
-    exists(PATHS.settingsFile, fileExist => {
+    exists(PATHS.settingsFile, (fileExist) => {
       if (!fileExist) {
         saveParameters();
       } else {
