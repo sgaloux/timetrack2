@@ -1,1 +1,4 @@
-{}
+{
+  "prettier.arrowParens": "always",
+  "editor.formatOnSave": false
+}

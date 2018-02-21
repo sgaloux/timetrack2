@@ -1,13 +1,13 @@
-import React from 'react';
-import { observer } from 'mobx-react';
-import { Form, Field } from 'react-final-form';
-import { Parameters, IParametersType } from '../../store/models/Parameters';
-import { FormGroup, Button, Intent } from '@blueprintjs/core';
+import { Button, Intent } from '@blueprintjs/core';
 import glamorous from 'glamorous';
+import { observer } from 'mobx-react';
+import React from 'react';
+import { Form } from 'react-final-form';
 import validator from 'validator';
+import { IParametersType, Parameters } from '../../store/models/Parameters';
 import InputField from '../Common/forms/InputField';
 
-interface IParametersFormProps {
+interface ISettingsFormProps {
   settings: IParametersType;
   onSubmit(values: IParametersType): void;
 }
@@ -26,21 +26,21 @@ function validateForm(values: any): any {
 }
 
 @observer
-export default class ParametersForm extends React.Component<IParametersFormProps> {
+export default class SettingsForm extends React.Component<ISettingsFormProps> {
   public render() {
     const { settings, onSubmit } = this.props;
     return (
       <Form
-        onSubmit={values => onSubmit(Parameters.create(values))}
+        onSubmit={(values) => onSubmit(Parameters.create(values))}
         validate={validateForm}
         initialValues={settings}
         render={({ handleSubmit, valid }) => (
           <form onSubmit={handleSubmit}>
-            <InputField name="inflowUrl" label="Inflow URL" showErrorDirectly />
-            <InputField name="inflowUser" label="Inflow User" />
-            <InputField name="inflowPassword" label="Inflow Password" type="password" />
+            <InputField name='inflowUrl' label='Inflow URL' showErrorDirectly />
+            <InputField name='inflowUser' label='Inflow User' />
+            <InputField name='inflowPassword' label='Inflow Password' type='password' />
             <ButtonContainer>
-              <Button intent={Intent.SUCCESS} type="submit" disabled={!valid}>
+              <Button intent={Intent.SUCCESS} type='submit' disabled={!valid}>
                 Save
               </Button>
             </ButtonContainer>
