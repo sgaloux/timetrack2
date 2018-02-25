@@ -1,3 +1,4 @@
 {
-  "prettier.arrowParens": "always"
+  "prettier.arrowParens": "always",
+  "eslint.autoFixOnSave": false
 }

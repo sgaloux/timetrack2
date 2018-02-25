@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs, { exists, writeFile } from 'fs';
 import path from 'path';
 
 function getUserHome(suffixPath: string) {
@@ -24,6 +24,23 @@ export function getRootFolder(suffixPath: string) {
   const finalPath = path.join(rootPath, suffixPath);
   ensureDirectoryExistence(finalPath);
   return finalPath;
+}
+
+export async function touchFile(filePath: string, content: any = null) {
+  return new Promise((res, rej) => {
+    exists(filePath, (fileExists) => {
+      if (fileExists) {
+        res();
+      } else {
+        writeFile(filePath, content, (err) => {
+          if (err) {
+            rej(err);
+          }
+          res();
+        });
+      }
+    });
+  });
 }
 
 export const PATHS = {

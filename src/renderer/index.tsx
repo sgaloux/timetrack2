@@ -10,6 +10,8 @@ import { RootStore } from './store/RootStore';
 import '@blueprintjs/core/dist/blueprint.css';
 import 'normalize.css/normalize.css';
 
+import { initializeDatabase } from '../common/database';
+import User from '../common/database/entities/User';
 import './index.css';
 
 const store = RootStore.create();
@@ -24,3 +26,14 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('app'),
 );
+
+initializeDatabase();
+(window as any).test = function test(nbRecords: number) {
+  console.time('test');
+  for (let i = 0; i < nbRecords; i++) {
+    const u = new User();
+    u.name = 'User' + i;
+    u.save();
+  }
+  console.timeEnd('test');
+};
