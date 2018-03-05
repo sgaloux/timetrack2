@@ -6,7 +6,6 @@ import { NotificationToast } from '../../modules/Common';
 
 const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
-const exists = promisify(fs.exists);
 
 const ParametersState = types.model({
   inflowUrl: '',
@@ -48,7 +47,6 @@ export const Parameters = ParametersState.views((self) => ({
     } catch (error) {
       NotificationToast.showError('Error while loading settings file' + error);
     }
-
   });
 
   return {

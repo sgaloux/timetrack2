@@ -11,9 +11,13 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 let mainWindow: Electron.BrowserWindow | null;
 
 function createMainWindow() {
-  const window = new BrowserWindow();
+  const window = new BrowserWindow({
+    webPreferences: {
+      webSecurity: false,
+    },
+  });
   if (isDevelopment) {
-    window.webContents.openDevTools({ mode: 'bottom' })
+    window.webContents.openDevTools({ mode: 'bottom' });
   }
 
   if (isDevelopment) {
