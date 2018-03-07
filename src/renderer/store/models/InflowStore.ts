@@ -1,34 +1,54 @@
 import { types, flow } from 'mobx-state-tree';
-import $ from 'jquery';
-import axios from 'axios';
+import { unflatten } from 'un-flatten-tree';
 import { GetParameters } from '../utils';
+import { getInflowTypes, getInflowTree } from '../../common/services/inflowService';
 
 const InflowType = types.model({
   id: types.string,
   name: types.string,
 });
 
+const InflowNode = types.model({
+  name: types.string,
+  inflowId: types.string,
+  parentId: types.maybe(types.string),
+});
+
+type InflowNodeType = typeof InflowNode.Type;
+
+interface InflowNodeTreeType extends InflowNodeType {
+  children: InflowNodeTreeType[];
+}
+
 export const InflowStore = types
   .model({
     inflowTypes: types.optional(types.array(InflowType), []),
+    inflowNodes: types.optional(types.array(InflowNode), []),
   })
+  .views((self) => ({
+    get inflowTree() {
+      const nodes = <InflowNodeTreeType[]>self.inflowNodes.map((node: InflowNodeType) => ({
+        ...node,
+        children: [],
+      }));
+      const tree = unflatten(
+        nodes,
+        (node, parentNode) => node.parentId === parentNode.inflowId,
+        (node, parentNode) => parentNode.children.push(node),
+      );
+      return tree;
+    },
+  }))
   .actions((self) => {
     const loadInflowTypes = flow(function*() {
-      try {
-        const { inflowPassword, inflowUrl, inflowUser } = GetParameters(self);
-        let response = yield axios.get(`${inflowUrl}/types/perf`, {
-          headers: {
-            'Content-Type': 'application/xml',
-            Authorization: 'Basic ' + btoa(inflowUser + ':' + inflowPassword),
-          },
-          withCredentials: true,
-          responseType: 'document',
-        });
-        console.log('Data fetched', response.data);
-      } catch (error) {
-        console.error('Unable to fetch inflowTypes', error);
-      }
+      const types = yield getInflowTypes(GetParameters(self));
+      self.inflowTypes = types;
     });
 
-    return { loadInflowTypes };
+    const loadInflowTree = flow(function*() {
+      const nodes = yield getInflowTree(GetParameters(self));
+      self.inflowNodes = nodes;
+    });
+
+    return { loadInflowTypes, loadInflowTree };
   });

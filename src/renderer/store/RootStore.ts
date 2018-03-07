@@ -20,6 +20,8 @@ export const RootStore = types
         yield self.parameters.loadParametersFromFile();
         self.initializeMessage = 'Loading inflow types';
         yield self.inflowStore.loadInflowTypes();
+        self.initializeMessage = 'Loading inflow tree';
+        yield self.inflowStore.loadInflowTree();
         self.initializeMessage = 'Init done !';
       } catch (error) {
         NotificationToast.showError('Error in startup');
