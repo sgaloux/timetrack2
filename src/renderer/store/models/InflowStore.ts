@@ -1,7 +1,7 @@
 import { types, flow } from 'mobx-state-tree';
 import { unflatten } from 'un-flatten-tree';
 import { GetParameters } from '../utils';
-import { getInflowTypes, getInflowTree } from '../../common/services/inflowService';
+import { getInflowTypes, getInflowTree } from '../../../common/services/inflowService';
 
 const InflowType = types.model({
   id: types.string,

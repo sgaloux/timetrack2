@@ -1,4 +1,5 @@
 import fs from 'fs';
+import convert from 'xml-js';
 import path from 'path';
 
 function getUserHome(suffixPath: string) {
@@ -24,6 +25,10 @@ export function getRootFolder(suffixPath: string) {
   const finalPath = path.join(rootPath, suffixPath);
   ensureDirectoryExistence(finalPath);
   return finalPath;
+}
+
+export function convertXmlToJs(input: string) {
+  return convert.xml2js(input, { compact: true, alwaysArray: true });
 }
 
 export const PATHS = {
