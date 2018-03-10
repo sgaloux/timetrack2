@@ -1,7 +1,7 @@
 import fs from 'fs';
-import convert from 'xml-js';
 import path from 'path';
 import { promisify } from 'util';
+import convert from 'xml-js';
 
 export const readFilePromisified = promisify(fs.readFile);
 export const writeFilePromisified = promisify(fs.writeFile);

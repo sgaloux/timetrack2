@@ -1,4 +1,4 @@
 {
   "prettier.arrowParens": "always",
- 
+  "prettier.singleQuote": true
 }

@@ -1,13 +1,13 @@
+import { Spinner } from '@blueprintjs/core';
 import glamorous from 'glamorous';
+import { inject, observer } from 'mobx-react';
 import * as React from 'react';
 import { Redirect, Route, Switch } from 'react-router';
 import { HashRouter } from 'react-router-dom';
+import { ICommonStoreProps } from '../../common/ICommonStoreProps';
 import { SettingsPage } from '../Settings';
 import { TrackerPage } from '../Tracker';
 import NavigationBar from './NavigationBar';
-import { inject, observer } from 'mobx-react';
-import { ICommonStoreProps } from '../../common/ICommonStoreProps';
-import { Spinner } from '@blueprintjs/core';
 
 const ContainerDiv = glamorous.div({
   padding: '5px',
@@ -25,8 +25,8 @@ const InitializeContentDiv = glamorous.div({
   alignItems: 'center',
 });
 
-//const key = OurToaster.show({ message: "Toasted!" });
-//OurToaster.update(key, { message: "Still toasted!" });
+// const key = OurToaster.show({ message: "Toasted!" });
+// OurToaster.update(key, { message: "Still toasted!" });
 
 @inject('store')
 @observer
@@ -35,29 +35,29 @@ export default class AppShell extends React.Component<ICommonStoreProps> {
     const { store } = this.props;
     const { initializeMessage, initializing } = store!;
     return (
-      <>
-        {initializing ? (
-          <InitializeContainerDiv>
-            <InitializeContentDiv>
-              <Spinner />
-              <h1>{initializeMessage}</h1>
-            </InitializeContentDiv>
-          </InitializeContainerDiv>
-        ) : (
-          <HashRouter>
-            <React.Fragment>
-              <NavigationBar />
+      <HashRouter>
+        <React.Fragment>
+          <NavigationBar onSync={store!.synchronizeData} onQuit={store!.quitApplication} />
+          {initializing ? (
+            <InitializeContainerDiv>
+              <InitializeContentDiv>
+                <Spinner />
+                <h1>{initializeMessage}</h1>
+              </InitializeContentDiv>
+            </InitializeContainerDiv>
+          ) : (
+
               <ContainerDiv>
                 <Switch>
-                  <Route path="/tracker" component={TrackerPage} />
-                  <Route path="/settings" component={SettingsPage} />
-                  <Redirect to="/tracker" />
+                  <Route path='/tracker' component={TrackerPage} />
+                  <Route path='/settings' component={SettingsPage} />
+                  <Redirect to='/tracker' />
                 </Switch>
               </ContainerDiv>
-            </React.Fragment>
-          </HashRouter>
-        )}
-      </>
+
+            )}
+        </React.Fragment>
+      </HashRouter>
     );
   }
 }

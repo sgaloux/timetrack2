@@ -21,18 +21,29 @@ const ButtonLink = (props: IButtonLinkProps) => {
   );
 };
 
-class NavigationBar extends Component {
+interface INavigationBarProps {
+  onSync: () => void;
+  onQuit: () => void;
+}
+
+class NavigationBar extends Component<INavigationBarProps> {
   public render() {
     return (
-      <Navbar className="pt-dark">
+      <Navbar className='pt-dark'>
         <NavbarGroup>
           <NavbarHeading>TimeTrack 2</NavbarHeading>
         </NavbarGroup>
         <NavbarGroup>
-          <ButtonLink label='Tracker' icon='pt-icon-gantt-chart' to='/tracker' />
+          <ButtonLink label='Tracker' icon='pt-icon-time' to='/tracker' />
         </NavbarGroup>
-        <NavbarGroup align="right">
+        <NavbarGroup align='right'>
+          <NavLink className='pt-button pt-minimal pt-icon-exchange' onClick={this.props.onSync} to=''>
+            Sync Inflow Tree
+          </NavLink>
           <ButtonLink label='Settings' icon='pt-icon-cog' to='/settings' />
+          <NavLink className='pt-button pt-minimal pt-icon-log-out' onClick={this.props.onQuit} to=''>
+            Quit
+          </NavLink>
         </NavbarGroup>
       </Navbar>
     );

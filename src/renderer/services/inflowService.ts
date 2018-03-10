@@ -14,10 +14,10 @@ interface IInflowType {
 
 export async function getInflowTypes(params: IInflowParameters): Promise<IInflowType[]> {
   const { inflowPassword, inflowUrl, inflowUser } = params;
-  let response = await axios.get(`${inflowUrl}/types/perf`, {
+  const response = await axios.get(`${inflowUrl}/types/perf`, {
     headers: {
       'Content-Type': 'application/xml',
-      Authorization: 'Basic ' + btoa(inflowUser + ':' + inflowPassword),
+      Authorization: `Basic ${btoa(`${inflowUser}:${inflowPassword}`)}`,
     },
     withCredentials: true,
   });
@@ -52,7 +52,9 @@ function parseTree(data: IXmlTree, parentId?: string): IInflowNode[] {
   if (data.application) {
     data.application.forEach((app) => {
       const nextParentId = data._attributes ? data._attributes.id : undefined;
-      if (app.application) nodes.push(...parseTree(app, nextParentId));
+      if (app.application) {
+        nodes.push(...parseTree(app, nextParentId));
+      }
     });
   }
   return nodes;
@@ -60,10 +62,10 @@ function parseTree(data: IXmlTree, parentId?: string): IInflowNode[] {
 
 export async function getInflowTree(params: IInflowParameters): Promise<IInflowNode[]> {
   const { inflowPassword, inflowUrl, inflowUser } = params;
-  let response = await axios.get(`${inflowUrl}/tree`, {
+  const response = await axios.get(`${inflowUrl}/tree`, {
     headers: {
       'Content-Type': 'application/xml',
-      Authorization: 'Basic ' + btoa(inflowUser + ':' + inflowPassword),
+      Authorization: `Basic ${btoa(`${inflowUser}:${inflowPassword}`)}`,
     },
     withCredentials: true,
   });

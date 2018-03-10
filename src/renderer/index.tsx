@@ -20,7 +20,7 @@ addMiddleware(store, actionLogger);
 
 ReactDOM.render(
   <Provider store={store}>
-    <AppShell />
+    <AppShell/>
   </Provider>,
   document.getElementById('app'),
 );
