@@ -19,10 +19,10 @@ export const RootStore = types
         self.initializeMessage = 'Loading parameters';
         yield self.parameters.loadParametersFromFile();
         self.initializeMessage = 'Loading inflow types';
-        yield self.inflowStore.loadInflowTypes();
+        yield self.inflowStore.loadInflowTypesFromServer();
         yield self.inflowStore.saveInflowTypesToFile();
         self.initializeMessage = 'Loading inflow tree';
-        yield self.inflowStore.loadInflowTree();
+        yield self.inflowStore.loadInflowNodesFromServer();
         yield self.inflowStore.saveInflowNodesToFile();
         self.initializeMessage = 'Init done !';
       } catch (error) {

@@ -42,12 +42,12 @@ export const InflowStore = types
     },
   }))
   .actions((self) => {
-    const loadInflowTypes = flow(function*() {
+    const loadInflowTypesFromServer = flow(function*() {
       const types = yield getInflowTypes(GetParameters(self));
       self.inflowTypes = types;
     });
 
-    const loadInflowTree = flow(function*() {
+    const loadInflowNodesFromServer = flow(function*() {
       const nodes = yield getInflowTree(GetParameters(self));
       self.inflowNodes = nodes;
     });
@@ -70,5 +70,5 @@ export const InflowStore = types
       }
     })
 
-    return { loadInflowTypes, loadInflowTree, saveInflowTypesToFile,saveInflowNodesToFile };
+    return { loadInflowTypesFromServer, loadInflowNodesFromServer, saveInflowTypesToFile,saveInflowNodesToFile };
   });

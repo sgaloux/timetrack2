@@ -1,9 +1,9 @@
 'use strict';
 
-import { app, BrowserWindow } from 'electron';
-import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
+import {app, BrowserWindow} from 'electron';
+import installExtension, {REACT_DEVELOPER_TOOLS} from 'electron-devtools-installer';
 import * as path from 'path';
-import { format as formatUrl } from 'url';
+import {format as formatUrl} from 'url';
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -17,7 +17,7 @@ function createMainWindow() {
     },
   });
   if (isDevelopment) {
-    window.webContents.openDevTools({ mode: 'bottom' });
+    window.webContents.openDevTools({mode: 'bottom'});
   }
 
   if (isDevelopment) {
