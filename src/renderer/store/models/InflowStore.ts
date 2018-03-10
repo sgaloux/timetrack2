@@ -1,7 +1,9 @@
 import { types, flow } from 'mobx-state-tree';
 import { unflatten } from 'un-flatten-tree';
 import { GetParameters } from '../utils';
-import { getInflowTypes, getInflowTree } from '../../../common/services/inflowService';
+import { NotificationToast } from '../../modules/Common';
+import { getInflowTypes, getInflowTree } from '../../services/inflowService';
+import { writeFilePromisified, PATHS } from '../../common/utils';
 
 const InflowType = types.model({
   id: types.string,
@@ -50,5 +52,23 @@ export const InflowStore = types
       self.inflowNodes = nodes;
     });
 
-    return { loadInflowTypes, loadInflowTree };
+    const saveInflowTypesToFile = flow(function*(){
+      try{
+        const typesContent = JSON.stringify(self.inflowTypes,null,2);
+        yield writeFilePromisified(PATHS.inflowTypesFile, typesContent, {encoding: 'utf8'})
+      }catch(error){
+        NotificationToast.showError('Error while saving inflow types file' + error);
+      }
+    })
+
+    const saveInflowNodesToFile = flow(function*(){
+      try{
+        const typesContent = JSON.stringify(self.inflowNodes,null,2);
+        yield writeFilePromisified(PATHS.inflowNodesFile, typesContent, {encoding: 'utf8'})
+      }catch(error){
+        NotificationToast.showError('Error while saving inflow nodes file' + error);
+      }
+    })
+
+    return { loadInflowTypes, loadInflowTree, saveInflowTypesToFile,saveInflowNodesToFile };
   });

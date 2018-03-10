@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { convertXmlToJs } from '../utils';
+import { convertXmlToJs } from '../common/utils';
 
 interface IInflowParameters {
   inflowUrl: string;

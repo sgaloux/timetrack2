@@ -1,6 +1,10 @@
 import fs from 'fs';
 import convert from 'xml-js';
 import path from 'path';
+import { promisify } from 'util';
+
+export const readFilePromisified = promisify(fs.readFile);
+export const writeFilePromisified = promisify(fs.writeFile);
 
 function getUserHome(suffixPath: string) {
   let p;
@@ -34,4 +38,6 @@ export function convertXmlToJs(input: string) {
 export const PATHS = {
   settingsFile: getRootFolder('settings.json'),
   dataPath: getRootFolder('/data/'),
+  inflowTypesFile: getRootFolder('inflowTypes.json'),
+  inflowNodesFile: getRootFolder('inflowNodes.json'),
 };

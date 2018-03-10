@@ -2,9 +2,9 @@ import { existsSync, readFile } from 'fs';
 import { types } from 'mobx-state-tree';
 import moment from 'moment';
 import path from 'path';
-import { PATHS } from '../../../common/utils';
 import { NotificationToast } from '../../modules/Common';
 import { WorkItem } from './WorkItem';
+import { PATHS } from '../../common/utils';
 
 const WorkDayShape = types.model({
   date: types.optional(types.Date, new Date()),
