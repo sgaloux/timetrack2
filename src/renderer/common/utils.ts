@@ -32,7 +32,7 @@ export function getRootFolder(suffixPath: string) {
 }
 
 export function convertXmlToJs(input: string) {
-  return convert.xml2js(input, {compact: true, alwaysArray: true});
+  return convert.xml2js(input, { compact: true, alwaysArray: true });
 }
 
 export const PATHS = {

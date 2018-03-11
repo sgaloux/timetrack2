@@ -13,7 +13,7 @@ interface IInflowType {
 }
 
 export async function getInflowTypes(params: IInflowParameters): Promise<IInflowType[]> {
-  const {inflowPassword, inflowUrl, inflowUser} = params;
+  const { inflowPassword, inflowUrl, inflowUser } = params;
   const response = await axios.get(`${inflowUrl}/types/perf`, {
     headers: {
       'Content-Type': 'application/xml',
@@ -47,7 +47,7 @@ interface IXmlTree {
 function parseTree(data: IXmlTree, parentId?: string): IInflowNode[] {
   const nodes: IInflowNode[] = [];
   if (data._attributes) {
-    nodes.push({name: data._attributes.name, inflowId: data._attributes.id, parentId});
+    nodes.push({ name: data._attributes.name, inflowId: data._attributes.id, parentId });
   }
   if (data.application) {
     data.application.forEach((app) => {
@@ -61,7 +61,7 @@ function parseTree(data: IXmlTree, parentId?: string): IInflowNode[] {
 }
 
 export async function getInflowTree(params: IInflowParameters): Promise<IInflowNode[]> {
-  const {inflowPassword, inflowUrl, inflowUser} = params;
+  const { inflowPassword, inflowUrl, inflowUser } = params;
   const response = await axios.get(`${inflowUrl}/tree`, {
     headers: {
       'Content-Type': 'application/xml',

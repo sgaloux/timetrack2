@@ -9,6 +9,7 @@ import InputField from '../Common/forms/InputField';
 
 interface ISettingsFormProps {
   settings: ParametersType;
+  onSubmit(values: ParametersType): void;
 }
 
 const ButtonContainer = glamorous.div({
@@ -27,17 +28,17 @@ function validateForm(values: any): any {
 @observer
 export default class SettingsForm extends React.Component<ISettingsFormProps> {
   public render() {
-    const {settings, onSubmit} = this.props;
+    const { settings, onSubmit } = this.props;
     return (
       <Form
         onSubmit={(values) => onSubmit(Parameters.create(values))}
         validate={validateForm}
         initialValues={settings}
-        render={({handleSubmit, valid}) => (
+        render={({ handleSubmit, valid }) => (
           <form onSubmit={handleSubmit}>
-            <InputField name='inflowUrl' label='Inflow URL' showErrorDirectly/>
-            <InputField name='inflowUser' label='Inflow User'/>
-            <InputField name='inflowPassword' label='Inflow Password' type='password'/>
+            <InputField name='inflowUrl' label='Inflow URL' showErrorDirectly />
+            <InputField name='inflowUser' label='Inflow User' />
+            <InputField name='inflowPassword' label='Inflow Password' type='password' />
             <ButtonContainer>
               <Button intent={Intent.SUCCESS} type='submit' disabled={!valid}>
                 Save

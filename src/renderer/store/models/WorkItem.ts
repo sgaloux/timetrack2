@@ -1,5 +1,6 @@
 import { types } from 'mobx-state-tree';
 import { v4 } from 'uuid';
+import { GetParameters } from '../utils';
 
 export const WorkItemShape = types.model({
   id: types.optional(types.identifier(), () => v4()),
@@ -9,5 +10,12 @@ export const WorkItemShape = types.model({
 export type WorkItemType = typeof WorkItemShape.Type;
 
 export const WorkItem = WorkItemShape.actions((self) => {
-  return {};
+  function uploadToInflow() {
+    const params = GetParameters(self);
+    console.log(params.inflowUrl);
+  }
+
+  return {
+    uploadToInflow,
+  };
 });

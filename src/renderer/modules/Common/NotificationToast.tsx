@@ -8,12 +8,12 @@ const toast = Toaster.create({
 export default {
   showError(message: string) {
     console.error(message);
-    toast.show({message, intent: Intent.DANGER});
+    toast.show({ message, intent: Intent.DANGER });
   },
   showInfo(message: string) {
-    toast.show({message, intent: Intent.PRIMARY});
+    toast.show({ message, intent: Intent.PRIMARY });
   },
   showSuccess(message: string) {
-    toast.show({message, intent: Intent.SUCCESS});
+    toast.show({ message, intent: Intent.SUCCESS });
   },
 };

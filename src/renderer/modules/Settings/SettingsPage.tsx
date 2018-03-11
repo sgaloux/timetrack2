@@ -7,11 +7,11 @@ import SettingsForm from './SettingsForm';
 @observer
 class SettingsPage extends Component<ICommonStoreProps> {
   public render() {
-    const {store} = this.props;
+    const { store } = this.props;
     return (
       <Fragment>
         <h1>Settings</h1>
-        <SettingsForm settings={store!.parameters.allValues} onSubmit={store!.parameters.setNewParameters}/>
+        <SettingsForm settings={store!.parameters.allValues} onSubmit={store!.parameters.setNewParameters} />
       </Fragment>
     );
   }

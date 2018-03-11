@@ -29,7 +29,7 @@ export const WorkDay = WorkDayShape.views((self) => ({
       const fileName = `${moment(self.date).format('YYYY-MM-DD')}.json`;
       const fullPath = path.join(PATHS.dataPath, fileName);
       if (existsSync(fullPath)) {
-        readFile(fullPath, {encoding: 'utf8'}, (err, data) => {
+        readFile(fullPath, { encoding: 'utf8' }, (err, data) => {
           if (!err) {
             const content = JSON.parse(data);
             console.log('CONTENT', content);

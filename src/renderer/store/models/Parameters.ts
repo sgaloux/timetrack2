@@ -1,7 +1,7 @@
 import fs from 'fs';
-import { applySnapshot, flow, getSnapshot, types } from 'mobx-state-tree';
-import { PATHS, readFilePromisified, writeFilePromisified } from '../../common/utils';
-import { NotificationToast } from '../../modules/Common';
+import {applySnapshot, flow, getSnapshot, types} from 'mobx-state-tree';
+import {PATHS, readFilePromisified, writeFilePromisified} from '../../common/utils';
+import {NotificationToast} from '../../modules/Common';
 
 const ParametersState = types.model({
   inflowUrl: '',

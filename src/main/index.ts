@@ -1,9 +1,9 @@
 'use strict';
 
-import { app, BrowserWindow } from 'electron';
-import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
+import {app, BrowserWindow} from 'electron';
+import installExtension, {REACT_DEVELOPER_TOOLS} from 'electron-devtools-installer';
 import * as path from 'path';
-import { format as formatUrl } from 'url';
+import {format as formatUrl} from 'url';
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -48,11 +48,10 @@ function createMainWindow() {
 
 // quit application when all windows are closed
 app.on('window-all-closed', () => {
-  app.quit();
   // on macOS it is common for applications to stay open until the user explicitly quits
-  // if (process.platform !== 'darwin') {
-  //   app.quit();
-  // }
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
 });
 
 app.on('activate', () => {
@@ -62,15 +61,15 @@ app.on('activate', () => {
   }
 });
 
-async function installExtensions() {
+function installExtensions() {
   if (isDevelopment) {
-    await installExtension(REACT_DEVELOPER_TOOLS);
-    await installExtension('pfgnfdagidkfgccljigdamigbcnndkod');
+    installExtension(REACT_DEVELOPER_TOOLS);
+    installExtension('pfgnfdagidkfgccljigdamigbcnndkod');
   }
 }
 
 // create main BrowserWindow when electron is ready
-app.on('ready', async () => {
-  await installExtensions();
+app.on('ready', () => {
+  installExtensions();
   mainWindow = createMainWindow();
 });

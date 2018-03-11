@@ -29,28 +29,28 @@ const InitializeContentDiv = glamorous.div({
 @observer
 export default class AppShell extends React.Component<ICommonStoreProps> {
   public render() {
-    const {store} = this.props;
-    const {initializeMessage, initializing} = store!;
+    const { store } = this.props;
+    const { initializeMessage, initializing } = store!;
     return (
       <HashRouter>
         <React.Fragment>
-          <NavigationBar onSync={store!.synchronizeData} onQuit={store!.quitApplication}/>
+          <NavigationBar onSync={store!.synchronizeData} onQuit={store!.quitApplication} />
           {initializing ? (
             <InitializeContainerDiv>
               <InitializeContentDiv>
-                <Spinner/>
+                <Spinner />
                 <h1>{initializeMessage}</h1>
               </InitializeContentDiv>
             </InitializeContainerDiv>
           ) : (
-            <ContainerDiv>
-              <Switch>
-                <Route path='/tracker' component={TrackerPage}/>
-                <Route path='/settings' component={SettingsPage}/>
-                <Redirect to='/tracker'/>
-              </Switch>
-            </ContainerDiv>
-          )}
+              <ContainerDiv>
+                <Switch>
+                  <Route path='/tracker' component={TrackerPage} />
+                  <Route path='/settings' component={SettingsPage} />
+                  <Redirect to='/tracker' />
+                </Switch>
+              </ContainerDiv>
+            )}
         </React.Fragment>
       </HashRouter>
     );

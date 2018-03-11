@@ -1,22 +1,20 @@
-import { Alignment, IconName, Navbar, NavbarGroup, NavbarHeading } from '@blueprintjs/core';
+import { Navbar, NavbarGroup, NavbarHeading } from '@blueprintjs/core';
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
 interface IButtonLinkProps {
-  icon: IconName;
-  to?: string;
+  icon: string;
+  to: string;
   label: string;
-  onClick?: () => any;
 }
 
 const ButtonLink = (props: IButtonLinkProps) => {
-  const {to = '', label, icon, onClick} = props;
+  const { icon, to, label } = props;
   return (
     <NavLink
-      activeClassName={to && 'pt-active'}
-      className={`pt-button pt-minimal pt-icon-${icon}`}
+      className={`pt-button pt-minimal ${icon}`}
+      activeClassName={`pt-button pt-minimal ${icon} pt-active`}
       to={to}
-      onClick={onClick}
     >
       {label}
     </NavLink>
@@ -36,12 +34,16 @@ class NavigationBar extends Component<INavigationBarProps> {
           <NavbarHeading>TimeTrack 2</NavbarHeading>
         </NavbarGroup>
         <NavbarGroup>
-          <ButtonLink label='Tracker' icon='home' to='/tracker'/>
+          <ButtonLink label='Tracker' icon='pt-icon-time' to='/tracker' />
         </NavbarGroup>
-        <NavbarGroup align={Alignment.RIGHT}>
-          <ButtonLink icon='exchange' onClick={this.props.onSync} label='Sync inflow tree'/>
-          <ButtonLink label='Settings' icon='cog' to='/settings'/>
-          <ButtonLink icon='log-out' onClick={this.props.onQuit} label='Quit'/>
+        <NavbarGroup align='right'>
+          <NavLink className='pt-button pt-minimal pt-icon-exchange' onClick={this.props.onSync} to=''>
+            Sync Inflow Tree
+          </NavLink>
+          <ButtonLink label='Settings' icon='pt-icon-cog' to='/settings' />
+          <NavLink className='pt-button pt-minimal pt-icon-log-out' onClick={this.props.onQuit} to=''>
+            Quit
+          </NavLink>
         </NavbarGroup>
       </Navbar>
     );
