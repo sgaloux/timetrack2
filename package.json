@@ -19,7 +19,7 @@
     }
   },
   "dependencies": {
-    "@blueprintjs/core": "^1.35.5",
+    "@blueprintjs/core": "^2.0.0-rc.2",
     "@types/axios": "^0.14.0",
     "axios": "^0.18.0",
     "electron-devtools-installer": "^2.2.3",
@@ -62,6 +62,6 @@
     "typescript": "^2.7.1",
     "webpack": "^3.10.0",
     "webpack-build-notifier": "^0.1.23",
-    "webpack-sources": "1.0.1"
+    "webpack-sources": "1.1.0"
   }
 }

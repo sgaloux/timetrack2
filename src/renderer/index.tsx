@@ -4,13 +4,15 @@ import { addMiddleware } from 'mobx-state-tree';
 import { actionLogger } from 'mst-middlewares';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+
+import 'normalize.css/normalize.css';
+import '@blueprintjs/core/lib/css/blueprint.css';
+
+import './index.css';
+
 import { AppShell } from './modules/App';
 import { RootStore } from './store/RootStore';
 
-import '@blueprintjs/core/dist/blueprint.css';
-import 'normalize.css/normalize.css';
-
-import './index.css';
 
 const store = RootStore.create();
 addMiddleware(store, actionLogger);
@@ -20,7 +22,7 @@ addMiddleware(store, actionLogger);
 
 ReactDOM.render(
   <Provider store={store}>
-    <AppShell/>
+    <AppShell />
   </Provider>,
   document.getElementById('app'),
 );
