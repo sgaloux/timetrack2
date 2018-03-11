@@ -22,7 +22,7 @@ export default class TrackerPage extends React.Component<ICommonStoreProps> {
           />
         ) : (
           store!.workDay.allItems.map((i: WorkItemType) => (
-            <WorkItem workItem={i} />
+            <WorkItem key={i.id.toString()} workItem={i} />
           ))
         )}
       </div>
