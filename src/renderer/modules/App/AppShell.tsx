@@ -25,9 +25,6 @@ const InitializeContentDiv = glamorous.div({
   alignItems: 'center',
 });
 
-// const key = OurToaster.show({ message: "Toasted!" });
-// OurToaster.update(key, { message: "Still toasted!" });
-
 @inject('store')
 @observer
 export default class AppShell extends React.Component<ICommonStoreProps> {
@@ -46,7 +43,6 @@ export default class AppShell extends React.Component<ICommonStoreProps> {
               </InitializeContentDiv>
             </InitializeContainerDiv>
           ) : (
-
               <ContainerDiv>
                 <Switch>
                   <Route path='/tracker' component={TrackerPage} />
@@ -54,7 +50,6 @@ export default class AppShell extends React.Component<ICommonStoreProps> {
                   <Redirect to='/tracker' />
                 </Switch>
               </ContainerDiv>
-
             )}
         </React.Fragment>
       </HashRouter>
