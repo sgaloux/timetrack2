@@ -13,35 +13,35 @@ interface IInputFieldProps {
 }
 
 const InputField = ({
-  label,
-  name,
-  placeholder,
-  disabled = false,
-  type = 'text',
-  showErrorDirectly = false,
-}: IInputFieldProps) => (
-    <Field
-      name={name}
-      render={({ input, meta }) => (
-        <FormGroup
-          label={label && `${label} : `}
-          labelFor={name}
+                      label,
+                      name,
+                      placeholder,
+                      disabled = false,
+                      type = 'text',
+                      showErrorDirectly = false,
+                    }: IInputFieldProps) => (
+  <Field
+    name={name}
+    render={({input, meta}) => (
+      <FormGroup
+        label={label && `${label} : `}
+        labelFor={name}
+        disabled={disabled}
+        intent={(meta.touched || showErrorDirectly) && meta.error ? Intent.DANGER : Intent.NONE}
+        helperText={(meta.touched || showErrorDirectly) && meta.error ? meta.error : ''}
+      >
+        <input
+          className={`pt-input pt-fill ${(meta.touched || showErrorDirectly) &&
+          meta.error &&
+          'pt-intent-danger'}`}
+          id={name}
+          type={type}
+          placeholder={placeholder}
           disabled={disabled}
-          intent={(meta.touched || showErrorDirectly) && meta.error ? Intent.DANGER : Intent.NONE}
-          helperText={(meta.touched || showErrorDirectly) && meta.error ? meta.error : ''}
-        >
-          <input
-            className={`pt-input pt-fill ${(meta.touched || showErrorDirectly) &&
-              meta.error &&
-              'pt-intent-danger'}`}
-            id={name}
-            type={type}
-            placeholder={placeholder}
-            disabled={disabled}
-            {...input}
-          />
-        </FormGroup>
-      )}
-    />
-  );
+          {...input}
+        />
+      </FormGroup>
+    )}
+  />
+);
 export default InputField;

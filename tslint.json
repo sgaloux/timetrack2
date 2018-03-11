@@ -14,8 +14,7 @@
     "no-unused-variable": true,
     "object-literal-key-quotes": false,
     "prefer-template": true,
-    "no-unused-expression": true,
-    "space-before-function-paren": false,
+    "no-unused-expression": true
   },
   "rulesDirectory": []
 }

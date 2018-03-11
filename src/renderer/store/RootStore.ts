@@ -14,7 +14,7 @@ export const RootStore = types
     initializeMessage: '',
   })
   .actions((self) => {
-    const afterCreate = flow(function* () {
+    const afterCreate = flow(function*() {
       try {
         self.initializing = true;
         self.initializeMessage = 'Loading parameters';
@@ -32,7 +32,7 @@ export const RootStore = types
       self.initializing = false;
     });
 
-    const synchronizeData = flow(function* () {
+    const synchronizeData = flow(function*() {
       try {
         self.initializing = true;
         self.initializeMessage = 'Synchronize inflow types';

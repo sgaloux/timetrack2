@@ -10,14 +10,14 @@ import WorkItem from './WorkItem';
 @observer
 export default class TrackerPage extends React.Component<ICommonStoreProps> {
   public render() {
-    const { store } = this.props;
+    const {store} = this.props;
     return (
       <div>
         <h1>{store!.workDay.formattedDate}</h1>
-        <ActionBar onAdd={store!.workDay.addWorkItem} />
+        <ActionBar onAdd={store!.workDay.addWorkItem}/>
         {store!.workDay.noItems ?
-          <NonIdealState title='No work items today...' visual='pt-icon-cross' /> :
-          store!.workDay.allItems.map((i: WorkItemType) => <WorkItem workItem={i} />)
+          <NonIdealState title='No work items today...' visual='menu'/> :
+          store!.workDay.allItems.map((i: WorkItemType) => <WorkItem key={i.id} workItem={i}/>)
         }
       </div>);
   }

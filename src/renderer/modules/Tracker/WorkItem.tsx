@@ -5,9 +5,9 @@ interface IWorkItemProps {
   workItem: WorkItemType;
 }
 
-export default class WorkItem extends React.Component<IWorkItemProps>{
+export default class WorkItem extends React.Component<IWorkItemProps> {
   public render() {
-    const { workItem } = this.props;
+    const {workItem} = this.props;
     return (
       <div>
         {workItem.id}
