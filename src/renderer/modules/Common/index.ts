@@ -1,3 +1,3 @@
-import NotificationToast from './NotificationToast';
+import NotificationToast from "./NotificationToast";
 
 export { NotificationToast };

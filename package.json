@@ -7,7 +7,8 @@
     "compile": "electron-webpack",
     "dist": "yarn compile && electron-builder",
     "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
-    "lint-fix": "tslint --fix ./src/**/*.ts ./src/**/*.tsx -t verbose"
+    "lint-fix": "tslint --fix ./src/**/*.ts ./src/**/*.tsx -t verbose",
+    "pretty": "prettier --write **/*.ts **/*.tsx"
   },
   "electronWebpack": {
     "main": {
@@ -58,6 +59,7 @@
     "electron-builder": "^20.4.1",
     "electron-webpack": "1.13.0",
     "electron-webpack-ts": "^1.4.0",
+    "prettier": "^1.11.1",
     "tslint": "^5.9.1",
     "typescript": "^2.7.1",
     "webpack": "^3.10.0",

@@ -1,5 +1,5 @@
-import { Button } from '@blueprintjs/core';
-import * as React from 'react';
+import { Button } from "@blueprintjs/core";
+import * as React from "react";
 
 interface IActionBarProps {
   onAdd: () => void;
@@ -7,6 +7,10 @@ interface IActionBarProps {
 
 export default class Actionbar extends React.Component<IActionBarProps> {
   public render() {
-    return <div><Button onClick={this.props.onAdd}>Add</Button></div>;
+    return (
+      <div>
+        <Button onClick={this.props.onAdd}>Add</Button>
+      </div>
+    );
   }
 }

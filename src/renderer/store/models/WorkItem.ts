@@ -1,10 +1,10 @@
-import { types } from 'mobx-state-tree';
-import { v4 } from 'uuid';
-import { GetParameters } from '../utils';
+import { types } from "mobx-state-tree";
+import { v4 } from "uuid";
+import { GetParameters } from "../utils";
 
 export const WorkItemShape = types.model({
   id: types.optional(types.identifier(), () => v4()),
-  title: '',
+  title: "",
   durationInSeconds: 0,
 });
 export type WorkItemType = typeof WorkItemShape.Type;

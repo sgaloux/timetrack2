@@ -1,3 +1,3 @@
-import TrackerPage from './TrackerPage';
+import TrackerPage from "./TrackerPage";
 
 export { TrackerPage };

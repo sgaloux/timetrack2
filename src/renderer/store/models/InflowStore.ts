@@ -1,10 +1,14 @@
-import { existsSync } from 'fs';
-import { applySnapshot, flow, types } from 'mobx-state-tree';
-import { unflatten } from 'un-flatten-tree';
-import { PATHS, readFilePromisified, writeFilePromisified } from '../../common/utils';
-import { NotificationToast } from '../../modules/Common';
-import { getInflowTree, getInflowTypes } from '../../services/inflowService';
-import { GetParameters } from '../utils';
+import { existsSync } from "fs";
+import { applySnapshot, flow, types } from "mobx-state-tree";
+import { unflatten } from "un-flatten-tree";
+import {
+  PATHS,
+  readFilePromisified,
+  writeFilePromisified,
+} from "../../common/utils";
+import { NotificationToast } from "../../modules/Common";
+import { getInflowTree, getInflowTypes } from "../../services/inflowService";
+import { GetParameters } from "../utils";
 
 const InflowType = types.model({
   id: types.string,
@@ -37,27 +41,31 @@ export const InflowStore = types
       const tree = unflatten(
         nodes,
         (node, parentNode) => node.parentId === parentNode.inflowId,
-        (node, parentNode) => parentNode.children.push(node),
+        (node, parentNode) => parentNode.children.push(node)
       );
       return tree;
     },
   }))
   .actions((self) => {
-    const loadInflowTypesFromServer = flow(function* () {
+    const loadInflowTypesFromServer = flow(function*() {
       self.inflowTypes = yield getInflowTypes(GetParameters(self));
     });
 
-    const loadInflowNodesFromServer = flow(function* () {
+    const loadInflowNodesFromServer = flow(function*() {
       self.inflowNodes = yield getInflowTree(GetParameters(self));
     });
 
-    const tryToLoadTypes = flow(function* () {
+    const tryToLoadTypes = flow(function*() {
       if (existsSync(PATHS.inflowTypesFile)) {
         try {
-          const content = yield readFilePromisified(PATHS.inflowTypesFile, { encoding: 'utf8' });
+          const content = yield readFilePromisified(PATHS.inflowTypesFile, {
+            encoding: "utf8",
+          });
           applySnapshot(self.inflowTypes, JSON.parse(content));
         } catch (error) {
-          NotificationToast.showError(`Unable to load inflow types from file ${error}`);
+          NotificationToast.showError(
+            `Unable to load inflow types from file ${error}`
+          );
         }
       } else {
         yield loadInflowTypesFromServer();
@@ -65,13 +73,17 @@ export const InflowStore = types
       }
     });
 
-    const tryToLoadNodes = flow(function* () {
+    const tryToLoadNodes = flow(function*() {
       if (existsSync(PATHS.inflowNodesFile)) {
         try {
-          const content = yield readFilePromisified(PATHS.inflowNodesFile, { encoding: 'utf8' });
+          const content = yield readFilePromisified(PATHS.inflowNodesFile, {
+            encoding: "utf8",
+          });
           applySnapshot(self.inflowNodes, JSON.parse(content));
         } catch (error) {
-          NotificationToast.showError(`Unable to load inflow nodes from file ${error}`);
+          NotificationToast.showError(
+            `Unable to load inflow nodes from file ${error}`
+          );
         }
       } else {
         yield loadInflowNodesFromServer();
@@ -79,21 +91,29 @@ export const InflowStore = types
       }
     });
 
-    const saveInflowTypesToFile = flow(function* () {
+    const saveInflowTypesToFile = flow(function*() {
       try {
         const typesContent = JSON.stringify(self.inflowTypes, null, 2);
-        yield writeFilePromisified(PATHS.inflowTypesFile, typesContent, { encoding: 'utf8' });
+        yield writeFilePromisified(PATHS.inflowTypesFile, typesContent, {
+          encoding: "utf8",
+        });
       } catch (error) {
-        NotificationToast.showError(`Error while saving inflow types file ${error}`);
+        NotificationToast.showError(
+          `Error while saving inflow types file ${error}`
+        );
       }
     });
 
-    const saveInflowNodesToFile = flow(function* () {
+    const saveInflowNodesToFile = flow(function*() {
       try {
         const typesContent = JSON.stringify(self.inflowNodes, null, 2);
-        yield writeFilePromisified(PATHS.inflowNodesFile, typesContent, { encoding: 'utf8' });
+        yield writeFilePromisified(PATHS.inflowNodesFile, typesContent, {
+          encoding: "utf8",
+        });
       } catch (error) {
-        NotificationToast.showError(`Error while saving inflow nodes file : ${error}`);
+        NotificationToast.showError(
+          `Error while saving inflow nodes file : ${error}`
+        );
       }
     });
 

@@ -1,9 +1,9 @@
-import { inject, observer } from 'mobx-react';
-import React, { Component, Fragment } from 'react';
-import { ICommonStoreProps } from '../../common/ICommonStoreProps';
-import SettingsForm from './SettingsForm';
+import { inject, observer } from "mobx-react";
+import React, { Component, Fragment } from "react";
+import { ICommonStoreProps } from "../../common/ICommonStoreProps";
+import SettingsForm from "./SettingsForm";
 
-@inject('store')
+@inject("store")
 @observer
 class SettingsPage extends Component<ICommonStoreProps> {
   public render() {
@@ -11,7 +11,10 @@ class SettingsPage extends Component<ICommonStoreProps> {
     return (
       <Fragment>
         <h1>Settings</h1>
-        <SettingsForm settings={store!.parameters.allValues} onSubmit={store!.parameters.setNewParameters} />
+        <SettingsForm
+          settings={store!.parameters.allValues}
+          onSubmit={store!.parameters.setNewParameters}
+        />
       </Fragment>
     );
   }
