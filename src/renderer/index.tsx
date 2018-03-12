@@ -23,5 +23,5 @@ ReactDOM.render(
   <Provider store={store}>
     <AppShell />
   </Provider>,
-  document.getElementById("app")
+  document.getElementById("app"),
 );

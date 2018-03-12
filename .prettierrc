@@ -3,7 +3,7 @@
   "jsxBracketSameLine": false,
   "semi": true,
   "singleQuote": false,
-  "trailingComma": "es5",
+  "trailingComma": "all",
   "arrowParens": "always",
   "parser": "typescript"
 }

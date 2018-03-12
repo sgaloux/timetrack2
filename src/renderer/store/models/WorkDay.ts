@@ -37,7 +37,7 @@ export const WorkDay = WorkDayShape.views((self) => ({
           } else {
             console.error(`Unable to load settings file ${fileName}`, err);
             NotificationToast.showSuccess(
-              `Unable to load data file ${fileName}`
+              `Unable to load data file ${fileName}`,
             );
           }
         });

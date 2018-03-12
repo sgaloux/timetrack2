@@ -41,7 +41,7 @@ export const InflowStore = types
       const tree = unflatten(
         nodes,
         (node, parentNode) => node.parentId === parentNode.inflowId,
-        (node, parentNode) => parentNode.children.push(node)
+        (node, parentNode) => parentNode.children.push(node),
       );
       return tree;
     },
@@ -64,7 +64,7 @@ export const InflowStore = types
           applySnapshot(self.inflowTypes, JSON.parse(content));
         } catch (error) {
           NotificationToast.showError(
-            `Unable to load inflow types from file ${error}`
+            `Unable to load inflow types from file ${error}`,
           );
         }
       } else {
@@ -82,7 +82,7 @@ export const InflowStore = types
           applySnapshot(self.inflowNodes, JSON.parse(content));
         } catch (error) {
           NotificationToast.showError(
-            `Unable to load inflow nodes from file ${error}`
+            `Unable to load inflow nodes from file ${error}`,
           );
         }
       } else {
@@ -99,7 +99,7 @@ export const InflowStore = types
         });
       } catch (error) {
         NotificationToast.showError(
-          `Error while saving inflow types file ${error}`
+          `Error while saving inflow types file ${error}`,
         );
       }
     });
@@ -112,7 +112,7 @@ export const InflowStore = types
         });
       } catch (error) {
         NotificationToast.showError(
-          `Error while saving inflow nodes file : ${error}`
+          `Error while saving inflow nodes file : ${error}`,
         );
       }
     });

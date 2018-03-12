@@ -49,7 +49,7 @@ export const Parameters = ParametersState.views((self) => ({
         applySnapshot(self, content);
       }
     } catch (error) {
-      NotificationToast.showError("Error while loading settings file" + error);
+      NotificationToast.showError(`Error while loading settings file ${error}`);
     }
   });
 

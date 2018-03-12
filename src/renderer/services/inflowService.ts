@@ -13,7 +13,7 @@ interface IInflowType {
 }
 
 export async function getInflowTypes(
-  params: IInflowParameters
+  params: IInflowParameters,
 ): Promise<IInflowType[]> {
   const { inflowPassword, inflowUrl, inflowUser } = params;
   const response = await axios.get(`${inflowUrl}/types/perf`, {
@@ -29,7 +29,7 @@ export async function getInflowTypes(
     (el: { _attributes: { id: string; name: string } }) => ({
       id: el._attributes.id,
       name: el._attributes.name,
-    })
+    }),
   );
   return types;
 }
@@ -69,7 +69,7 @@ function parseTree(data: IXmlTree, parentId?: string): IInflowNode[] {
 }
 
 export async function getInflowTree(
-  params: IInflowParameters
+  params: IInflowParameters,
 ): Promise<IInflowNode[]> {
   const { inflowPassword, inflowUrl, inflowUser } = params;
   const response = await axios.get(`${inflowUrl}/tree`, {
