@@ -65,20 +65,34 @@ export const WorkDay = WorkDayShape.views((self) => ({
       }
     });
 
+    let changingDate = false;
+
     function loadDate(newDate: Date = new Date()) {
-      // read from disk
+      self.workItems.clear();
       self.date = newDate;
       loadFromFile();
+    }
+
+    function loadNextDate() {
+      loadDate(
+        moment(self.date)
+          .add(1, "day")
+          .toDate()
+      );
+    }
+
+    function loadPreviousDate() {
+      loadDate(
+        moment(self.date)
+          .subtract(1, "day")
+          .toDate()
+      );
     }
 
     function addWorkItem() {
       const newItem = WorkItem.create();
       self.workItems.push(newItem);
-    }
-
-    function afterAttach() {
-      console.log(`After attach WorkDay ${self.formattedDate}`);
-      onSnapshot(self, saveToFile);
+      saveToFile();
     }
 
     function afterCreate() {
@@ -88,7 +102,8 @@ export const WorkDay = WorkDayShape.views((self) => ({
     return {
       loadDate,
       addWorkItem,
-      afterAttach,
       afterCreate,
+      loadNextDate,
+      loadPreviousDate,
     };
   });
