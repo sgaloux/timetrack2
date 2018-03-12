@@ -17,9 +17,14 @@ function getUserHome(suffixPath: string) {
 }
 
 function ensureDirectoryExistence(filePath: string) {
-  const dirname = path.dirname(filePath);
+  let dirname = path.dirname(filePath);
+  if (filePath.endsWith("/")) {
+    dirname = filePath;
+  }
   if (!fs.existsSync(dirname)) {
-    ensureDirectoryExistence(dirname);
+    if (!filePath.endsWith("/")) {
+      ensureDirectoryExistence(dirname);
+    }
     fs.mkdirSync(dirname);
   }
 }

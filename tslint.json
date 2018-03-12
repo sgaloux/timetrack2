@@ -11,7 +11,8 @@
     "object-literal-key-quotes": false,
     "prefer-template": true,
     "no-unused-expression": true,
-    "space-before-function-paren": false
+    "space-before-function-paren": false,
+    "trailing-comma": false,
   },
   "rulesDirectory": []
 }
