@@ -5,10 +5,10 @@ import * as React from "react";
 import { Redirect, Route, Switch } from "react-router";
 import { HashRouter } from "react-router-dom";
 import { ICommonStoreProps } from "../../common/ICommonStoreProps";
-import AppDialog from "../Common/AppDialog";
 import { SettingsPage } from "../Settings";
 import { TrackerPage } from "../Tracker";
 import NavigationBar from "./NavigationBar";
+import AppConfirm from "../Common/dialogs/AppConfirm";
 
 const ContainerDiv = glamorous.div({
   padding: "5px",
@@ -35,11 +35,8 @@ export default class AppShell extends React.Component<ICommonStoreProps> {
     return (
       <HashRouter>
         <React.Fragment>
-          <AppDialog />
-          <NavigationBar
-            onSync={store!.synchronizeData}
-            onQuit={store!.quitApplication}
-          />
+          <AppConfirm />
+          <NavigationBar onSync={store!.synchronizeData} onQuit={store!.quitApplication} />
           {initializing ? (
             <InitializeContainerDiv>
               <InitializeContentDiv>

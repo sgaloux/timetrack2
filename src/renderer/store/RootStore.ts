@@ -4,12 +4,14 @@ import { NotificationToast } from "../modules/Common";
 import { InflowStore } from "./models/InflowStore";
 import { Parameters } from "./models/Parameters";
 import { WorkDay } from "./models/WorkDay";
+import { ModalStore } from "./models/modalStore";
 
 export const RootStore = types
   .model({
     parameters: types.optional(Parameters, Parameters.create()),
     workDay: types.optional(WorkDay, WorkDay.create({})),
     inflowStore: types.optional(InflowStore, InflowStore.create({})),
+    modalStore: types.optional(ModalStore, ModalStore.create({})),
     initializing: true,
     initializeMessage: "",
   })
@@ -50,9 +52,15 @@ export const RootStore = types
       self.initializing = false;
     });
 
-    const quitApplication = () => {
-      remote.getCurrentWindow().close();
-    };
+    const quitApplication = flow(function*() {
+      const confirm = yield self.modalStore.confirm.show(
+        "Confirm exit",
+        "Are you sure you want to quit? ",
+      );
+      if (confirm) {
+        remote.app.quit();
+      }
+    });
 
     return {
       afterCreate,
