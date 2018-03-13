@@ -7,6 +7,13 @@ import { WorkItemType } from "../../store/models/WorkItem";
 import ActionBar from "./ActionBar";
 import WorkItem from "./WorkItem";
 import DateSelector from "./DateSelector";
+import glamorous from "glamorous";
+
+const ActionContainer = glamorous.div({
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between",
+});
 
 @inject("store")
 @observer
@@ -15,8 +22,11 @@ export default class TrackerPage extends React.Component<ICommonStoreProps> {
     const { store } = this.props;
     return (
       <div>
-        <DateSelector />
-        <ActionBar onAdd={store!.workDay.addWorkItem} />
+        <ActionContainer>
+          <DateSelector />
+          <ActionBar onAdd={store!.workDay.addWorkItem} />
+        </ActionContainer>
+        <hr />
         {store!.workDay.noItems ? (
           <NonIdealState title="No work items today..." visual="pt-icon-cross" />
         ) : (

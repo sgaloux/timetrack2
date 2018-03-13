@@ -12,6 +12,7 @@ import AppConfirm from "../Common/dialogs/AppConfirm";
 
 const ContainerDiv = glamorous.div({
   padding: "5px",
+  marginTop: "10px",
 });
 
 const InitializeContainerDiv = glamorous.div({
