@@ -9,6 +9,7 @@ import { RootStore } from "./store/RootStore";
 
 import "@blueprintjs/core/dist/blueprint.css";
 import "normalize.css/normalize.css";
+import "@blueprintjs/datetime/dist/blueprint-datetime.css";
 
 import "./index.css";
 
@@ -16,8 +17,7 @@ const store = RootStore.create();
 addMiddleware(store, actionLogger);
 
 (window as any).rootStore = store;
-(window as any).printState = () =>
-  console.log(JSON.stringify(getSnapshot(store), null, 2));
+(window as any).printState = () => console.log(JSON.stringify(getSnapshot(store), null, 2));
 
 ReactDOM.render(
   <Provider store={store}>
