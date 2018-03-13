@@ -4,7 +4,7 @@ import { ICommonStoreProps } from "../../common/ICommonStoreProps";
 import { Button, Popover, Position, PopoverInteractionKind } from "@blueprintjs/core";
 import glamorous from "glamorous";
 import { DatePicker } from "@blueprintjs/datetime";
-import moment from "moment";
+//@ts-ignore
 import MomentLocaleUtils from "react-day-picker/moment";
 import "moment/locale/fr";
 
