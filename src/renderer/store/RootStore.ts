@@ -55,7 +55,7 @@ export const RootStore = types
     const quitApplication = flow(function*() {
       const confirm = yield self.modalStore.confirm.show(
         "Confirm exit",
-        "Are you sure you want to quit? ",
+        "Are you sure you want to quit timetrack2 ? ",
       );
       if (confirm) {
         remote.app.quit();

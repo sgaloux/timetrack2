@@ -12,7 +12,7 @@ export default class AppConfirm extends React.Component<ICommonStoreProps> {
     return (
       <div>
         <Dialog
-          iconName="inbox"
+          iconName="warning-sign"
           isOpen={confirm.isOpen}
           onClose={confirm.cancel}
           title={confirm.title}
