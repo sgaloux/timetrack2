@@ -45,3 +45,5 @@ export const ModalStore = types.model({
     }),
   ),
 });
+
+export type ModalStoreType = typeof ModalStore.Type;

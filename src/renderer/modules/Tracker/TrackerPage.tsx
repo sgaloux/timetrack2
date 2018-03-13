@@ -24,14 +24,14 @@ export default class TrackerPage extends React.Component<ICommonStoreProps> {
       <div>
         <ActionContainer>
           <DateSelector />
-          <ActionBar onAdd={store!.workDay.addWorkItem} />
+          <ActionBar onAdd={store!.workDay.addWorkItem} onClear={store!.workDay.clearTheDay} />
         </ActionContainer>
         <hr />
         {store!.workDay.noItems ? (
-          <NonIdealState title="No work items today..." visual="pt-icon-cross" />
+          <NonIdealState title="No work items found..." visual="pt-icon-predictive-analysis" />
         ) : (
           store!.workDay.allItems.map((i: WorkItemType) => (
-            <WorkItem key={i.id.toString()} workItem={i} />
+            <WorkItem key={i.id.toString()} workItem={i} onDeleteItem={store!.workDay.deleteItem} />
           ))
         )}
       </div>

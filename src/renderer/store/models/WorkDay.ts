@@ -1,14 +1,11 @@
 import { existsSync, readFile } from "fs";
-import { applySnapshot, flow, onSnapshot, types } from "mobx-state-tree";
+import { applySnapshot, flow, onSnapshot, types, getRoot } from "mobx-state-tree";
 import moment from "moment";
 import path from "path";
-import {
-  PATHS,
-  readFilePromisified,
-  writeFilePromisified,
-} from "../../common/utils";
+import { PATHS, readFilePromisified, writeFilePromisified } from "../../common/utils";
 import { NotificationToast } from "../../modules/Common";
 import { WorkItem } from "./WorkItem";
+import { GetModals } from "../utils";
 
 const WorkDayShape = types.model({
   date: types.optional(types.Date, new Date()),
@@ -46,9 +43,7 @@ export const WorkDay = WorkDayShape.views((self) => ({
         });
         applySnapshot(self, JSON.parse(content));
       } catch (error) {
-        NotificationToast.showError(
-          `Unable to load file ${self.fullPath} : ${error}`
-        );
+        NotificationToast.showError(`Unable to load file ${self.fullPath} : ${error}`);
       }
     });
 
@@ -59,13 +54,9 @@ export const WorkDay = WorkDayShape.views((self) => ({
           encoding: "utf8",
         });
       } catch (error) {
-        NotificationToast.showError(
-          `Unable to save workday to file : ${self.fullPath} : ${error}`
-        );
+        NotificationToast.showError(`Unable to save workday to file : ${self.fullPath} : ${error}`);
       }
     });
-
-    let changingDate = false;
 
     function loadDate(newDate: Date = new Date()) {
       self.workItems.clear();
@@ -77,7 +68,7 @@ export const WorkDay = WorkDayShape.views((self) => ({
       loadDate(
         moment(self.date)
           .add(1, "day")
-          .toDate()
+          .toDate(),
       );
     }
 
@@ -85,7 +76,7 @@ export const WorkDay = WorkDayShape.views((self) => ({
       loadDate(
         moment(self.date)
           .subtract(1, "day")
-          .toDate()
+          .toDate(),
       );
     }
 
@@ -99,11 +90,31 @@ export const WorkDay = WorkDayShape.views((self) => ({
       loadDate();
     }
 
+    const clearTheDay = flow(function*() {
+      const confirmed = yield GetModals(self).confirm.show(
+        "Delete all",
+        `Are you sure you want to clear the day?\n${
+          self.workItems.length
+        } item(s) will be deleted !`,
+      );
+      if (confirmed) {
+        self.workItems.clear();
+        saveToFile();
+      }
+    });
+
+    const deleteItem = function(item: typeof WorkItem.Type) {
+      self.workItems.remove(item);
+      saveToFile();
+    };
+
     return {
       loadDate,
       addWorkItem,
       afterCreate,
       loadNextDate,
       loadPreviousDate,
+      deleteItem,
+      clearTheDay,
     };
   });

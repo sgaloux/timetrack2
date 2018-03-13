@@ -17,11 +17,18 @@ export default class AppConfirm extends React.Component<ICommonStoreProps> {
           onClose={confirm.cancel}
           title={confirm.title}
         >
-          <div className="pt-dialog-body">{confirm.content}</div>
+          <div className="pt-dialog-body" style={{ textAlign: "center" }}>
+            {confirm.content.split("\n").map((s) => <div>{s}</div>)}
+          </div>
           <div className="pt-dialog-footer">
             <div className="pt-dialog-footer-actions">
-              <Button text="No" onClick={confirm.cancel} />
-              <Button intent={Intent.PRIMARY} onClick={confirm.confirm} text="Yes" />
+              <Button text="No" onClick={confirm.cancel} className="pt-fill" />
+              <Button
+                intent={Intent.PRIMARY}
+                onClick={confirm.confirm}
+                text="Yes"
+                className="pt-fill"
+              />
             </div>
           </div>
         </Dialog>
