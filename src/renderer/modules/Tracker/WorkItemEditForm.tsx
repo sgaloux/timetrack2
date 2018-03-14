@@ -4,6 +4,7 @@ import React from "react";
 import { Form, Field, FormSpy } from "react-final-form";
 import { FormState } from "final-form";
 import { WorkItemType } from "../../store/models/WorkItemModel";
+import AutoSave from "../Common/forms/AutoSave";
 
 interface IWorkItemEditForm {
   workItem: WorkItemType;
@@ -20,14 +21,6 @@ function validateForm(values: any): any {
 
 @observer
 export default class WorkItemEditForm extends React.Component<IWorkItemEditForm> {
-  timeout!: NodeJS.Timer;
-  private onDataChange = (formState: FormState) => {
-    if (this.timeout) {
-      clearTimeout(this.timeout);
-    }
-    this.timeout = setTimeout(() => this.props.onSave(formState.values as WorkItemType), 500);
-  };
-
   public render() {
     const { workItem } = this.props;
     return (
@@ -37,7 +30,7 @@ export default class WorkItemEditForm extends React.Component<IWorkItemEditForm>
         initialValues={workItem}
         render={({ handleSubmit, valid }) => (
           <form onSubmit={handleSubmit}>
-            <FormSpy subscription={{ values: true }} onChange={this.onDataChange} />
+            <AutoSave debounce={500} save={this.props.onSave} />
             <Field
               name="title"
               render={({ input, meta }) => (

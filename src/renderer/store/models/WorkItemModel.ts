@@ -15,7 +15,8 @@ export const WorkItemModel = types
     }
 
     function setValues(newValues: WorkItemType) {
-      applySnapshot(self, newValues);
+      self.title = newValues.title;
+      self.durationInSeconds = newValues.durationInSeconds;
     }
 
     return {
