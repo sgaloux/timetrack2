@@ -1,8 +1,8 @@
-import { types } from "mobx-state-tree";
+import { types, applySnapshot } from "mobx-state-tree";
 import { v4 } from "uuid";
 import { GetParameters } from "../utils";
 
-export const WorkItem = types
+export const WorkItemModel = types
   .model({
     id: types.optional(types.identifier(), () => v4()),
     title: "",
@@ -14,8 +14,13 @@ export const WorkItem = types
       console.log(params.inflowUrl);
     }
 
+    function setValues(newValues: WorkItemType) {
+      applySnapshot(self, newValues);
+    }
+
     return {
       uploadToInflow,
+      setValues,
     };
   });
-export type WorkItemType = typeof WorkItem.Type;
+export type WorkItemType = typeof WorkItemModel.Type;

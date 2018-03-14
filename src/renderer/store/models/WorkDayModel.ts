@@ -4,20 +4,19 @@ import moment from "moment";
 import path from "path";
 import { PATHS, readFilePromisified, writeFilePromisified } from "../../common/utils";
 import { NotificationToast } from "../../modules/Common";
-import { WorkItem } from "./WorkItem";
+import { WorkItemModel } from "./WorkItemModel";
 import { GetModals } from "../utils";
 
-const WorkDayShape = types.model({
-  date: types.optional(types.Date, new Date()),
-  workItems: types.optional(types.array(WorkItem), []),
-});
-export type WorkDayType = typeof WorkDayShape.Type;
-
-export const WorkDay = WorkDayShape.views((self) => ({
-  get formattedDate() {
-    return moment(self.date).format("DD/MM/YY");
-  },
-}))
+export const WorkDayModel = types
+  .model({
+    date: types.optional(types.Date, new Date()),
+    workItems: types.optional(types.array(WorkItemModel), []),
+  })
+  .views((self) => ({
+    get formattedDate() {
+      return moment(self.date).format("DD/MM/YY");
+    },
+  }))
   .views((self) => ({
     get allItems() {
       return self.workItems;
@@ -81,13 +80,14 @@ export const WorkDay = WorkDayShape.views((self) => ({
     }
 
     function addWorkItem() {
-      const newItem = WorkItem.create();
+      const newItem = WorkItemModel.create();
       self.workItems.push(newItem);
       saveToFile();
     }
 
     function afterCreate() {
       loadDate();
+      onSnapshot(self.workItems, saveToFile);
     }
 
     const clearTheDay = flow(function*() {
@@ -103,7 +103,7 @@ export const WorkDay = WorkDayShape.views((self) => ({
       }
     });
 
-    const deleteItem = function(item: typeof WorkItem.Type) {
+    const deleteItem = function(item: typeof WorkItemModel.Type) {
       self.workItems.remove(item);
       saveToFile();
     };

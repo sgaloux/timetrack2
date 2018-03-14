@@ -18,7 +18,7 @@ export default class AppConfirm extends React.Component<ICommonStoreProps> {
           title={confirm.title}
         >
           <div className="pt-dialog-body" style={{ textAlign: "center" }}>
-            {confirm.content.split("\n").map((s) => <div>{s}</div>)}
+            {confirm.content.split("\n").map((s, index) => <div key={index}>{s}</div>)}
           </div>
           <div className="pt-dialog-footer">
             <div className="pt-dialog-footer-actions">

@@ -2,14 +2,14 @@ import { remote } from "electron";
 import { flow, types } from "mobx-state-tree";
 import { NotificationToast } from "../modules/Common";
 import { InflowStore } from "./models/InflowStore";
-import { Parameters } from "./models/Parameters";
-import { WorkDay } from "./models/WorkDay";
+import { ParametersModel } from "./models/ParametersModel";
+import { WorkDayModel } from "./models/WorkDayModel";
 import { ModalStore } from "./models/modalStore";
 
 export const RootStore = types
   .model({
-    parameters: types.optional(Parameters, Parameters.create()),
-    workDay: types.optional(WorkDay, WorkDay.create({})),
+    parameters: types.optional(ParametersModel, ParametersModel.create()),
+    workDay: types.optional(WorkDayModel, WorkDayModel.create({})),
     inflowStore: types.optional(InflowStore, InflowStore.create({})),
     modalStore: types.optional(ModalStore, ModalStore.create({})),
     initializing: true,

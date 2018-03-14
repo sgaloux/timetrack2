@@ -1,11 +1,7 @@
 import { existsSync } from "fs";
 import { applySnapshot, flow, types } from "mobx-state-tree";
 import { unflatten } from "un-flatten-tree";
-import {
-  PATHS,
-  readFilePromisified,
-  writeFilePromisified,
-} from "../../common/utils";
+import { PATHS, readFilePromisified, writeFilePromisified } from "../../common/utils";
 import { NotificationToast } from "../../modules/Common";
 import { getInflowTree, getInflowTypes } from "../../services/inflowService";
 import { GetParameters } from "../utils";
@@ -41,7 +37,7 @@ export const InflowStore = types
       const tree = unflatten(
         nodes,
         (node, parentNode) => node.parentId === parentNode.inflowId,
-        (node, parentNode) => parentNode.children.push(node)
+        (node, parentNode) => parentNode.children.push(node),
       );
       return tree;
     },
@@ -63,9 +59,7 @@ export const InflowStore = types
           });
           applySnapshot(self.inflowTypes, JSON.parse(content));
         } catch (error) {
-          NotificationToast.showError(
-            `Unable to load inflow types from file ${error}`
-          );
+          NotificationToast.showError(`Unable to load inflow types from file ${error}`);
         }
       } else {
         yield loadInflowTypesFromServer();
@@ -81,9 +75,7 @@ export const InflowStore = types
           });
           applySnapshot(self.inflowNodes, JSON.parse(content));
         } catch (error) {
-          NotificationToast.showError(
-            `Unable to load inflow nodes from file ${error}`
-          );
+          NotificationToast.showError(`Unable to load inflow nodes from file ${error}`);
         }
       } else {
         yield loadInflowNodesFromServer();
@@ -98,9 +90,7 @@ export const InflowStore = types
           encoding: "utf8",
         });
       } catch (error) {
-        NotificationToast.showError(
-          `Error while saving inflow types file ${error}`
-        );
+        NotificationToast.showError(`Error while saving inflow types file ${error}`);
       }
     });
 
@@ -111,9 +101,7 @@ export const InflowStore = types
           encoding: "utf8",
         });
       } catch (error) {
-        NotificationToast.showError(
-          `Error while saving inflow nodes file : ${error}`
-        );
+        NotificationToast.showError(`Error while saving inflow nodes file : ${error}`);
       }
     });
 

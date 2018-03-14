@@ -1,7 +1,9 @@
 import * as React from "react";
-import { WorkItemType } from "../../store/models/WorkItem";
-import { Card, Elevation, ButtonGroup, Button, Intent, Tooltip, Position } from "@blueprintjs/core";
+import { Card, Elevation, ButtonGroup, Intent } from "@blueprintjs/core";
 import glamorous from "glamorous";
+import TooltipButton from "../Common/TooltipButton";
+import WorkItemEditForm from "./WorkItemEditForm";
+import { WorkItemType } from "../../store/models/WorkItemModel";
 
 interface IWorkItemProps {
   workItem: WorkItemType;
@@ -25,15 +27,14 @@ export default class WorkItem extends React.Component<IWorkItemProps> {
       <Container>
         <Card interactive elevation={Elevation.TWO}>
           <CardContainerContent>
-            <div>{workItem.id}</div>
+            <WorkItemEditForm workItem={workItem} onSave={workItem.setValues} />
             <ButtonGroup>
-              <Tooltip content="Delete work item" position={Position.TOP_RIGHT}>
-                <Button
-                  iconName="cross"
-                  intent={Intent.DANGER}
-                  onClick={() => this.props.onDeleteItem(workItem)}
-                />
-              </Tooltip>
+              <TooltipButton
+                tooltipContent="Delete work item"
+                iconName="cross"
+                intent={Intent.DANGER}
+                onClick={() => this.props.onDeleteItem(workItem)}
+              />
             </ButtonGroup>
           </CardContainerContent>
         </Card>

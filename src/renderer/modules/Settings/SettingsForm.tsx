@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 import React from "react";
 import { Form } from "react-final-form";
 import validator from "validator";
-import { Parameters, ParametersType } from "../../store/models/Parameters";
+import { ParametersModel, ParametersType } from "../../store/models/ParametersModel";
 import InputField from "../Common/forms/InputField";
 
 interface ISettingsFormProps {
@@ -31,18 +31,14 @@ export default class SettingsForm extends React.Component<ISettingsFormProps> {
     const { settings, onSubmit } = this.props;
     return (
       <Form
-        onSubmit={(values) => onSubmit(Parameters.create(values))}
+        onSubmit={(values) => onSubmit(ParametersModel.create(values))}
         validate={validateForm}
         initialValues={settings}
         render={({ handleSubmit, valid }) => (
           <form onSubmit={handleSubmit}>
             <InputField name="inflowUrl" label="Inflow URL" showErrorDirectly />
             <InputField name="inflowUser" label="Inflow User" />
-            <InputField
-              name="inflowPassword"
-              label="Inflow Password"
-              type="password"
-            />
+            <InputField name="inflowPassword" label="Inflow Password" type="password" />
             <ButtonContainer>
               <Button intent={Intent.SUCCESS} type="submit" disabled={!valid}>
                 Save
