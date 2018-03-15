@@ -24,6 +24,7 @@
     "@blueprintjs/datetime": "^1.25.4",
     "@types/axios": "^0.14.0",
     "axios": "^0.18.0",
+    "classnames": "^2.2.5",
     "electron-devtools-installer": "^2.2.3",
     "final-form": "^4.2.1",
     "glamor": "^2.20.40",
@@ -50,6 +51,7 @@
     "xml-js": "^1.6.2"
   },
   "devDependencies": {
+    "@types/classnames": "^2.2.3",
     "@types/electron-devtools-installer": "^2.0.2",
     "@types/lodash": "^4.14.104",
     "@types/node-uuid": "^0.0.28",
