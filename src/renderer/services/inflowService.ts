@@ -1,5 +1,5 @@
-import axios from "axios";
-import { convertXmlToJs } from "../common/utils";
+import axios from 'axios';
+import { convertXmlToJs } from '../common/utils';
 
 interface IInflowParameters {
   inflowUrl: string;
@@ -12,25 +12,21 @@ interface IInflowType {
   name: string;
 }
 
-export async function getInflowTypes(
-  params: IInflowParameters,
-): Promise<IInflowType[]> {
+export async function getInflowTypes(params: IInflowParameters): Promise<IInflowType[]> {
   const { inflowPassword, inflowUrl, inflowUser } = params;
   const response = await axios.get(`${inflowUrl}/types/perf`, {
     headers: {
-      "Content-Type": "application/xml",
+      'Content-Type': 'application/xml',
       Authorization: `Basic ${btoa(`${inflowUser}:${inflowPassword}`)}`,
     },
     withCredentials: true,
   });
   const jsonData = convertXmlToJs(response.data);
 
-  const types = jsonData.types[0].type.map(
-    (el: { _attributes: { id: string; name: string } }) => ({
-      id: el._attributes.id,
-      name: el._attributes.name,
-    }),
-  );
+  const types = jsonData.types[0].type.map((el: { _attributes: { id: string; name: string } }) => ({
+    id: el._attributes.id,
+    name: el._attributes.name,
+  }));
   return types;
 }
 
@@ -68,13 +64,11 @@ function parseTree(data: IXmlTree, parentId?: string): IInflowNode[] {
   return nodes;
 }
 
-export async function getInflowTree(
-  params: IInflowParameters,
-): Promise<IInflowNode[]> {
+export async function getInflowTree(params: IInflowParameters): Promise<IInflowNode[]> {
   const { inflowPassword, inflowUrl, inflowUser } = params;
   const response = await axios.get(`${inflowUrl}/tree`, {
     headers: {
-      "Content-Type": "application/xml",
+      'Content-Type': 'application/xml',
       Authorization: `Basic ${btoa(`${inflowUser}:${inflowPassword}`)}`,
     },
     withCredentials: true,

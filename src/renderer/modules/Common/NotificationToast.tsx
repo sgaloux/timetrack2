@@ -1,7 +1,7 @@
-import { Intent, Position, Toaster } from "@blueprintjs/core";
+import { Intent, Position, Toaster } from '@blueprintjs/core';
 
 const toast = Toaster.create({
-  className: "my-toaster",
+  className: 'my-toaster',
   position: Position.BOTTOM_RIGHT,
 });
 

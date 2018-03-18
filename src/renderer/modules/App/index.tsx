@@ -1,3 +1,3 @@
-import AppShell from "./AppShell";
+import AppShell from './AppShell';
 
 export { AppShell };

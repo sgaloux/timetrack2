@@ -1,5 +1,5 @@
-import * as React from "react";
-import { Button, Tooltip, IButtonProps, Position } from "@blueprintjs/core";
+import * as React from 'react';
+import { Button, Tooltip, IButtonProps, Position } from '@blueprintjs/core';
 
 interface IToolTipButtonProps extends IButtonProps {
   tooltipContent: string;

@@ -1,9 +1,9 @@
-import { Button, Dialog, Intent } from "@blueprintjs/core";
-import * as React from "react";
-import { ICommonStoreProps } from "../../../common/ICommonStoreProps";
-import { inject, observer } from "mobx-react";
+import { Button, Dialog, Intent } from '@blueprintjs/core';
+import * as React from 'react';
+import { ICommonStoreProps } from '../../../common/ICommonStoreProps';
+import { inject, observer } from 'mobx-react';
 
-@inject("store")
+@inject('store')
 @observer
 export default class AppConfirm extends React.Component<ICommonStoreProps> {
   public render() {
@@ -17,8 +17,8 @@ export default class AppConfirm extends React.Component<ICommonStoreProps> {
           onClose={confirm.cancel}
           title={confirm.title}
         >
-          <div className="pt-dialog-body" style={{ textAlign: "center" }}>
-            {confirm.content.split("\n").map((s, index) => <div key={index}>{s}</div>)}
+          <div className="pt-dialog-body" style={{ textAlign: 'center' }}>
+            {confirm.content.split('\n').map((s, index) => <div key={index}>{s}</div>)}
           </div>
           <div className="pt-dialog-footer">
             <div className="pt-dialog-footer-actions">

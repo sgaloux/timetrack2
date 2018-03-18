@@ -1,10 +1,10 @@
-import { remote } from "electron";
-import { flow, types } from "mobx-state-tree";
-import { NotificationToast } from "../modules/Common";
-import { InflowStore } from "./models/InflowStore";
-import { ParametersModel } from "./models/ParametersModel";
-import { WorkDayModel } from "./models/WorkDayModel";
-import { ModalStore } from "./models/modalStore";
+import { remote } from 'electron';
+import { flow, types } from 'mobx-state-tree';
+import { NotificationToast } from '../modules/Common';
+import { InflowStore } from './models/InflowStore';
+import { ParametersModel } from './models/ParametersModel';
+import { WorkDayModel } from './models/WorkDayModel';
+import { ModalStore } from './models/modalStore';
 
 export const RootStore = types
   .model({
@@ -13,22 +13,22 @@ export const RootStore = types
     inflowStore: types.optional(InflowStore, InflowStore.create({})),
     modalStore: types.optional(ModalStore, ModalStore.create({})),
     initializing: true,
-    initializeMessage: "",
+    initializeMessage: '',
   })
   .actions((self) => {
     const afterCreate = flow(function*() {
       try {
         self.initializing = true;
-        self.initializeMessage = "Loading parameters";
+        self.initializeMessage = 'Loading parameters';
         yield self.parameters.loadParametersFromFile();
-        self.initializeMessage = "Loading inflow types";
+        self.initializeMessage = 'Loading inflow types';
         yield self.inflowStore.tryToLoadTypes();
-        self.initializeMessage = "Loading inflow tree";
+        self.initializeMessage = 'Loading inflow tree';
         yield self.inflowStore.tryToLoadNodes();
-        self.initializeMessage = "Init done !";
+        self.initializeMessage = 'Init done !';
       } catch (error) {
-        NotificationToast.showError("Error in startup");
-        console.error("Error occured on sartup...", error);
+        NotificationToast.showError('Error in startup');
+        console.error('Error occured on sartup...', error);
         self.initializeMessage = `Error on startup : ${error}`;
       }
       self.initializing = false;
@@ -37,16 +37,16 @@ export const RootStore = types
     const synchronizeData = flow(function*() {
       try {
         self.initializing = true;
-        self.initializeMessage = "Synchronize inflow types";
+        self.initializeMessage = 'Synchronize inflow types';
         yield self.inflowStore.loadInflowTypesFromServer();
         yield self.inflowStore.saveInflowTypesToFile();
-        self.initializeMessage = "Synchronize inflow tree";
+        self.initializeMessage = 'Synchronize inflow tree';
         yield self.inflowStore.loadInflowNodesFromServer();
         yield self.inflowStore.saveInflowNodesToFile();
-        self.initializeMessage = "Synchronization done !";
+        self.initializeMessage = 'Synchronization done !';
       } catch (error) {
-        NotificationToast.showError("Error while synchronizing data");
-        console.error("Error while synchronizing data...", error);
+        NotificationToast.showError('Error while synchronizing data');
+        console.error('Error while synchronizing data...', error);
         self.initializeMessage = `Error while synchronizing data : ${error}`;
       }
       self.initializing = false;
@@ -54,8 +54,8 @@ export const RootStore = types
 
     const quitApplication = flow(function*() {
       const confirm = yield self.modalStore.confirm.show(
-        "Confirm exit",
-        "Are you sure you want to quit timetrack2 ? ",
+        'Confirm exit',
+        'Are you sure you want to quit timetrack2 ? ',
       );
       if (confirm) {
         remote.app.quit();

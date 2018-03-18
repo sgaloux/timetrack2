@@ -13,10 +13,10 @@ import {
   IconClasses,
   PopoverInteractionKind,
   Colors,
-} from "@blueprintjs/core";
-import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
-import classnames from "classnames";
+} from '@blueprintjs/core';
+import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
+import classnames from 'classnames';
 
 interface IButtonLinkProps {
   icon: IconName;

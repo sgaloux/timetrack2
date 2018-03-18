@@ -1,14 +1,17 @@
-import { TextArea } from "@blueprintjs/core";
-import { observer } from "mobx-react";
-import React from "react";
-import { Form, Field, FormSpy } from "react-final-form";
-import { FormState } from "final-form";
-import { WorkItemType } from "../../store/models/WorkItemModel";
-import AutoSave from "../Common/forms/AutoSave";
+import { TextArea, Button, Classes, Intent, Dialog } from '@blueprintjs/core';
+import { observer } from 'mobx-react';
+import React, { Fragment } from 'react';
+import { Form, Field } from 'react-final-form';
+import { WorkItemType } from '../../store/models/WorkItemModel';
+import AutoSave from '../Common/forms/AutoSave';
 
-interface IWorkItemEditForm {
+interface WorkItemEditFormProps {
   workItem: WorkItemType;
   onSave(values: WorkItemType): void;
+}
+
+interface WorkItemEditFormState {
+  isPopupOpened: boolean;
 }
 
 function validateForm(values: any): any {
@@ -20,26 +23,68 @@ function validateForm(values: any): any {
 }
 
 @observer
-export default class WorkItemEditForm extends React.Component<IWorkItemEditForm> {
+export default class WorkItemEditForm extends React.Component<
+  WorkItemEditFormProps,
+  WorkItemEditFormState
+> {
+  constructor(props: WorkItemEditFormProps) {
+    super(props);
+    this.state = {
+      isPopupOpened: false,
+    };
+  }
+
   public render() {
     const { workItem } = this.props;
     return (
-      <Form
-        onSubmit={() => {}}
-        validate={validateForm}
-        initialValues={workItem}
-        render={({ handleSubmit, valid }) => (
-          <form onSubmit={handleSubmit}>
-            <AutoSave debounce={500} save={this.props.onSave} />
-            <Field
-              name="title"
-              render={({ input, meta }) => (
-                <TextArea placeholder="Give a task title..." {...input} />
-              )}
-            />
-          </form>
-        )}
-      />
+      <div>
+        <Dialog
+          isOpen={this.state.isPopupOpened}
+          onClose={this.closePopup}
+          title="Select inflow node"
+          style={{ width: '80%' }}
+        >
+          <div className="pt-dialog-body">
+            INFLOW<br />
+          </div>
+        </Dialog>
+
+        <Form
+          onSubmit={() => ({})}
+          validate={validateForm}
+          initialValues={workItem}
+          render={({ valid }) => (
+            <Fragment>
+              <AutoSave debounce={500} save={this.props.onSave} />
+              <Field
+                name="title"
+                render={({ input, meta }) => (
+                  <TextArea
+                    style={{ width: '350px' }}
+                    placeholder="Give a task title..."
+                    {...input}
+                  />
+                )}
+              />
+              <Button
+                text="Inflow..."
+                className={Classes.MINIMAL}
+                intent={Intent.PRIMARY}
+                onClick={this.openInflowPopup}
+              />
+              <Button text="Youtrack..." className={Classes.MINIMAL} intent={Intent.PRIMARY} />
+            </Fragment>
+          )}
+        />
+      </div>
     );
   }
+
+  private openInflowPopup = () => {
+    this.setState({ isPopupOpened: true });
+  };
+
+  private closePopup = () => {
+    this.setState({ isPopupOpened: false });
+  };
 }

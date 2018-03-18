@@ -1,33 +1,33 @@
-import { Spinner } from "@blueprintjs/core";
-import glamorous from "glamorous";
-import { inject, observer } from "mobx-react";
-import * as React from "react";
-import { Redirect, Route, Switch } from "react-router";
-import { HashRouter } from "react-router-dom";
-import { ICommonStoreProps } from "../../common/ICommonStoreProps";
-import { SettingsPage } from "../Settings";
-import { TrackerPage } from "../Tracker";
-import NavigationBar from "./NavigationBar";
-import AppConfirm from "../Common/dialogs/AppConfirm";
+import { Spinner } from '@blueprintjs/core';
+import glamorous from 'glamorous';
+import { inject, observer } from 'mobx-react';
+import * as React from 'react';
+import { Redirect, Route, Switch } from 'react-router';
+import { HashRouter } from 'react-router-dom';
+import { ICommonStoreProps } from '../../common/ICommonStoreProps';
+import { SettingsPage } from '../Settings';
+import { TrackerPage } from '../Tracker';
+import NavigationBar from './NavigationBar';
+import AppConfirm from '../Common/dialogs/AppConfirm';
 
 const ContainerDiv = glamorous.div({
-  padding: "5px",
-  marginTop: "10px",
+  padding: '5px',
+  marginTop: '10px',
 });
 
 const InitializeContainerDiv = glamorous.div({
-  display: "flex",
-  paddingTop: "100px",
-  justifyContent: "center",
+  display: 'flex',
+  paddingTop: '100px',
+  justifyContent: 'center',
 });
 
 const InitializeContentDiv = glamorous.div({
-  flexDirection: "column",
-  display: "flex",
-  alignItems: "center",
+  flexDirection: 'column',
+  display: 'flex',
+  alignItems: 'center',
 });
 
-@inject("store")
+@inject('store')
 @observer
 export default class AppShell extends React.Component<ICommonStoreProps> {
   public render() {

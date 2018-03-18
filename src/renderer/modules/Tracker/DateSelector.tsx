@@ -1,29 +1,29 @@
-import * as React from "react";
-import { observer, inject } from "mobx-react";
-import { ICommonStoreProps } from "../../common/ICommonStoreProps";
-import { Button, Popover, Position, PopoverInteractionKind } from "@blueprintjs/core";
-import glamorous from "glamorous";
-import { DatePicker } from "@blueprintjs/datetime";
+import * as React from 'react';
+import { observer, inject } from 'mobx-react';
+import { ICommonStoreProps } from '../../common/ICommonStoreProps';
+import { Button, Popover, Position, PopoverInteractionKind } from '@blueprintjs/core';
+import glamorous from 'glamorous';
+import { DatePicker } from '@blueprintjs/datetime';
 //@ts-ignore
-import MomentLocaleUtils from "react-day-picker/moment";
-import "moment/locale/fr";
+import MomentLocaleUtils from 'react-day-picker/moment';
+import 'moment/locale/fr';
 
 const Container = glamorous.div({
-  display: "flex",
-  flexDirection: "row",
-  alignItems: "center",
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
 });
 
 const DateText = glamorous.h2({
   margin: 0,
-  cursor: "pointer",
+  cursor: 'pointer',
 });
 
 interface IDateSelectorState {
   popoverOpened: boolean;
 }
 
-@inject("store")
+@inject('store')
 @observer
 export default class DateSelector extends React.Component<ICommonStoreProps, IDateSelectorState> {
   public state = {
@@ -34,7 +34,7 @@ export default class DateSelector extends React.Component<ICommonStoreProps, IDa
     const { store } = this.props;
     const { workDay } = store!;
     workDay.loadDate(date);
-    console.log("selectedDate - manual? " + hasUserManuallySelectedDate, date);
+    console.log('selectedDate - manual? ' + hasUserManuallySelectedDate, date);
     if (hasUserManuallySelectedDate) {
       this.setState({
         popoverOpened: false,

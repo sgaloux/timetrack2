@@ -1,6 +1,6 @@
-import { Button, ButtonGroup, Intent } from "@blueprintjs/core";
-import * as React from "react";
-import glamorous from "glamorous";
+import { Button, ButtonGroup, Intent } from '@blueprintjs/core';
+import * as React from 'react';
+import glamorous from 'glamorous';
 
 interface IActionBarProps {
   onAdd: () => void;
@@ -8,8 +8,8 @@ interface IActionBarProps {
 }
 
 const Container = glamorous.div({
-  display: "flex",
-  flexDirection: "row",
+  display: 'flex',
+  flexDirection: 'row',
 });
 
 export default class Actionbar extends React.Component<IActionBarProps> {

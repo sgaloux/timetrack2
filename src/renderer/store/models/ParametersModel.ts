@@ -1,13 +1,13 @@
-import fs from "fs";
-import { applySnapshot, flow, getSnapshot, types } from "mobx-state-tree";
-import { PATHS, readFilePromisified, writeFilePromisified } from "../../common/utils";
-import { NotificationToast } from "../../modules/Common";
+import fs from 'fs';
+import { applySnapshot, flow, getSnapshot, types } from 'mobx-state-tree';
+import { PATHS, readFilePromisified, writeFilePromisified } from '../../common/utils';
+import { NotificationToast } from '../../modules/Common';
 
 export const ParametersModel = types
   .model({
-    inflowUrl: "",
-    inflowUser: "",
-    inflowPassword: "",
+    inflowUrl: '',
+    inflowUser: '',
+    inflowPassword: '',
   })
   .actions((self) => {
     function setNewParameters(newParams: typeof ParametersModel.Type) {
@@ -19,11 +19,11 @@ export const ParametersModel = types
       const jsonContent = JSON.stringify(self, null, 2);
       try {
         yield writeFilePromisified(PATHS.settingsFile, jsonContent, {
-          encoding: "utf8",
+          encoding: 'utf8',
         });
-        NotificationToast.showSuccess("Settings saved !");
+        NotificationToast.showSuccess('Settings saved !');
       } catch (error) {
-        NotificationToast.showError("Unable to save settings to file !");
+        NotificationToast.showError('Unable to save settings to file !');
       }
     });
 
@@ -34,7 +34,7 @@ export const ParametersModel = types
           yield saveParameters();
         } else {
           const data = yield readFilePromisified(PATHS.settingsFile, {
-            encoding: "utf8",
+            encoding: 'utf8',
           });
           const content = JSON.parse(data);
           applySnapshot(self, content);

@@ -1,11 +1,11 @@
-import { Button, Intent } from "@blueprintjs/core";
-import glamorous from "glamorous";
-import { observer } from "mobx-react";
-import React from "react";
-import { Form } from "react-final-form";
-import validator from "validator";
-import { ParametersModel, ParametersType } from "../../store/models/ParametersModel";
-import InputField from "../Common/forms/InputField";
+import { Button, Intent } from '@blueprintjs/core';
+import glamorous from 'glamorous';
+import { observer } from 'mobx-react';
+import React from 'react';
+import { Form } from 'react-final-form';
+import validator from 'validator';
+import { ParametersModel, ParametersType } from '../../store/models/ParametersModel';
+import InputField from '../Common/forms/InputField';
 
 interface ISettingsFormProps {
   settings: ParametersType;
@@ -13,14 +13,14 @@ interface ISettingsFormProps {
 }
 
 const ButtonContainer = glamorous.div({
-  display: "flex",
-  justifyContent: "flex-end",
+  display: 'flex',
+  justifyContent: 'flex-end',
 });
 
 function validateForm(values: any): any {
   const errors: any = {};
-  if (!validator.isURL(values.inflowUrl || "")) {
-    errors.inflowUrl = "URL is invalid !";
+  if (!validator.isURL(values.inflowUrl || '')) {
+    errors.inflowUrl = 'URL is invalid !';
   }
   return errors;
 }

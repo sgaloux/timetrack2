@@ -1,10 +1,10 @@
-import { types } from "mobx-state-tree";
+import { types } from 'mobx-state-tree';
 
 const ConfirmModal = types
   .model({
     isOpen: false,
-    title: "",
-    content: "",
+    title: '',
+    content: '',
   })
   .actions((self) => {
     let scopeResolve: any;
@@ -40,8 +40,8 @@ export const ModalStore = types.model({
     ConfirmModal,
     ConfirmModal.create({
       isOpen: false,
-      title: "",
-      content: "",
+      title: '',
+      content: '',
     }),
   ),
 });
