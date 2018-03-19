@@ -1,5 +1,5 @@
 import { RootStore } from '../store/RootStore';
 
-export interface ICommonStoreProps {
+export interface CommonStoreProps {
   store?: typeof RootStore.Type;
 }

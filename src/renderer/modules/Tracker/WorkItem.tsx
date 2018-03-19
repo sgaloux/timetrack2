@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { Card, Elevation, ButtonGroup, Intent } from '@blueprintjs/core';
+import { Card, Elevation, ButtonGroup, Intent, IconClasses } from '@blueprintjs/core';
 import glamorous from 'glamorous';
 import TooltipButton from '../Common/TooltipButton';
 import WorkItemEditForm from './WorkItemEditForm';
 import { WorkItemType } from '../../store/models/WorkItemModel';
 
-interface IWorkItemProps {
+interface WorkItemProps {
   workItem: WorkItemType;
   onDeleteItem: (item: WorkItemType) => any;
 }
@@ -20,18 +20,18 @@ const CardContainerContent = glamorous.div({
   justifyContent: 'space-between',
 });
 
-export default class WorkItem extends React.Component<IWorkItemProps> {
+export default class WorkItem extends React.Component<WorkItemProps> {
   public render() {
     const { workItem } = this.props;
     return (
       <Container>
-        <Card interactive elevation={Elevation.TWO}>
+        <Card interactive={true} elevation={Elevation.TWO}>
           <CardContainerContent>
             <WorkItemEditForm workItem={workItem} onSave={workItem.setValues} />
             <ButtonGroup>
               <TooltipButton
                 tooltipContent="Delete work item"
-                iconName="cross"
+                iconName={IconClasses.CROSS}
                 intent={Intent.DANGER}
                 onClick={() => this.props.onDeleteItem(workItem)}
               />

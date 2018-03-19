@@ -19,7 +19,7 @@ const InflowNode = types.model({
 
 type InflowNodeType = typeof InflowNode.Type;
 
-interface InflowNodeTreeType extends InflowNodeType {
+export interface InflowNodeTreeType extends InflowNodeType {
   children: InflowNodeTreeType[];
 }
 

@@ -2,8 +2,7 @@ import { NonIdealState, Button } from '@blueprintjs/core';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
 
-import { ICommonStoreProps } from '../../common/ICommonStoreProps';
-import { WorkItemType } from '../../store/models/WorkItem';
+import { CommonStoreProps } from '../../common/ICommonStoreProps';
 import ActionBar from './ActionBar';
 import WorkItem from './WorkItem';
 import DateSelector from './DateSelector';
@@ -17,7 +16,7 @@ const ActionContainer = glamorous.div({
 
 @inject('store')
 @observer
-export default class TrackerPage extends React.Component<ICommonStoreProps> {
+export default class TrackerPage extends React.Component<CommonStoreProps> {
   public render() {
     const { store } = this.props;
     return (

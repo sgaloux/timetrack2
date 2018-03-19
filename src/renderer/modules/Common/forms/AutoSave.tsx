@@ -2,7 +2,7 @@ import React from 'react';
 import { FormSpy, FormSpyProps } from 'react-final-form';
 import diff from 'object-diff';
 
-interface IAutoSaveProps extends FormSpyProps {
+interface AutoSaveProps extends FormSpyProps {
   values: any;
   submitting: false;
   debounce: number;
@@ -14,15 +14,15 @@ interface AutoSaveState {
   submitting: boolean;
 }
 
-class AutoSave extends React.Component<IAutoSaveProps, AutoSaveState> {
+class AutoSave extends React.Component<AutoSaveProps, AutoSaveState> {
   promise: any;
   timeout!: NodeJS.Timer;
-  constructor(props: IAutoSaveProps) {
+  constructor(props: AutoSaveProps) {
     super(props);
     this.state = { values: props.values, submitting: false };
   }
 
-  componentWillReceiveProps(nextProps: IAutoSaveProps) {
+  componentWillReceiveProps(nextProps: AutoSaveProps) {
     if (this.timeout) {
       clearTimeout(this.timeout);
     }
@@ -45,7 +45,7 @@ class AutoSave extends React.Component<IAutoSaveProps, AutoSaveState> {
       delete this.promise;
       this.setState({ submitting: false });
     }
-  }
+  };
 
   render() {
     // This component doesn't have to render anything, but it can render

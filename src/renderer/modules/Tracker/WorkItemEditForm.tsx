@@ -4,6 +4,7 @@ import React, { Fragment } from 'react';
 import { Form, Field } from 'react-final-form';
 import { WorkItemType } from '../../store/models/WorkItemModel';
 import AutoSave from '../Common/forms/AutoSave';
+import InflowTreeSelector from './InflowTreeSelector';
 
 interface WorkItemEditFormProps {
   workItem: WorkItemType;
@@ -45,7 +46,7 @@ export default class WorkItemEditForm extends React.Component<
           style={{ width: '80%' }}
         >
           <div className="pt-dialog-body">
-            INFLOW<br />
+            <InflowTreeSelector />
           </div>
         </Dialog>
 

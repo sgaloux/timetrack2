@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { observer, inject } from 'mobx-react';
-import { ICommonStoreProps } from '../../common/ICommonStoreProps';
+import { CommonStoreProps } from '../../common/ICommonStoreProps';
 import { Button, Popover, Position, PopoverInteractionKind } from '@blueprintjs/core';
 import glamorous from 'glamorous';
 import { DatePicker } from '@blueprintjs/datetime';
-//@ts-ignore
+// @ts-ignore
 import MomentLocaleUtils from 'react-day-picker/moment';
 import 'moment/locale/fr';
 
@@ -19,33 +19,15 @@ const DateText = glamorous.h2({
   cursor: 'pointer',
 });
 
-interface IDateSelectorState {
+interface DateSelectorState {
   popoverOpened: boolean;
 }
 
 @inject('store')
 @observer
-export default class DateSelector extends React.Component<ICommonStoreProps, IDateSelectorState> {
+export default class DateSelector extends React.Component<CommonStoreProps, DateSelectorState> {
   public state = {
     popoverOpened: false,
-  };
-
-  private selectDate = (date: Date, hasUserManuallySelectedDate: boolean) => {
-    const { store } = this.props;
-    const { workDay } = store!;
-    workDay.loadDate(date);
-    console.log('selectedDate - manual? ' + hasUserManuallySelectedDate, date);
-    if (hasUserManuallySelectedDate) {
-      this.setState({
-        popoverOpened: false,
-      });
-    }
-  };
-
-  private handleInteraction = (nextOpenedState: boolean) => {
-    this.setState({
-      popoverOpened: nextOpenedState,
-    });
   };
 
   public render() {
@@ -65,7 +47,7 @@ export default class DateSelector extends React.Component<ICommonStoreProps, IDa
               onChange={this.selectDate}
               locale="fr"
               localeUtils={MomentLocaleUtils}
-              showActionsBar
+              showActionsBar={true}
             />
           }
           position={Position.BOTTOM_LEFT}
@@ -84,4 +66,22 @@ export default class DateSelector extends React.Component<ICommonStoreProps, IDa
       </Container>
     );
   }
+
+  private selectDate = (date: Date, hasUserManuallySelectedDate: boolean) => {
+    const { store } = this.props;
+    const { workDay } = store!;
+    workDay.loadDate(date);
+    console.log('selectedDate - manual? ' + hasUserManuallySelectedDate, date);
+    if (hasUserManuallySelectedDate) {
+      this.setState({
+        popoverOpened: false,
+      });
+    }
+  };
+
+  private handleInteraction = (nextOpenedState: boolean) => {
+    this.setState({
+      popoverOpened: nextOpenedState,
+    });
+  };
 }

@@ -1,11 +1,11 @@
 import { inject, observer } from 'mobx-react';
 import React, { Component, Fragment } from 'react';
-import { ICommonStoreProps } from '../../common/ICommonStoreProps';
+import { CommonStoreProps } from '../../common/ICommonStoreProps';
 import SettingsForm from './SettingsForm';
 
 @inject('store')
 @observer
-class SettingsPage extends Component<ICommonStoreProps> {
+class SettingsPage extends Component<CommonStoreProps> {
   public render() {
     const { store } = this.props;
     return (

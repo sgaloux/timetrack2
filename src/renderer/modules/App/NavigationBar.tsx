@@ -48,7 +48,18 @@ const MenuLink = (props: IMenuLinkProps) => {
       content={
         <Menu>
           <MenuItem iconName="new-text-box" text="New text box" />
-          <MenuItem text="Settings..." iconName="cog" />
+          <MenuItem text="Settings..." iconName="cog">
+            <MenuItem iconName="new-text-box" text="New text box" />
+            <MenuItem text="Settings..." iconName="cog">
+              <MenuItem iconName="new-text-box" text="New text box" />
+              <MenuItem iconName="new-text-box" text="New text box" />
+              <MenuItem iconName="new-text-box" text="New text box" />
+              <MenuItem iconName="new-text-box" text="New text box" />
+            </MenuItem>
+            <MenuItem iconName="new-text-box" text="New text box" />
+            <MenuItem iconName="new-text-box" text="New text box" />
+            <MenuItem iconName="new-text-box" text="New text box" />
+          </MenuItem>
         </Menu>
       }
       interactionKind={PopoverInteractionKind.HOVER}
@@ -80,6 +91,7 @@ class NavigationBar extends Component<INavigationBarProps> {
           <ButtonLink label="Tracker" icon="pt-icon-time" to="/tracker" />
         </NavbarGroup>
         <NavbarGroup align="right">
+          <MenuLink icon={IconClasses.CAMERA} label="MyMenu" />
           <NavLink
             className="pt-button pt-minimal pt-icon-exchange"
             onClick={this.props.onSync}

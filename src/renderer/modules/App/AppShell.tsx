@@ -4,7 +4,7 @@ import { inject, observer } from 'mobx-react';
 import * as React from 'react';
 import { Redirect, Route, Switch } from 'react-router';
 import { HashRouter } from 'react-router-dom';
-import { ICommonStoreProps } from '../../common/ICommonStoreProps';
+import { CommonStoreProps } from '../../common/ICommonStoreProps';
 import { SettingsPage } from '../Settings';
 import { TrackerPage } from '../Tracker';
 import NavigationBar from './NavigationBar';
@@ -29,7 +29,7 @@ const InitializeContentDiv = glamorous.div({
 
 @inject('store')
 @observer
-export default class AppShell extends React.Component<ICommonStoreProps> {
+export default class AppShell extends React.Component<CommonStoreProps> {
   public render() {
     const { store } = this.props;
     const { initializeMessage, initializing } = store!;

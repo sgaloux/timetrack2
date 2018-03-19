@@ -1,11 +1,11 @@
 import { Button, Dialog, Intent } from '@blueprintjs/core';
 import * as React from 'react';
-import { ICommonStoreProps } from '../../../common/ICommonStoreProps';
+import { CommonStoreProps } from '../../../common/ICommonStoreProps';
 import { inject, observer } from 'mobx-react';
 
 @inject('store')
 @observer
-export default class AppConfirm extends React.Component<ICommonStoreProps> {
+export default class AppConfirm extends React.Component<CommonStoreProps> {
   public render() {
     const { store } = this.props;
     const { confirm } = store!.modalStore;
