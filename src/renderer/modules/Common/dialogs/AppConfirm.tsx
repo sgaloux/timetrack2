@@ -1,6 +1,6 @@
 import { Button, Dialog, Intent } from '@blueprintjs/core';
 import * as React from 'react';
-import { CommonStoreProps } from '../../../common/ICommonStoreProps';
+import { CommonStoreProps } from '../../../common/CommonStoreProps';
 import { inject, observer } from 'mobx-react';
 
 @inject('store')

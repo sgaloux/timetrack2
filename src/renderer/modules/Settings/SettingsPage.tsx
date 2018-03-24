@@ -12,7 +12,7 @@ class SettingsPage extends Component<CommonStoreProps> {
       <Fragment>
         <h1>Settings</h1>
         <SettingsForm
-          settings={store!.parameters.allValues}
+          settings={store!.parameters}
           onSubmit={store!.parameters.setNewParameters}
         />
       </Fragment>

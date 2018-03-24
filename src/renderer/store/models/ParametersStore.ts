@@ -1,16 +1,16 @@
 import fs from 'fs';
-import { applySnapshot, flow, getSnapshot, types } from 'mobx-state-tree';
+import { applySnapshot, flow, types } from 'mobx-state-tree';
 import { PATHS, readFilePromisified, writeFilePromisified } from '../../common/utils';
 import { NotificationToast } from '../../modules/Common';
 
-export const ParametersModel = types
+export const ParametersStore = types
   .model({
     inflowUrl: '',
     inflowUser: '',
     inflowPassword: '',
   })
   .actions((self) => {
-    function setNewParameters(newParams: typeof ParametersModel.Type) {
+    function setNewParameters(newParams: typeof ParametersStore.Type) {
       applySnapshot(self, newParams);
       saveParameters();
     }
@@ -51,4 +51,4 @@ export const ParametersModel = types
     };
   });
 
-export type ParametersType = typeof ParametersModel.Type;
+export type ParametersType = typeof ParametersStore.Type;

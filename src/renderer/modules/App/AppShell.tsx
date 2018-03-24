@@ -4,7 +4,7 @@ import { inject, observer } from 'mobx-react';
 import * as React from 'react';
 import { Redirect, Route, Switch } from 'react-router';
 import { HashRouter } from 'react-router-dom';
-import { CommonStoreProps } from '../../common/ICommonStoreProps';
+import { CommonStoreProps } from '../../common/CommonStoreProps';
 import { SettingsPage } from '../Settings';
 import { TrackerPage } from '../Tracker';
 import NavigationBar from './NavigationBar';

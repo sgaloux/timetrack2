@@ -13,7 +13,7 @@ const ConfirmModal = types
       self.title = title;
       self.content = content;
       self.isOpen = true;
-      return new Promise<boolean>((resolve, reject) => {
+      return new Promise<boolean>((resolve) => {
         scopeResolve = resolve;
       });
     }

@@ -22,7 +22,7 @@ class AutoSave extends React.Component<AutoSaveProps, AutoSaveState> {
     this.state = { values: props.values, submitting: false };
   }
 
-  componentWillReceiveProps(nextProps: AutoSaveProps) {
+  componentWillReceiveProps() {
     if (this.timeout) {
       clearTimeout(this.timeout);
     }

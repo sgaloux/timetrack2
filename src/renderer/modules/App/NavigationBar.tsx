@@ -7,24 +7,21 @@ import {
   Menu,
   MenuItem,
   Position,
-  MenuDivider,
   IconName,
   Classes,
   IconClasses,
   PopoverInteractionKind,
-  Colors,
 } from '@blueprintjs/core';
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import classnames from 'classnames';
 
-interface IButtonLinkProps {
+interface ButtonLinkProps {
   icon: IconName;
   to: string;
   label: string;
 }
 
-const ButtonLink = (props: IButtonLinkProps) => {
+const ButtonLink = (props: ButtonLinkProps) => {
   const { icon, to, label } = props;
   return (
     <NavLink className={`pt-button pt-minimal ${icon}`} activeClassName={`pt-active`} to={to}>
@@ -33,12 +30,12 @@ const ButtonLink = (props: IButtonLinkProps) => {
   );
 };
 
-interface IMenuLinkProps {
+interface MenuLinkProps {
   icon: IconName;
   label: string;
 }
 
-const MenuLink = (props: IMenuLinkProps) => {
+const MenuLink = (props: MenuLinkProps) => {
   const { icon, label } = props;
 
   return (
@@ -75,12 +72,12 @@ const MenuLink = (props: IMenuLinkProps) => {
   );
 };
 
-interface INavigationBarProps {
+interface NavigationBarProps {
   onSync: () => void;
   onQuit: () => void;
 }
 
-class NavigationBar extends Component<INavigationBarProps> {
+class NavigationBar extends Component<NavigationBarProps> {
   public render() {
     return (
       <Navbar className={Classes.DARK}>

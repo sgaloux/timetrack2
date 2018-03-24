@@ -1,12 +1,13 @@
-import { NonIdealState, Button } from '@blueprintjs/core';
+import { NonIdealState } from '@blueprintjs/core';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
 
-import { CommonStoreProps } from '../../common/ICommonStoreProps';
+import { CommonStoreProps } from '../../common/CommonStoreProps';
 import ActionBar from './ActionBar';
 import WorkItem from './WorkItem';
 import DateSelector from './DateSelector';
 import glamorous from 'glamorous';
+import { WorkItemType } from '../../store/models/WorkItemModel';
 
 const ActionContainer = glamorous.div({
   display: 'flex',

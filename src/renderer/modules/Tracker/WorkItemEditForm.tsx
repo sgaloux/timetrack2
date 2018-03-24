@@ -15,7 +15,7 @@ interface WorkItemEditFormState {
   isPopupOpened: boolean;
 }
 
-function validateForm(values: any): any {
+function validateForm(): any {
   const errors: any = {};
   // if (!validator.isURL(values.inflowUrl || "")) {
   //   errors.inflowUrl = "URL is invalid !";
@@ -54,12 +54,12 @@ export default class WorkItemEditForm extends React.Component<
           onSubmit={() => ({})}
           validate={validateForm}
           initialValues={workItem}
-          render={({ valid }) => (
+          render={() => (
             <Fragment>
               <AutoSave debounce={500} save={this.props.onSave} />
               <Field
                 name="title"
-                render={({ input, meta }) => (
+                render={({ input }) => (
                   <TextArea
                     style={{ width: '350px' }}
                     placeholder="Give a task title..."

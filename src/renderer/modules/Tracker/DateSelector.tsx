@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { observer, inject } from 'mobx-react';
-import { CommonStoreProps } from '../../common/ICommonStoreProps';
+import { CommonStoreProps } from '../../common/CommonStoreProps';
 import { Button, Popover, Position, PopoverInteractionKind } from '@blueprintjs/core';
 import glamorous from 'glamorous';
 import { DatePicker } from '@blueprintjs/datetime';

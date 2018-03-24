@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { inject, observer } from 'mobx-react';
-import { CommonStoreProps } from '../../common/ICommonStoreProps';
+import { CommonStoreProps } from '../../common/CommonStoreProps';
 import { Tree, ITreeNode, Classes } from '@blueprintjs/core';
 import { InflowNodeTreeType } from '../../store/models/InflowStore';
 import glamorous from 'glamorous';
@@ -87,7 +87,7 @@ export default class InflowTreeSelector extends React.Component<
 
     for (const node of nodes) {
       callback(node);
-      this.forEachNode(node.childNodes, callback);
+      this.forEachNode(node.childNodes!, callback);
     }
   }
 }
