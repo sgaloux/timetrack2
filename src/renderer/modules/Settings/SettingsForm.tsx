@@ -7,7 +7,7 @@ import validator from 'validator';
 import { ParametersStore, ParametersType } from '../../store/models/ParametersStore';
 import InputField from '../Common/forms/InputField';
 
-interface ISettingsFormProps {
+interface SettingsFormProps {
   settings: ParametersType;
   onSubmit(values: ParametersType): void;
 }
@@ -26,7 +26,7 @@ function validateForm(values: any): any {
 }
 
 @observer
-export default class SettingsForm extends React.Component<ISettingsFormProps> {
+export default class SettingsForm extends React.Component<SettingsFormProps> {
   public render() {
     const { settings, onSubmit } = this.props;
     return (
