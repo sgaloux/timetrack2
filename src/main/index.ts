@@ -15,6 +15,8 @@ function createMainWindow() {
     webPreferences: {
       webSecurity: false,
     },
+    width: 1280,
+    height: 1024,
   });
   if (isDevelopment) {
     window.webContents.openDevTools({ mode: 'bottom' });

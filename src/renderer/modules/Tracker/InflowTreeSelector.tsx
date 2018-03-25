@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react';
 import { CommonStoreProps } from '../../common/CommonStoreProps';
 import { Tree, ITreeNode, Classes } from '@blueprintjs/core';
 import { InflowNodeTreeType } from '../../store/models/InflowStore';
-import glamorous from 'glamorous';
+import { Div } from 'glamorous';
 import { IconNames } from '@blueprintjs/icons';
 
 interface InflowTreeSelectorState {
@@ -26,12 +26,13 @@ export default class InflowTreeSelector extends React.Component<
   }
 
   public render() {
-    const Container = glamorous.div({
-      maxHeight: '50vh',
-      overflow: 'auto',
-    });
     return (
-      <Container>
+      <Div
+        css={{
+          maxHeight: '50vh',
+          overflow: 'auto',
+        }}
+      >
         <Tree
           contents={this.state.nodes}
           onNodeClick={this.handleNodeClick}
@@ -39,7 +40,7 @@ export default class InflowTreeSelector extends React.Component<
           onNodeExpand={this.handleNodeExpand}
           className={Classes.ELEVATION_0}
         />
-      </Container>
+      </Div>
     );
   }
 
