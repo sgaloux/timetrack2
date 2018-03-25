@@ -6,7 +6,7 @@
     "module": "esnext",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "pretty": true
+    "pretty": true,
   },
   "exclude": [
     "node_modules"

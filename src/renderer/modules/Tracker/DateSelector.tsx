@@ -7,6 +7,7 @@ import { DatePicker } from '@blueprintjs/datetime';
 // @ts-ignore
 import MomentLocaleUtils from 'react-day-picker/moment';
 import 'moment/locale/fr';
+import { IconNames } from '@blueprintjs/icons';
 
 const Container = glamorous.div({
   display: 'flex',
@@ -37,7 +38,7 @@ export default class DateSelector extends React.Component<CommonStoreProps, Date
       <Container>
         <Button
           className="pt-minimal pt-small"
-          iconName="direction-left"
+          icon={IconNames.DIRECTION_LEFT}
           onClick={workDay.loadPreviousDate}
         />&nbsp;
         <Popover
@@ -60,7 +61,7 @@ export default class DateSelector extends React.Component<CommonStoreProps, Date
         &nbsp;
         <Button
           className="pt-minimal pt-small"
-          iconName="direction-right"
+          icon={IconNames.DIRECTION_RIGHT}
           onClick={workDay.loadNextDate}
         />
       </Container>

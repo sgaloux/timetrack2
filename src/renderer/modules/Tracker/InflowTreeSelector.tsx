@@ -4,6 +4,7 @@ import { CommonStoreProps } from '../../common/CommonStoreProps';
 import { Tree, ITreeNode, Classes } from '@blueprintjs/core';
 import { InflowNodeTreeType } from '../../store/models/InflowStore';
 import glamorous from 'glamorous';
+import { IconNames } from '@blueprintjs/icons';
 
 interface InflowTreeSelectorState {
   nodes: ITreeNode[];
@@ -47,7 +48,7 @@ export default class InflowTreeSelector extends React.Component<
       const node: ITreeNode = {
         label: el.name,
         id: el.inflowId,
-        iconName: 'box',
+        icon: IconNames.BOX,
       };
       if (el.children.length > 0) {
         node.hasCaret = true;

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Card, Elevation, ButtonGroup, Intent, IconClasses } from '@blueprintjs/core';
+import { Card, Elevation, ButtonGroup, Intent } from '@blueprintjs/core';
+import { IconNames } from '@blueprintjs/icons';
 import glamorous from 'glamorous';
 import TooltipButton from '../Common/TooltipButton';
 import WorkItemEditForm from './WorkItemEditForm';
@@ -31,7 +32,7 @@ export default class WorkItem extends React.Component<WorkItemProps> {
             <ButtonGroup>
               <TooltipButton
                 tooltipContent="Delete work item"
-                iconName={IconClasses.CROSS}
+                icon={IconNames.CROSS}
                 intent={Intent.DANGER}
                 onClick={() => this.props.onDeleteItem(workItem)}
               />

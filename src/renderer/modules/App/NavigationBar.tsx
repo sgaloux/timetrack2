@@ -2,18 +2,13 @@ import {
   Navbar,
   NavbarGroup,
   NavbarHeading,
-  Button,
-  Popover,
-  Menu,
-  MenuItem,
-  Position,
   IconName,
   Classes,
-  IconClasses,
-  PopoverInteractionKind,
+  Alignment,
 } from '@blueprintjs/core';
-import React, { Component } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { IconNames } from '@blueprintjs/icons';
 
 interface ButtonLinkProps {
   icon: IconName;
@@ -30,54 +25,12 @@ const ButtonLink = (props: ButtonLinkProps) => {
   );
 };
 
-interface MenuLinkProps {
-  icon: IconName;
-  label: string;
-}
-
-const MenuLink = (props: MenuLinkProps) => {
-  const { icon, label } = props;
-
-  return (
-    <Popover
-      hoverOpenDelay={0}
-      hoverCloseDelay={50}
-      content={
-        <Menu>
-          <MenuItem iconName="new-text-box" text="New text box" />
-          <MenuItem text="Settings..." iconName="cog">
-            <MenuItem iconName="new-text-box" text="New text box" />
-            <MenuItem text="Settings..." iconName="cog">
-              <MenuItem iconName="new-text-box" text="New text box" />
-              <MenuItem iconName="new-text-box" text="New text box" />
-              <MenuItem iconName="new-text-box" text="New text box" />
-              <MenuItem iconName="new-text-box" text="New text box" />
-            </MenuItem>
-            <MenuItem iconName="new-text-box" text="New text box" />
-            <MenuItem iconName="new-text-box" text="New text box" />
-            <MenuItem iconName="new-text-box" text="New text box" />
-          </MenuItem>
-        </Menu>
-      }
-      interactionKind={PopoverInteractionKind.HOVER}
-      position={Position.BOTTOM}
-    >
-      <Button
-        text={label}
-        iconName={icon}
-        rightIconName={IconClasses.CARET_DOWN}
-        className={Classes.MINIMAL}
-      />
-    </Popover>
-  );
-};
-
 interface NavigationBarProps {
   onSync: () => void;
   onQuit: () => void;
 }
 
-class NavigationBar extends Component<NavigationBarProps> {
+class NavigationBar extends React.Component<NavigationBarProps> {
   public render() {
     return (
       <Navbar className={Classes.DARK}>
@@ -85,10 +38,9 @@ class NavigationBar extends Component<NavigationBarProps> {
           <NavbarHeading>TimeTrack 2</NavbarHeading>
         </NavbarGroup>
         <NavbarGroup>
-          <ButtonLink label="Tracker" icon="pt-icon-time" to="/tracker" />
+          <ButtonLink label="Tracker" icon={IconNames.TIME} to="/tracker" />
         </NavbarGroup>
-        <NavbarGroup align="right">
-          <MenuLink icon={IconClasses.CAMERA} label="MyMenu" />
+        <NavbarGroup align={Alignment.RIGHT}>
           <NavLink
             className="pt-button pt-minimal pt-icon-exchange"
             onClick={this.props.onSync}
@@ -96,7 +48,7 @@ class NavigationBar extends Component<NavigationBarProps> {
           >
             Sync Inflow Tree
           </NavLink>
-          <ButtonLink label="Settings" icon="pt-icon-cog" to="/settings" />
+          <ButtonLink label="Settings" icon={IconNames.COG} to="/settings" />
           <NavLink
             className="pt-button pt-minimal pt-icon-log-out"
             onClick={this.props.onQuit}
