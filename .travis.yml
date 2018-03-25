@@ -6,3 +6,6 @@ cache:
   yarn: true
 script: 
   - yarn dist
+notifications:
+  email: 
+    - sebastien.galoux@gmail.com
