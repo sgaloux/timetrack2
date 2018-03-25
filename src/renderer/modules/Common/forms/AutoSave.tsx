@@ -16,7 +16,7 @@ interface AutoSaveState {
 
 class AutoSave extends React.Component<AutoSaveProps, AutoSaveState> {
   promise: any;
-  timeout!: NodeJS.Timer;
+  timeout!: any;
   constructor(props: AutoSaveProps) {
     super(props);
     this.state = { values: props.values, submitting: false };
