@@ -1,6 +1,6 @@
 import { Button, Dialog, Intent } from '@blueprintjs/core';
 import * as React from 'react';
-import { CommonStoreProps } from '../../../common/ICommonStoreProps';
+import { CommonStoreProps } from '../../../common/CommonStoreProps';
 import { inject, observer } from 'mobx-react';
 
 @inject('store')
@@ -12,7 +12,7 @@ export default class AppConfirm extends React.Component<CommonStoreProps> {
     return (
       <div>
         <Dialog
-          iconName="warning-sign"
+          icon="warning-sign"
           isOpen={confirm.isOpen}
           onClose={confirm.cancel}
           title={confirm.title}

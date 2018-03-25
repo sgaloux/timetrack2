@@ -1,5 +1,5 @@
-import { existsSync, readFile } from 'fs';
-import { applySnapshot, flow, onSnapshot, types, getRoot } from 'mobx-state-tree';
+import { existsSync } from 'fs';
+import { applySnapshot, flow, onSnapshot, types } from 'mobx-state-tree';
 import moment from 'moment';
 import path from 'path';
 import { PATHS, readFilePromisified, writeFilePromisified } from '../../common/utils';
@@ -7,7 +7,7 @@ import { NotificationToast } from '../../modules/Common';
 import { WorkItemModel } from './WorkItemModel';
 import { GetModals } from '../utils';
 
-export const WorkDayModel = types
+export const WorkDayStore = types
   .model({
     date: types.optional(types.Date, new Date()),
     workItems: types.optional(types.array(WorkItemModel), []),

@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { Button, Tooltip, IButtonProps, Position } from '@blueprintjs/core';
 
-interface IToolTipButtonProps extends IButtonProps {
+interface ToolTipButtonProps extends IButtonProps {
   tooltipContent: string;
   tooltipPosition?: Position;
 }
 
-export default class TooltipButton extends React.Component<IToolTipButtonProps> {
-  public static defaultProps: Partial<IToolTipButtonProps> = {
+export default class TooltipButton extends React.Component<ToolTipButtonProps> {
+  public static defaultProps: Partial<ToolTipButtonProps> = {
     tooltipPosition: Position.TOP_RIGHT,
   };
   public render() {

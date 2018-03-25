@@ -7,9 +7,10 @@ import * as ReactDOM from 'react-dom';
 import { AppShell } from './modules/App';
 import { RootStore } from './store/RootStore';
 
-import '@blueprintjs/core/dist/blueprint.css';
 import 'normalize.css/normalize.css';
-import '@blueprintjs/datetime/dist/blueprint-datetime.css';
+import '@blueprintjs/core/lib/css/blueprint.css';
+import '@blueprintjs/icons/lib/css/blueprint-icons.css';
+import '@blueprintjs/datetime/lib/css/blueprint-datetime.css';
 
 import './index.css';
 

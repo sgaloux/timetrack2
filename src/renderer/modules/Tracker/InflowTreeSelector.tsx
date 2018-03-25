@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { inject, observer } from 'mobx-react';
-import { CommonStoreProps } from '../../common/ICommonStoreProps';
+import { CommonStoreProps } from '../../common/CommonStoreProps';
 import { Tree, ITreeNode, Classes } from '@blueprintjs/core';
 import { InflowNodeTreeType } from '../../store/models/InflowStore';
 import glamorous from 'glamorous';
+import { IconNames } from '@blueprintjs/icons';
 
 interface InflowTreeSelectorState {
   nodes: ITreeNode[];
@@ -47,7 +48,7 @@ export default class InflowTreeSelector extends React.Component<
       const node: ITreeNode = {
         label: el.name,
         id: el.inflowId,
-        iconName: 'box',
+        icon: IconNames.BOX,
       };
       if (el.children.length > 0) {
         node.hasCaret = true;
@@ -87,7 +88,7 @@ export default class InflowTreeSelector extends React.Component<
 
     for (const node of nodes) {
       callback(node);
-      this.forEachNode(node.childNodes, callback);
+      this.forEachNode(node.childNodes!, callback);
     }
   }
 }
