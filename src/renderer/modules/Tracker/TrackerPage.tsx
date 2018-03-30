@@ -5,7 +5,7 @@ import React from 'react';
 import ActionBar from './ActionBar';
 import WorkItem from './WorkItem';
 import DateSelector from './DateSelector';
-import glamorous, { Div } from 'glamorous';
+import { Div } from 'glamorous';
 import { WorkItemType } from '../../store/models/WorkItemModel';
 import { IconNames } from '@blueprintjs/icons';
 import classNames from 'classnames';

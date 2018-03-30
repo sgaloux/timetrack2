@@ -8,7 +8,6 @@ import MomentLocaleUtils from 'react-day-picker/moment';
 import 'moment/locale/fr';
 import { IconNames } from '@blueprintjs/icons';
 import { WorkDayStoreType } from '../../store/models/WorkDayStore';
-import { getRoot } from 'mobx-state-tree';
 import { GetRootStore } from '../../store/utils';
 
 interface DateSelectorState {

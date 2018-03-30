@@ -5,7 +5,7 @@ import { ModalStoreType } from './models/ModalStore';
 
 export function GetParameters(model: IStateTreeNode): ParametersStoreType {
   const root = getRoot(model) as typeof RootStore.Type;
-  return root.ParameterStore;
+  return root.ParametersStore;
 }
 
 export function GetModals(model: IStateTreeNode): ModalStoreType {
