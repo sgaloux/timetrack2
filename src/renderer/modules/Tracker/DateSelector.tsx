@@ -1,41 +1,37 @@
 import * as React from 'react';
 import { observer, inject } from 'mobx-react';
-import { CommonStoreProps } from '../../common/CommonStoreProps';
 import { Button, Popover, Position, PopoverInteractionKind } from '@blueprintjs/core';
-import glamorous from 'glamorous';
+import { Div } from 'glamorous';
 import { DatePicker } from '@blueprintjs/datetime';
 // @ts-ignore
 import MomentLocaleUtils from 'react-day-picker/moment';
 import 'moment/locale/fr';
 import { IconNames } from '@blueprintjs/icons';
-
-const Container = glamorous.div({
-  display: 'flex',
-  flexDirection: 'row',
-  alignItems: 'center',
-});
-
-const DateText = glamorous.h2({
-  margin: 0,
-  cursor: 'pointer',
-});
+import { WorkDayStoreType } from '../../store/models/WorkDayStore';
+import { getRoot } from 'mobx-state-tree';
+import { GetRootStore } from '../../store/utils';
 
 interface DateSelectorState {
   popoverOpened: boolean;
 }
 
-@inject('store')
+interface DateSelectorProps {
+  workDay?: WorkDayStoreType;
+}
+
+@inject((s) => ({
+  workDay: GetRootStore(s).WorkDayStore,
+}))
 @observer
-export default class DateSelector extends React.Component<CommonStoreProps, DateSelectorState> {
+export default class DateSelector extends React.Component<DateSelectorProps, DateSelectorState> {
   public state = {
     popoverOpened: false,
   };
 
   public render() {
-    const { store } = this.props;
-    const { workDay } = store!;
+    const workDay = this.props.workDay!;
     return (
-      <Container>
+      <Div display="flex" flexDirection="row" alignItems="center">
         <Button
           className="pt-minimal pt-small"
           icon={IconNames.DIRECTION_LEFT}
@@ -56,7 +52,14 @@ export default class DateSelector extends React.Component<CommonStoreProps, Date
           onInteraction={(state) => this.handleInteraction(state)}
           isOpen={this.state.popoverOpened}
         >
-          <DateText>{workDay.formattedDate}</DateText>
+          <Div
+            css={{
+              margin: 0,
+              cursor: 'pointer',
+            }}
+          >
+            {workDay.formattedDate}
+          </Div>
         </Popover>
         &nbsp;
         <Button
@@ -64,13 +67,12 @@ export default class DateSelector extends React.Component<CommonStoreProps, Date
           icon={IconNames.DIRECTION_RIGHT}
           onClick={workDay.loadNextDate}
         />
-      </Container>
+      </Div>
     );
   }
 
   private selectDate = (date: Date, hasUserManuallySelectedDate: boolean) => {
-    const { store } = this.props;
-    const { workDay } = store!;
+    const workDay = this.props.workDay!;
     workDay.loadDate(date);
     console.log('selectedDate - manual? ' + hasUserManuallySelectedDate, date);
     if (hasUserManuallySelectedDate) {

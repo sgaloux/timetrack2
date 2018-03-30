@@ -8,10 +8,10 @@ import { ModalStore } from './models/modalStore';
 
 export const RootStore = types
   .model({
-    parameters: types.optional(ParametersStore, ParametersStore.create()),
-    workDay: types.optional(WorkDayStore, WorkDayStore.create({})),
-    inflowStore: types.optional(InflowStore, InflowStore.create({})),
-    modalStore: types.optional(ModalStore, ModalStore.create({})),
+    ParametersStore: types.optional(ParametersStore, ParametersStore.create()),
+    WorkDayStore: types.optional(WorkDayStore, WorkDayStore.create({})),
+    InflowStore: types.optional(InflowStore, InflowStore.create({})),
+    ModalStore: types.optional(ModalStore, ModalStore.create({})),
     initializing: true,
     initializeMessage: '',
   })
@@ -20,11 +20,11 @@ export const RootStore = types
       try {
         self.initializing = true;
         self.initializeMessage = 'Loading parameters';
-        yield self.parameters.loadParametersFromFile();
+        yield self.ParametersStore.loadParametersFromFile();
         self.initializeMessage = 'Loading inflow types';
-        yield self.inflowStore.tryToLoadTypes();
+        yield self.InflowStore.tryToLoadTypes();
         self.initializeMessage = 'Loading inflow tree';
-        yield self.inflowStore.tryToLoadNodes();
+        yield self.InflowStore.tryToLoadNodes();
         self.initializeMessage = 'Init done !';
       } catch (error) {
         NotificationToast.showError('Error in startup');
@@ -38,11 +38,11 @@ export const RootStore = types
       try {
         self.initializing = true;
         self.initializeMessage = 'Synchronize inflow types';
-        yield self.inflowStore.loadInflowTypesFromServer();
-        yield self.inflowStore.saveInflowTypesToFile();
+        yield self.InflowStore.loadInflowTypesFromServer();
+        yield self.InflowStore.saveInflowTypesToFile();
         self.initializeMessage = 'Synchronize inflow tree';
-        yield self.inflowStore.loadInflowNodesFromServer();
-        yield self.inflowStore.saveInflowNodesToFile();
+        yield self.InflowStore.loadInflowNodesFromServer();
+        yield self.InflowStore.saveInflowNodesToFile();
         self.initializeMessage = 'Synchronization done !';
       } catch (error) {
         NotificationToast.showError('Error while synchronizing data');
@@ -53,7 +53,7 @@ export const RootStore = types
     });
 
     const quitApplication = flow(function*() {
-      const confirm = yield self.modalStore.confirm.show(
+      const confirm = yield self.ModalStore.confirm.show(
         'Confirm exit',
         'Are you sure you want to quit timetrack2 ? ',
       );
@@ -68,3 +68,5 @@ export const RootStore = types
       quitApplication,
     };
   });
+
+export type RootStoreType = typeof RootStore.Type;

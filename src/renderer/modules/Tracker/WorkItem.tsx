@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Card, Elevation, ButtonGroup, Intent } from '@blueprintjs/core';
+import { Card, Elevation, ButtonGroup, Intent, Button, Classes } from '@blueprintjs/core';
 import { IconNames } from '@blueprintjs/icons';
-import glamorous from 'glamorous';
+import { Div } from 'glamorous';
 import TooltipButton from '../Common/TooltipButton';
 import WorkItemEditForm from './WorkItemEditForm';
 import { WorkItemType } from '../../store/models/WorkItemModel';
@@ -9,26 +9,30 @@ import { WorkItemType } from '../../store/models/WorkItemModel';
 interface WorkItemProps {
   workItem: WorkItemType;
   onDeleteItem: (item: WorkItemType) => any;
+  onInflowButtonClicked: () => any;
 }
-
-const Container = glamorous.div({
-  marginBottom: 5,
-});
-
-const CardContainerContent = glamorous.div({
-  display: 'flex',
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-});
 
 export default class WorkItem extends React.Component<WorkItemProps> {
   public render() {
-    const { workItem } = this.props;
+    const { workItem, onInflowButtonClicked } = this.props;
     return (
-      <Container>
+      <Div marginBottom={5}>
         <Card interactive={true} elevation={Elevation.TWO}>
-          <CardContainerContent>
+          <Div
+            css={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}
+          >
             <WorkItemEditForm workItem={workItem} onSave={workItem.setValues} />
+            <Button
+              text="Inflow..."
+              className={Classes.MINIMAL}
+              intent={Intent.PRIMARY}
+              onClick={onInflowButtonClicked}
+            />
+            <Button text="Youtrack..." className={Classes.MINIMAL} intent={Intent.PRIMARY} />
             <ButtonGroup>
               <TooltipButton
                 tooltipContent="Delete work item"
@@ -37,9 +41,9 @@ export default class WorkItem extends React.Component<WorkItemProps> {
                 onClick={() => this.props.onDeleteItem(workItem)}
               />
             </ButtonGroup>
-          </CardContainerContent>
+          </Div>
         </Card>
-      </Container>
+      </Div>
     );
   }
 }

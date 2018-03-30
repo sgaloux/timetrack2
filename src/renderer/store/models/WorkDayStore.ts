@@ -118,3 +118,5 @@ export const WorkDayStore = types
       clearTheDay,
     };
   });
+
+export type WorkDayStoreType = typeof WorkDayStore.Type;

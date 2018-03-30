@@ -114,3 +114,5 @@ export const InflowStore = types
       tryToLoadNodes,
     };
   });
+
+export type InflowStoreType = typeof InflowStore.Type;

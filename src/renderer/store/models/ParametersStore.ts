@@ -51,4 +51,4 @@ export const ParametersStore = types
     };
   });
 
-export type ParametersType = typeof ParametersStore.Type;
+export type ParametersStoreType = typeof ParametersStore.Type;

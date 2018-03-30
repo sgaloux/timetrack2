@@ -23,6 +23,7 @@
     "@blueprintjs/core": "^2.0.0",
     "@blueprintjs/datetime": "^2.0.0",
     "@blueprintjs/icons": "^2.0.0",
+    "animate.css": "^3.6.1",
     "axios": "^0.18.0",
     "classnames": "^2.2.5",
     "electron-devtools-installer": "^2.2.3",

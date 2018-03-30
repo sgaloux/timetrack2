@@ -1,18 +1,13 @@
-import { TextArea, Button, Classes, Intent, Dialog } from '@blueprintjs/core';
+import { TextArea } from '@blueprintjs/core';
 import { observer } from 'mobx-react';
 import React, { Fragment } from 'react';
 import { Form, Field } from 'react-final-form';
 import { WorkItemType } from '../../store/models/WorkItemModel';
 import AutoSave from '../Common/forms/AutoSave';
-import InflowTreeSelector from './InflowTreeSelector';
 
 interface WorkItemEditFormProps {
   workItem: WorkItemType;
   onSave(values: WorkItemType): void;
-}
-
-interface WorkItemEditFormState {
-  isPopupOpened: boolean;
 }
 
 function validateForm(): any {
@@ -24,32 +19,15 @@ function validateForm(): any {
 }
 
 @observer
-export default class WorkItemEditForm extends React.Component<
-  WorkItemEditFormProps,
-  WorkItemEditFormState
-> {
+export default class WorkItemEditForm extends React.Component<WorkItemEditFormProps> {
   constructor(props: WorkItemEditFormProps) {
     super(props);
-    this.state = {
-      isPopupOpened: false,
-    };
   }
 
   public render() {
     const { workItem } = this.props;
     return (
       <div>
-        <Dialog
-          isOpen={this.state.isPopupOpened}
-          onClose={this.closePopup}
-          title="Select inflow node"
-          style={{ width: '80%' }}
-        >
-          <div className="pt-dialog-body">
-            <InflowTreeSelector />
-          </div>
-        </Dialog>
-
         <Form
           onSubmit={() => ({})}
           validate={validateForm}
@@ -67,25 +45,10 @@ export default class WorkItemEditForm extends React.Component<
                   />
                 )}
               />
-              <Button
-                text="Inflow..."
-                className={Classes.MINIMAL}
-                intent={Intent.PRIMARY}
-                onClick={this.openInflowPopup}
-              />
-              <Button text="Youtrack..." className={Classes.MINIMAL} intent={Intent.PRIMARY} />
             </Fragment>
           )}
         />
       </div>
     );
   }
-
-  private openInflowPopup = () => {
-    this.setState({ isPopupOpened: true });
-  };
-
-  private closePopup = () => {
-    this.setState({ isPopupOpened: false });
-  };
 }

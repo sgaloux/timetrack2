@@ -1,28 +1,34 @@
 import * as React from 'react';
 import { inject, observer } from 'mobx-react';
-import { CommonStoreProps } from '../../common/CommonStoreProps';
 import { Tree, ITreeNode, Classes } from '@blueprintjs/core';
-import { InflowNodeTreeType } from '../../store/models/InflowStore';
+import { InflowNodeTreeType, InflowStoreType } from '../../store/models/InflowStore';
 import { Div } from 'glamorous';
 import { IconNames } from '@blueprintjs/icons';
+import { GetRootStore } from '../../store/utils';
 
 interface InflowTreeSelectorState {
   nodes: ITreeNode[];
 }
 
-@inject('store')
+interface InflowTreeSelectorProps {
+  inflowStore?: InflowStoreType;
+}
+@inject((s) => ({
+  inflowStore: GetRootStore(s).InflowStore,
+}))
 @observer
 export default class InflowTreeSelector extends React.Component<
-  CommonStoreProps,
+  InflowTreeSelectorProps,
   InflowTreeSelectorState
 > {
-  public constructor(props: CommonStoreProps) {
+  public constructor(props: InflowTreeSelectorProps) {
     super(props);
-    const store = props.store!;
-    const tree = store.inflowStore.inflowTree;
+    const tree = this.props.inflowStore!.inflowTree;
+    console.time('tree');
     this.state = {
       nodes: this.getNodes(tree),
     };
+    console.timeEnd('tree');
   }
 
   public render() {

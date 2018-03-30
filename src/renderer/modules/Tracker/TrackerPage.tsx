@@ -1,41 +1,78 @@
-import { NonIdealState } from '@blueprintjs/core';
+import { NonIdealState, Overlay, Classes } from '@blueprintjs/core';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
 
-import { CommonStoreProps } from '../../common/CommonStoreProps';
 import ActionBar from './ActionBar';
 import WorkItem from './WorkItem';
 import DateSelector from './DateSelector';
-import glamorous from 'glamorous';
+import glamorous, { Div } from 'glamorous';
 import { WorkItemType } from '../../store/models/WorkItemModel';
 import { IconNames } from '@blueprintjs/icons';
+import classNames from 'classnames';
+import { GetRootStore } from '../../store/utils';
+import { WorkDayStoreType } from '../../store/models/WorkDayStore';
 
-const ActionContainer = glamorous.div({
-  display: 'flex',
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-});
+interface TrackerPageState {
+  inflowSelectorOverlayOpened: boolean;
+  youtrackSelectorOverlayOpened: boolean;
+}
 
-@inject('store')
+interface TrackerPageProps {
+  workDay?: WorkDayStoreType;
+}
+@inject((s) => ({
+  workDay: GetRootStore(s).WorkDayStore,
+}))
 @observer
-export default class TrackerPage extends React.Component<CommonStoreProps> {
+export default class TrackerPage extends React.Component<TrackerPageProps, TrackerPageState> {
+  public state = {
+    inflowSelectorOverlayOpened: false,
+    youtrackSelectorOverlayOpened: false,
+  };
+
   public render() {
-    const { store } = this.props;
+    const workDay = this.props.workDay!;
+    const overlayClasses = classNames(Classes.CARD, Classes.ELEVATION_4, 'animationPane');
+
     return (
       <div>
-        <ActionContainer>
+        <Div
+          css={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}
+        >
           <DateSelector />
-          <ActionBar onAdd={store!.workDay.addWorkItem} onClear={store!.workDay.clearTheDay} />
-        </ActionContainer>
+          <ActionBar onAdd={workDay.addWorkItem} onClear={workDay.clearTheDay} />
+        </Div>
         <hr />
-        {store!.workDay.noItems ? (
+        <Overlay
+          isOpen={this.state.inflowSelectorOverlayOpened}
+          className={Classes.OVERLAY_SCROLL_CONTAINER}
+          transitionDuration={10}
+          onClose={() => this.setState({ inflowSelectorOverlayOpened: false })}
+        >
+          <div className={overlayClasses}>Content</div>
+        </Overlay>
+        {workDay.noItems ? (
           <NonIdealState title="No work items found..." visual={IconNames.PREDICTIVE_ANALYSIS} />
         ) : (
-          store!.workDay.allItems.map((i: WorkItemType) => (
-            <WorkItem key={i.id.toString()} workItem={i} onDeleteItem={store!.workDay.deleteItem} />
+          workDay.allItems.map((i: WorkItemType) => (
+            <WorkItem
+              key={i.id.toString()}
+              workItem={i}
+              onDeleteItem={workDay.deleteItem}
+              onInflowButtonClicked={this.showInflowSelector}
+            />
           ))
         )}
       </div>
     );
   }
+  private showInflowSelector = () => {
+    this.setState({
+      inflowSelectorOverlayOpened: true,
+    });
+  };
 }

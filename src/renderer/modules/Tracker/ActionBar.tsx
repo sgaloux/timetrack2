@@ -1,6 +1,6 @@
 import { Button, ButtonGroup, Intent } from '@blueprintjs/core';
 import * as React from 'react';
-import glamorous from 'glamorous';
+import { Div } from 'glamorous';
 import { IconNames } from '@blueprintjs/icons';
 
 interface ActionBarProps {
@@ -8,15 +8,10 @@ interface ActionBarProps {
   onClear: () => void;
 }
 
-const Container = glamorous.div({
-  display: 'flex',
-  flexDirection: 'row',
-});
-
 export default class Actionbar extends React.Component<ActionBarProps> {
   public render() {
     return (
-      <Container>
+      <Div display="flex" flexDirection="row">
         <ButtonGroup>
           <Button
             onClick={this.props.onAdd}
@@ -40,7 +35,7 @@ export default class Actionbar extends React.Component<ActionBarProps> {
             text="Clear"
           />
         </ButtonGroup>
-      </Container>
+      </Div>
     );
   }
 }

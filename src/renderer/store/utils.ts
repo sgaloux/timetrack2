@@ -1,14 +1,18 @@
 import { getRoot, IStateTreeNode } from 'mobx-state-tree';
-import { RootStore } from './RootStore';
-import { ParametersType } from './models/ParametersStore';
+import { RootStore, RootStoreType } from './RootStore';
+import { ParametersStoreType } from './models/ParametersStore';
 import { ModalStoreType } from './models/ModalStore';
 
-export function GetParameters(model: IStateTreeNode): ParametersType {
+export function GetParameters(model: IStateTreeNode): ParametersStoreType {
   const root = getRoot(model) as typeof RootStore.Type;
-  return root.parameters;
+  return root.ParameterStore;
 }
 
 export function GetModals(model: IStateTreeNode): ModalStoreType {
   const root = getRoot(model) as typeof RootStore.Type;
-  return root.modalStore;
+  return root.ModalStore;
+}
+
+export function GetRootStore(s: any): RootStoreType {
+  return s.store as RootStoreType;
 }
