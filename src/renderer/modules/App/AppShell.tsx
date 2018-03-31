@@ -29,7 +29,7 @@ const InitializeContentDiv = glamorous.div({
 });
 
 interface AppShellProps {
-  store: RootStoreType;
+  store?: RootStoreType;
 }
 
 @inject((s) => ({
