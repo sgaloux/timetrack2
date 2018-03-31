@@ -4,11 +4,12 @@ import { inject, observer } from 'mobx-react';
 import * as React from 'react';
 import { Redirect, Route, Switch } from 'react-router';
 import { HashRouter } from 'react-router-dom';
-import { CommonStoreProps } from '../../common/CommonStoreProps';
 import { SettingsPage } from '../Settings';
 import { TrackerPage } from '../Tracker';
 import NavigationBar from './NavigationBar';
 import AppConfirm from '../Common/dialogs/AppConfirm';
+import { RootStoreType } from '../../store/RootStore';
+import { GetRootStore } from '../../store/utils';
 
 const ContainerDiv = glamorous.div({
   padding: '5px',
@@ -27,9 +28,15 @@ const InitializeContentDiv = glamorous.div({
   alignItems: 'center',
 });
 
-@inject('store')
+interface AppShellProps {
+  store: RootStoreType;
+}
+
+@inject((s) => ({
+  store: GetRootStore(s),
+}))
 @observer
-export default class AppShell extends React.Component<CommonStoreProps> {
+export default class AppShell extends React.Component<AppShellProps> {
   public render() {
     const { store } = this.props;
     const { initializeMessage, initializing } = store!;
