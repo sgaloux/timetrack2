@@ -4,7 +4,7 @@ import { IconNames } from '@blueprintjs/icons';
 import { Div } from 'glamorous';
 import TooltipButton from '../Common/TooltipButton';
 import WorkItemEditForm from './WorkItemEditForm';
-import { WorkItemType } from '../../store/models/WorkItemModel';
+import { WorkItemType } from '../../store/WorkItemModel';
 
 interface WorkItemProps {
   workItem: WorkItemType;

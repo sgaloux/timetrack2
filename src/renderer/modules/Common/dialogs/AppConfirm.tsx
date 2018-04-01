@@ -1,8 +1,8 @@
 import { Button, Dialog, Intent } from '@blueprintjs/core';
 import * as React from 'react';
 import { inject, observer } from 'mobx-react';
-import { ModalStoreType } from '../../../store/models/modalStore';
 import { GetRootStore } from '../../../store/utils';
+import { ModalStoreType } from '../../../store/ModalStore';
 
 @inject((s) => ({
   modalStore: GetRootStore(s).ModalStore,

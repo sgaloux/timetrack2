@@ -6,11 +6,11 @@ import ActionBar from './ActionBar';
 import WorkItem from './WorkItem';
 import DateSelector from './DateSelector';
 import { Div } from 'glamorous';
-import { WorkItemType } from '../../store/models/WorkItemModel';
 import { IconNames } from '@blueprintjs/icons';
 import classNames from 'classnames';
 import { GetRootStore } from '../../store/utils';
-import { WorkDayStoreType } from '../../store/models/WorkDayStore';
+import { WorkDayStoreType } from '../../store/WorkDayStore';
+import { WorkItemType } from '../../store/WorkItemModel';
 
 interface TrackerPageState {
   inflowSelectorOverlayOpened: boolean;

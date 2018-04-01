@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { inject, observer } from 'mobx-react';
 import { Tree, ITreeNode, Classes } from '@blueprintjs/core';
-import { InflowNodeTreeType, InflowStoreType } from '../../store/models/InflowStore';
 import { Div } from 'glamorous';
 import { IconNames } from '@blueprintjs/icons';
 import { GetRootStore } from '../../store/utils';
+import { InflowStoreType, InflowNodeTreeType } from '../../store/InflowStore';
 
 interface InflowTreeSelectorState {
   nodes: ITreeNode[];

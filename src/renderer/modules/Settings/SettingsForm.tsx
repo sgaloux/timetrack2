@@ -4,8 +4,8 @@ import { observer } from 'mobx-react';
 import React from 'react';
 import { Form } from 'react-final-form';
 import validator from 'validator';
-import { ParametersStore, ParametersStoreType } from '../../store/models/ParametersStore';
 import InputField from '../Common/forms/InputField';
+import { ParametersStoreType, ParametersStore } from '../../store/ParametersStore';
 
 function validateForm(values: any): any {
   const errors: any = {};

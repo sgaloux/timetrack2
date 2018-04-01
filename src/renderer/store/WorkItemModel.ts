@@ -1,6 +1,6 @@
 import { types } from 'mobx-state-tree';
 import { v4 } from 'uuid';
-import { GetParameters } from '../utils';
+import { GetParameters } from './utils';
 
 export const WorkItemModel = types
   .model({

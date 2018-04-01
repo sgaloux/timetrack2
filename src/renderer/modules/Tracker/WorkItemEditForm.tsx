@@ -2,8 +2,8 @@ import { TextArea } from '@blueprintjs/core';
 import { observer } from 'mobx-react';
 import React, { Fragment } from 'react';
 import { Form, Field } from 'react-final-form';
-import { WorkItemType } from '../../store/models/WorkItemModel';
 import AutoSave from '../Common/forms/AutoSave';
+import { WorkItemType } from '../../store/WorkItemModel';
 
 interface WorkItemEditFormProps {
   workItem: WorkItemType;

@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { applySnapshot, flow, types } from 'mobx-state-tree';
-import { PATHS, readFilePromisified, writeFilePromisified } from '../../common/utils';
-import { NotificationToast } from '../../modules/Common';
+import { writeFilePromisified, PATHS, readFilePromisified } from '../common/utils';
+import { NotificationToast } from '../modules/Common';
 
 export const ParametersStore = types
   .model({

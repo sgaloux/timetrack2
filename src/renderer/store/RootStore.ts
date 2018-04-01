@@ -1,10 +1,10 @@
 import { remote } from 'electron';
 import { flow, types } from 'mobx-state-tree';
 import { NotificationToast } from '../modules/Common';
-import { InflowStore } from './models/InflowStore';
-import { ParametersStore } from './models/ParametersStore';
-import { WorkDayStore } from './models/WorkDayStore';
-import { ModalStore } from './models/modalStore';
+import { ParametersStore } from './ParametersStore';
+import { WorkDayStore } from './WorkDayStore';
+import { InflowStore } from './InflowStore';
+import { ModalStore } from './ModalStore';
 
 export const RootStore = types
   .model({

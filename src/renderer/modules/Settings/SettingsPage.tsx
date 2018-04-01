@@ -2,7 +2,7 @@ import { inject, observer } from 'mobx-react';
 import React, { Component, Fragment } from 'react';
 import SettingsForm from './SettingsForm';
 import { GetRootStore } from '../../store/utils';
-import { ParametersStoreType } from '../../store/models/ParametersStore';
+import { ParametersStoreType } from '../../store/ParametersStore';
 
 @inject((s) => ({
   parameters: GetRootStore(s).ParametersStore,
