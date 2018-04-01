@@ -119,5 +119,4 @@ export const WorkDayStore = types
     };
   });
 
-hasItems:any;
 export type WorkDayStoreType = typeof WorkDayStore.Type;
