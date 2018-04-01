@@ -1,8 +1,8 @@
 import { types } from 'mobx-state-tree';
 import { v4 } from 'uuid';
-import { GetParameters } from './utils';
+import { GetParameters } from '../index';
 
-export const WorkItemModel = types
+export const WorkItem = types
   .model({
     id: types.optional(types.identifier(), () => v4()),
     title: '',
@@ -24,4 +24,4 @@ export const WorkItemModel = types
       setValues,
     };
   });
-export type WorkItemType = typeof WorkItemModel.Type;
+export type WorkItemType = typeof WorkItem.Type;

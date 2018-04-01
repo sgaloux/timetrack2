@@ -8,8 +8,8 @@ import { SettingsPage } from '../Settings';
 import { TrackerPage } from '../Tracker';
 import NavigationBar from './NavigationBar';
 import AppConfirm from '../Common/dialogs/AppConfirm';
-import { RootStoreType } from '../../store/RootStore';
-import { GetRootStore } from '../../store/utils';
+import { RootStoreType } from '../../store';
+import { GetRootStore } from '../../store';
 
 const ContainerDiv = glamorous.div({
   padding: '5px',

@@ -5,7 +5,7 @@ import React from 'react';
 import { Form } from 'react-final-form';
 import validator from 'validator';
 import InputField from '../Common/forms/InputField';
-import { ParametersStoreType, ParametersStore } from '../../store/ParametersStore';
+import { ParametersStoreType, ParametersStore } from '../../store';
 
 function validateForm(values: any): any {
   const errors: any = {};

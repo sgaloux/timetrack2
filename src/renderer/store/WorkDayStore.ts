@@ -2,15 +2,15 @@ import { existsSync } from 'fs';
 import { applySnapshot, flow, onSnapshot, types } from 'mobx-state-tree';
 import moment from 'moment';
 import path from 'path';
-import { WorkItemModel } from './WorkItemModel';
-import { PATHS, readFilePromisified, writeFilePromisified } from '../common/utils';
+import { WorkItem } from './models';
+import { PATHS, readFilePromisified, writeFilePromisified } from '../common';
 import { NotificationToast } from '../modules/Common';
-import { GetModals } from './utils';
+import { GetModals } from './index';
 
 export const WorkDayStore = types
   .model({
     date: types.optional(types.Date, new Date()),
-    workItems: types.optional(types.array(WorkItemModel), []),
+    workItems: types.optional(types.array(WorkItem), []),
   })
   .views((self) => ({
     get formattedDate() {
@@ -80,7 +80,7 @@ export const WorkDayStore = types
     }
 
     function addWorkItem() {
-      const newItem = WorkItemModel.create();
+      const newItem = WorkItem.create();
       self.workItems.push(newItem);
       saveToFile();
     }
@@ -103,7 +103,7 @@ export const WorkDayStore = types
       }
     });
 
-    const deleteItem = function(item: typeof WorkItemModel.Type) {
+    const deleteItem = function(item: typeof WorkItem.Type) {
       self.workItems.remove(item);
       saveToFile();
     };
@@ -119,4 +119,5 @@ export const WorkDayStore = types
     };
   });
 
+hasItems:any;
 export type WorkDayStoreType = typeof WorkDayStore.Type;

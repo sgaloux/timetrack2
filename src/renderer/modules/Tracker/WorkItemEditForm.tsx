@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import React, { Fragment } from 'react';
 import { Form, Field } from 'react-final-form';
 import AutoSave from '../Common/forms/AutoSave';
-import { WorkItemType } from '../../store/WorkItemModel';
+import { WorkItemType } from '../../store/models';
 
 interface WorkItemEditFormProps {
   workItem: WorkItemType;
@@ -11,11 +11,11 @@ interface WorkItemEditFormProps {
 }
 
 function validateForm(): any {
-  const errors: any = {};
+
   // if (!validator.isURL(values.inflowUrl || "")) {
   //   errors.inflowUrl = "URL is invalid !";
   // }
-  return errors;
+  return {};
 }
 
 @observer

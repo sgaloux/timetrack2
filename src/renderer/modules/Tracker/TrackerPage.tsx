@@ -8,9 +8,8 @@ import DateSelector from './DateSelector';
 import { Div } from 'glamorous';
 import { IconNames } from '@blueprintjs/icons';
 import classNames from 'classnames';
-import { GetRootStore } from '../../store/utils';
-import { WorkDayStoreType } from '../../store/WorkDayStore';
-import { WorkItemType } from '../../store/WorkItemModel';
+import { GetRootStore, WorkDayStoreType } from '../../store';
+import { WorkItemType } from '../../store/models';
 
 interface TrackerPageState {
   inflowSelectorOverlayOpened: boolean;
@@ -44,7 +43,7 @@ export default class TrackerPage extends React.Component<TrackerPageProps, Track
           }}
         >
           <DateSelector />
-          <ActionBar onAdd={workDay.addWorkItem} onClear={workDay.clearTheDay} />
+          <ActionBar onAdd={workDay.addWorkItem} onClear={workDay.clearTheDay} clearButtonDisabled={workDay.noItems} />
         </Div>
         <hr />
         <Overlay

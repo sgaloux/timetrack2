@@ -2,8 +2,8 @@ import { existsSync } from 'fs';
 import { applySnapshot, flow, types } from 'mobx-state-tree';
 import { unflatten } from 'un-flatten-tree';
 import { getInflowTypes, getInflowTree } from '../services/inflowService';
-import { GetParameters } from './utils';
-import { PATHS, readFilePromisified, writeFilePromisified } from '../common/utils';
+import { GetParameters } from './index';
+import { PATHS, readFilePromisified, writeFilePromisified } from '../common';
 import { NotificationToast } from '../modules/Common';
 
 const InflowType = types.model({
@@ -34,12 +34,11 @@ export const InflowStore = types
         ...node,
         children: [],
       })) as InflowNodeTreeType[];
-      const tree = unflatten(
+      return unflatten(
         nodes,
         (node, parentNode) => node.parentId === parentNode.inflowId,
         (node, parentNode) => parentNode.children.push(node),
       );
-      return tree;
     },
   }))
   .actions((self) => {

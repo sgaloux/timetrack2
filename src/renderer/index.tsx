@@ -5,7 +5,7 @@ import { actionLogger } from 'mst-middlewares';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { AppShell } from './modules/App';
-import { RootStore } from './store/RootStore';
+import { RootStore } from './store';
 
 import 'normalize.css/normalize.css';
 import '@blueprintjs/core/lib/css/blueprint.css';

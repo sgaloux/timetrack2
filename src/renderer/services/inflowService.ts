@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { convertXmlToJs } from '../common/utils';
+import { convertXmlToJs } from '../common';
 
 interface InflowParameters {
   inflowUrl: string;
@@ -23,11 +23,10 @@ export async function getInflowTypes(params: InflowParameters): Promise<InflowTy
   });
   const jsonData = convertXmlToJs(response.data);
 
-  const types = jsonData.types[0].type.map((el: { _attributes: { id: string; name: string } }) => ({
+  return jsonData.types[0].type.map((el: { _attributes: { id: string; name: string } }) => ({
     id: el._attributes.id,
     name: el._attributes.name,
   }));
-  return types;
 }
 
 interface InflowNode {
@@ -74,6 +73,5 @@ export async function getInflowTree(params: InflowParameters): Promise<InflowNod
     withCredentials: true,
   });
   const jsonData = convertXmlToJs(response.data);
-  const nodes = parseTree(jsonData.root[0]);
-  return nodes;
+  return parseTree(jsonData.root[0]);
 }

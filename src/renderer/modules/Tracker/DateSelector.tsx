@@ -7,8 +7,8 @@ import { DatePicker } from '@blueprintjs/datetime';
 import MomentLocaleUtils from 'react-day-picker/moment';
 import 'moment/locale/fr';
 import { IconNames } from '@blueprintjs/icons';
-import { WorkDayStoreType } from '../../store/WorkDayStore';
-import { GetRootStore } from '../../store/utils';
+import { WorkDayStoreType } from '../../store';
+import { GetRootStore } from '../../store';
 
 interface DateSelectorState {
   popoverOpened: boolean;

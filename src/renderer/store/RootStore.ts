@@ -8,15 +8,15 @@ import { ModalStore } from './ModalStore';
 
 export const RootStore = types
   .model({
-    ParametersStore: types.optional(ParametersStore, ParametersStore.create()),
-    WorkDayStore: types.optional(WorkDayStore, WorkDayStore.create({})),
-    InflowStore: types.optional(InflowStore, InflowStore.create({})),
-    ModalStore: types.optional(ModalStore, ModalStore.create({})),
+    ParametersStore: types.optional(ParametersStore, {}),
+    WorkDayStore: types.optional(WorkDayStore, {}),
+    InflowStore: types.optional(InflowStore, {}),
+    ModalStore: types.optional(ModalStore, {}),
     initializing: true,
     initializeMessage: '',
   })
   .actions((self) => {
-    const afterCreate = flow(function*() {
+    const afterCreate = flow(function* () {
       try {
         self.initializing = true;
         self.initializeMessage = 'Loading parameters';
@@ -34,7 +34,7 @@ export const RootStore = types
       self.initializing = false;
     });
 
-    const synchronizeData = flow(function*() {
+    const synchronizeData = flow(function* () {
       try {
         self.initializing = true;
         self.initializeMessage = 'Synchronize inflow types';
@@ -52,7 +52,7 @@ export const RootStore = types
       self.initializing = false;
     });
 
-    const quitApplication = flow(function*() {
+    const quitApplication = flow(function* () {
       const confirm = yield self.ModalStore.confirm.show(
         'Confirm exit',
         'Are you sure you want to quit timetrack2 ? ',
