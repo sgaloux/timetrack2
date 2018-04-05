@@ -1,14 +1,14 @@
 Arguments: 
-  /usr/local/Cellar/node/9.9.0/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js start
+  /Users/sga/.nvs/node/9.10.1/x64/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js ugradeInteractive
 
 PATH: 
-  /usr/local/opt/php71/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Xamarin Workbooks.app/Contents/SharedSupport/path-bin:/usr/local/opt/php71/bin
+  /Users/sga/.nvs/default/bin:/usr/local/opt/php@7.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Xamarin Workbooks.app/Contents/SharedSupport/path-bin
 
 Yarn version: 
   1.5.1
 
 Node version: 
-  9.9.0
+  9.10.1
 
 Platform: 
   darwin x64
@@ -19,7 +19,7 @@ npm manifest:
     "version": "0.0.1",
     "license": "MIT",
     "scripts": {
-      "dev": "electron-webpack dev",
+      "start": "electron-webpack dev",
       "compile": "electron-webpack",
       "dist": "yarn compile && electron-builder",
       "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
@@ -8985,7 +8985,7 @@ Lockfile:
       yeoman-environment "^2.0.5"
 
 Trace: 
-  Error: Command "start" not found.
+  Error: Command "ugradeInteractive" not found.
       at new MessageError (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:186:110)
       at /usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:87307:17
       at Generator.next (<anonymous>)
