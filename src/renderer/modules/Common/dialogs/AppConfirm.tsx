@@ -1,16 +1,18 @@
 import { Button, Dialog, Intent } from '@blueprintjs/core';
 import * as React from 'react';
 import { inject, observer } from 'mobx-react';
-import { GetRootStore } from '../../../store';
 import { ModalStoreType } from '../../../store';
+import { mapStore } from '../../../store/utils';
 
-@inject((s) => ({
-  modalStore: GetRootStore(s).ModalStore,
-}))
-@observer
-export default class AppConfirm extends React.Component<{
+interface AppConfirmProps {
   modalStore?: ModalStoreType;
-}> {
+}
+
+@inject(mapStore(root => ({
+  modalStore: root.ModalStore,
+})))
+@observer
+export default class AppConfirm extends React.Component<AppConfirmProps> {
   public render() {
     const { confirm } = this.props.modalStore!;
     return (
@@ -26,7 +28,7 @@ export default class AppConfirm extends React.Component<{
           </div>
           <div className="pt-dialog-footer">
             <div className="pt-dialog-footer-actions">
-              <Button text="No" onClick={confirm.cancel} className="pt-fill" />
+              <Button text="No" onClick={confirm.cancel} className="pt-fill"/>
               <Button
                 intent={Intent.PRIMARY}
                 onClick={confirm.confirm}

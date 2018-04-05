@@ -1,4 +1,4 @@
-import { NonIdealState, Overlay, Classes } from '@blueprintjs/core';
+import { Classes, NonIdealState, Overlay } from '@blueprintjs/core';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
 
@@ -8,8 +8,9 @@ import DateSelector from './DateSelector';
 import { Div } from 'glamorous';
 import { IconNames } from '@blueprintjs/icons';
 import classNames from 'classnames';
-import { GetRootStore, WorkDayStoreType } from '../../store';
+import { WorkDayStoreType } from '../../store';
 import { WorkItemType } from '../../store/models';
+import { mapStore } from '../../store/utils';
 
 interface TrackerPageState {
   inflowSelectorOverlayOpened: boolean;
@@ -19,9 +20,10 @@ interface TrackerPageState {
 interface TrackerPageProps {
   workDay?: WorkDayStoreType;
 }
-@inject((s) => ({
-  workDay: GetRootStore(s).WorkDayStore,
-}))
+
+@inject(mapStore(root => ({
+  workDay: root.WorkDayStore,
+})))
 @observer
 export default class TrackerPage extends React.Component<TrackerPageProps, TrackerPageState> {
   public state = {
@@ -42,10 +44,10 @@ export default class TrackerPage extends React.Component<TrackerPageProps, Track
             justifyContent: 'space-between',
           }}
         >
-          <DateSelector />
-          <ActionBar onAdd={workDay.addWorkItem} onClear={workDay.clearTheDay} clearButtonDisabled={workDay.noItems} />
+          <DateSelector/>
+          <ActionBar onAdd={workDay.addWorkItem} onClear={workDay.clearTheDay} clearButtonDisabled={workDay.noItems}/>
         </Div>
-        <hr />
+        <hr/>
         <Overlay
           isOpen={this.state.inflowSelectorOverlayOpened}
           className={Classes.OVERLAY_SCROLL_CONTAINER}
@@ -55,7 +57,7 @@ export default class TrackerPage extends React.Component<TrackerPageProps, Track
           <div className={overlayClasses}>Content</div>
         </Overlay>
         {workDay.noItems ? (
-          <NonIdealState title="No work items found..." visual={IconNames.PREDICTIVE_ANALYSIS} />
+          <NonIdealState title="No work items found..." visual={IconNames.PREDICTIVE_ANALYSIS}/>
         ) : (
           workDay.allItems.map((i: WorkItemType) => (
             <WorkItem
@@ -69,6 +71,7 @@ export default class TrackerPage extends React.Component<TrackerPageProps, Track
       </div>
     );
   }
+
   private showInflowSelector = () => {
     this.setState({
       inflowSelectorOverlayOpened: true,

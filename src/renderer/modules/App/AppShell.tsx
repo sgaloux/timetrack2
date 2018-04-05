@@ -9,7 +9,7 @@ import { TrackerPage } from '../Tracker';
 import NavigationBar from './NavigationBar';
 import AppConfirm from '../Common/dialogs/AppConfirm';
 import { RootStoreType } from '../../store';
-import { GetRootStore } from '../../store';
+import { mapStore } from '../../store/utils';
 
 const ContainerDiv = glamorous.div({
   padding: '5px',
@@ -32,9 +32,9 @@ interface AppShellProps {
   store?: RootStoreType;
 }
 
-@inject((s) => ({
-  store: GetRootStore(s),
-}))
+@inject(mapStore(root => ({
+  store: root,
+})))
 @observer
 export default class AppShell extends React.Component<AppShellProps> {
   public render() {
@@ -43,21 +43,21 @@ export default class AppShell extends React.Component<AppShellProps> {
     return (
       <HashRouter>
         <React.Fragment>
-          <AppConfirm />
-          <NavigationBar onSync={store!.synchronizeData} onQuit={store!.quitApplication} />
+          <AppConfirm/>
+          <NavigationBar onSync={store!.synchronizeData} onQuit={store!.quitApplication}/>
           {initializing ? (
             <InitializeContainerDiv>
               <InitializeContentDiv>
-                <Spinner />
+                <Spinner/>
                 <h1>{initializeMessage}</h1>
               </InitializeContentDiv>
             </InitializeContainerDiv>
           ) : (
             <ContainerDiv>
               <Switch>
-                <Route path="/tracker" component={TrackerPage} />
-                <Route path="/settings" component={SettingsPage} />
-                <Redirect to="/tracker" />
+                <Route path="/tracker" component={TrackerPage}/>
+                <Route path="/settings" component={SettingsPage}/>
+                <Redirect to="/tracker"/>
               </Switch>
             </ContainerDiv>
           )}

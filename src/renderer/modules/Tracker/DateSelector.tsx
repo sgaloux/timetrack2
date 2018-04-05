@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { observer, inject } from 'mobx-react';
-import { Button, Popover, Position, PopoverInteractionKind } from '@blueprintjs/core';
+import { inject, observer } from 'mobx-react';
+import { Button, Popover, PopoverInteractionKind, Position } from '@blueprintjs/core';
 import { Div } from 'glamorous';
 import { DatePicker } from '@blueprintjs/datetime';
 // @ts-ignore
@@ -8,7 +8,7 @@ import MomentLocaleUtils from 'react-day-picker/moment';
 import 'moment/locale/fr';
 import { IconNames } from '@blueprintjs/icons';
 import { WorkDayStoreType } from '../../store';
-import { GetRootStore } from '../../store';
+import { mapStore } from '../../store/utils';
 
 interface DateSelectorState {
   popoverOpened: boolean;
@@ -18,9 +18,9 @@ interface DateSelectorProps {
   workDay?: WorkDayStoreType;
 }
 
-@inject((s) => ({
-  workDay: GetRootStore(s).WorkDayStore,
-}))
+@inject(mapStore(root => ({
+  workDay: root.WorkDayStore,
+})))
 @observer
 export default class DateSelector extends React.Component<DateSelectorProps, DateSelectorState> {
   public state = {
