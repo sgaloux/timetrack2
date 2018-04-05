@@ -3,21 +3,12 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "start": "electron-webpack dev",
+    "dev": "electron-webpack dev",
     "compile": "electron-webpack",
-    "dist": "yarn compile && electron-builder",
-    "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
+    "dist": "npm run compile && electron-builder",
+    "dist:dir": "npm run dist --dir -c.compression=store -c.mac.identity=null",
     "lint-fix": "tslint --fix ./src/**/*.ts ./src/**/*.tsx -t verbose",
     "pretty": "prettier --write **/*.ts **/*.tsx"
-  },
-  "electronWebpack": {
-    "main": {
-      "webpackConfig": "custom.additions.webpack.js"
-    },
-    "renderer": {
-      "webpackConfig": "custom.additions.webpack.js",
-      "webpackDllConfig": "custom.additions.webpack.js"
-    }
   },
   "dependencies": {
     "@blueprintjs/core": "^2.0.1",
@@ -74,7 +65,9 @@
     "tslint-react": "^3.5.1",
     "typescript": "^2.8.1",
     "webpack": "^4.4.1",
-    "webpack-build-notifier": "^0.1.23",
-    "webpack-sources": "1.1.0"
+    "webpack-build-notifier": "^0.1.23"
+  },
+  "resolutions": {
+    "webpack-sources": "1.0.1"
   }
 }

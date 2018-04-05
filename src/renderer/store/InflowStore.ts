@@ -2,7 +2,7 @@ import { existsSync } from 'fs';
 import { applySnapshot, flow, types } from 'mobx-state-tree';
 import { unflatten } from 'un-flatten-tree';
 import { getInflowTree, getInflowTypes } from '../services/inflowService';
-import { GetParameters } from './index';
+import { GetParameters } from './utils/utils';
 import { PATHS, readFilePromisified, writeFilePromisified } from '../common';
 import { NotificationToast } from '../modules/Common';
 import { InflowNode, InflowNodeType, InflowType } from './models';

@@ -5,7 +5,7 @@ import path from 'path';
 import { WorkItem } from './models';
 import { PATHS, readFilePromisified, writeFilePromisified } from '../common';
 import { NotificationToast } from '../modules/Common';
-import { GetModals } from './index';
+import { GetModals } from './utils/utils';
 
 export const WorkDayStore = types
   .model({
