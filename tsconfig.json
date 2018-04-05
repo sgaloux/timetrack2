@@ -7,7 +7,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "pretty": true,
-    "rootDir": "./src",
+    "rootDir": "./src"
   },
   "include": [
     "src/**/*"

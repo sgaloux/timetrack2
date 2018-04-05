@@ -23,3 +23,8 @@ export function GetModals(model: IStateTreeNode): ModalStoreType {
 export function GetRootStore(s: any): RootStoreType {
   return s.store as RootStoreType;
 }
+
+export { InflowType } from './models/InflowType';
+export { InflowNode } from './models/InflowNode';
+export { InflowNodeType } from './models/InflowType';
+export { ConfirmModalModel } from './models/ConfirmModalModel';
