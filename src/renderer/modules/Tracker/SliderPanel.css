@@ -1,0 +1,40 @@
+.sliderPanel {
+    height: 620px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    position: fixed;
+    left: 10%;
+    bottom: -640px;
+    padding: 5px;
+    -webkit-transition: all 0.3s ease-in-out;
+}
+
+.sliderPanel-appear {
+
+}
+
+.sliderPanel-active-appear {
+}
+
+.sliderPanel-enter {
+
+}
+
+.sliderPanel-active-enter {
+
+}
+
+.sliderPanel-enter-done {
+    bottom: -20px;
+}
+
+.sliderPanel-exit {
+}
+
+.sliderPanel-active-exit {
+}
+
+.sliderPanel-done-exit {
+
+}

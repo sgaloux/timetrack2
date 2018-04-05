@@ -1,4 +1,4 @@
-import { Classes, NonIdealState, Overlay } from '@blueprintjs/core';
+import { Card, NonIdealState } from '@blueprintjs/core';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
 
@@ -7,10 +7,12 @@ import WorkItem from './WorkItem';
 import DateSelector from './DateSelector';
 import { Div } from 'glamorous';
 import { IconNames } from '@blueprintjs/icons';
-import classNames from 'classnames';
 import { WorkDayStoreType } from '../../store';
 import { WorkItemType } from '../../store/models';
 import { mapStore } from '../../store/utils';
+import { InflowTreeSelector } from './InflowTreeSelector';
+import SliderPanel from './SliderPanel';
+
 
 interface TrackerPageState {
   inflowSelectorOverlayOpened: boolean;
@@ -33,7 +35,7 @@ export default class TrackerPage extends React.Component<TrackerPageProps, Track
 
   public render() {
     const workDay = this.props.workDay!;
-    const overlayClasses = classNames(Classes.CARD, Classes.ELEVATION_4, 'animationPane');
+    // const overlayClasses = classNames(Classes.CARD, Classes.ELEVATION_4, 'animationPane');
 
     return (
       <div>
@@ -45,19 +47,23 @@ export default class TrackerPage extends React.Component<TrackerPageProps, Track
           }}
         >
           <DateSelector/>
-          <ActionBar onAdd={workDay.addWorkItem} onClear={workDay.clearTheDay} clearButtonDisabled={workDay.noItems}/>
+          <ActionBar
+            onAdd={workDay.addWorkItem}
+            onClear={workDay.clearTheDay}
+            clearButtonDisabled={workDay.noItems}
+          />
         </Div>
         <hr/>
-        <Overlay
-          isOpen={this.state.inflowSelectorOverlayOpened}
-          className={Classes.OVERLAY_SCROLL_CONTAINER}
-          transitionDuration={10}
-          onClose={() => this.setState({ inflowSelectorOverlayOpened: false })}
-        >
-          <div className={overlayClasses}>Content</div>
-        </Overlay>
+        <SliderPanel active={this.state.inflowSelectorOverlayOpened}>
+          <Card>
+            <InflowTreeSelector/>
+          </Card>
+        </SliderPanel>
         {workDay.noItems ? (
-          <NonIdealState title="No work items found..." visual={IconNames.PREDICTIVE_ANALYSIS}/>
+          <NonIdealState
+            title="No work items found..."
+            visual={IconNames.PREDICTIVE_ANALYSIS}
+          />
         ) : (
           workDay.allItems.map((i: WorkItemType) => (
             <WorkItem
