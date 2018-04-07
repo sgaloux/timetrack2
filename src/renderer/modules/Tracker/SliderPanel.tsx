@@ -16,22 +16,36 @@ interface SliderPanelState {
 }
 
 export default class SliderPanel extends React.Component<SliderPanelProps, SliderPanelState> {
-
   public state = {
     active: false,
   };
 
   static getDerivedStateFromProps(nextProps: SliderPanelProps) {
+    console.log('derived state slider panel: ', nextProps);
     return {
       active: nextProps.active,
     };
   }
 
-  public close = (e) => {
+  public close = () => {
     this.setState({
       active: false,
     });
   };
+
+  escFunction = (event: KeyboardEvent) => {
+    if (event.keyCode === 27) {
+      // Listen to escape key for close
+      this.close();
+    }
+  };
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.escFunction, false);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.escFunction, false);
+  }
 
   public render() {
     return (
@@ -49,12 +63,9 @@ export default class SliderPanel extends React.Component<SliderPanelProps, Slide
           return (
             <div className={cl}>
               <Card style={{ width: '100%', height: '100%' }}>
-
                 {this.props.children}
-                <Button
-                  onClick={this.close}
-                  text="Close"
-                />
+                <hr />
+                <Button onClick={this.close} text="Close" />
               </Card>
             </div>
           );

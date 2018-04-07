@@ -15,13 +15,16 @@ export const InflowStore = types
   .model({
     inflowTypes: types.optional(types.array(InflowType), []),
     inflowNodes: types.optional(types.array(InflowNode), []),
+    nodeSearchTerm: types.optional(types.string, ''),
   })
   .views((self) => ({
     get inflowTree() {
-      const nodes = self.inflowNodes.map((node: InflowNodeType) => ({
-        ...node,
-        children: [],
-      })) as InflowNodeTreeType[];
+      const nodes = self.inflowNodes
+        .filter((node) => node.name.toLowerCase().includes(self.nodeSearchTerm.toLowerCase()))
+        .map((node: InflowNodeType) => ({
+          ...node,
+          children: [],
+        })) as InflowNodeTreeType[];
       return unflatten(
         nodes,
         (node, parentNode) => node.parentId === parentNode.inflowId,
@@ -30,15 +33,15 @@ export const InflowStore = types
     },
   }))
   .actions((self) => {
-    const loadInflowTypesFromServer = flow(function* () {
+    const loadInflowTypesFromServer = flow(function*() {
       self.inflowTypes = yield getInflowTypes(GetParameters(self));
     });
 
-    const loadInflowNodesFromServer = flow(function* () {
+    const loadInflowNodesFromServer = flow(function*() {
       self.inflowNodes = yield getInflowTree(GetParameters(self));
     });
 
-    const tryToLoadTypes = flow(function* () {
+    const tryToLoadTypes = flow(function*() {
       if (existsSync(PATHS.inflowTypesFile)) {
         try {
           const content = yield readFilePromisified(PATHS.inflowTypesFile, {
@@ -54,7 +57,7 @@ export const InflowStore = types
       }
     });
 
-    const tryToLoadNodes = flow(function* () {
+    const tryToLoadNodes = flow(function*() {
       if (existsSync(PATHS.inflowNodesFile)) {
         try {
           const content = yield readFilePromisified(PATHS.inflowNodesFile, {
@@ -70,7 +73,7 @@ export const InflowStore = types
       }
     });
 
-    const saveInflowTypesToFile = flow(function* () {
+    const saveInflowTypesToFile = flow(function*() {
       try {
         const typesContent = JSON.stringify(self.inflowTypes, null, 2);
         yield writeFilePromisified(PATHS.inflowTypesFile, typesContent, {
@@ -81,7 +84,7 @@ export const InflowStore = types
       }
     });
 
-    const saveInflowNodesToFile = flow(function* () {
+    const saveInflowNodesToFile = flow(function*() {
       try {
         const typesContent = JSON.stringify(self.inflowNodes, null, 2);
         yield writeFilePromisified(PATHS.inflowNodesFile, typesContent, {
@@ -92,6 +95,10 @@ export const InflowStore = types
       }
     });
 
+    const searchNodes = (searchterm: string) => {
+      self.nodeSearchTerm = searchterm;
+    };
+
     return {
       loadInflowTypesFromServer,
       loadInflowNodesFromServer,
@@ -99,6 +106,7 @@ export const InflowStore = types
       saveInflowNodesToFile,
       tryToLoadTypes,
       tryToLoadNodes,
+      searchNodes,
     };
   });
 

@@ -1,4 +1,4 @@
-import { Card, NonIdealState } from '@blueprintjs/core';
+import { NonIdealState } from '@blueprintjs/core';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
 
@@ -10,9 +10,8 @@ import { IconNames } from '@blueprintjs/icons';
 import { WorkDayStoreType } from '../../store';
 import { WorkItemType } from '../../store/models';
 import { mapStore } from '../../store/utils';
-import { InflowTreeSelector } from './InflowTreeSelector';
+import InflowTreeSelector from './InflowTreeSelector';
 import SliderPanel from './SliderPanel';
-
 
 interface TrackerPageState {
   inflowSelectorOverlayOpened: boolean;
@@ -23,9 +22,11 @@ interface TrackerPageProps {
   workDay?: WorkDayStoreType;
 }
 
-@inject(mapStore(root => ({
-  workDay: root.WorkDayStore,
-})))
+@inject(
+  mapStore((root) => ({
+    workDay: root.WorkDayStore,
+  })),
+)
 @observer
 export default class TrackerPage extends React.Component<TrackerPageProps, TrackerPageState> {
   public state = {
@@ -46,24 +47,22 @@ export default class TrackerPage extends React.Component<TrackerPageProps, Track
             justifyContent: 'space-between',
           }}
         >
-          <DateSelector/>
+          <DateSelector />
           <ActionBar
             onAdd={workDay.addWorkItem}
             onClear={workDay.clearTheDay}
             clearButtonDisabled={workDay.noItems}
           />
         </Div>
-        <hr/>
-        <SliderPanel active={this.state.inflowSelectorOverlayOpened}>
-          <Card>
-            <InflowTreeSelector/>
-          </Card>
+        <hr />
+        <SliderPanel
+          active={this.state.inflowSelectorOverlayOpened}
+          onClosed={() => this.setState({ inflowSelectorOverlayOpened: false })}
+        >
+          <InflowTreeSelector />
         </SliderPanel>
         {workDay.noItems ? (
-          <NonIdealState
-            title="No work items found..."
-            visual={IconNames.PREDICTIVE_ANALYSIS}
-          />
+          <NonIdealState title="No work items found..." visual={IconNames.PREDICTIVE_ANALYSIS} />
         ) : (
           workDay.allItems.map((i: WorkItemType) => (
             <WorkItem

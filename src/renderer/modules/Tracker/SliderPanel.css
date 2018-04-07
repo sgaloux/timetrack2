@@ -1,40 +1,15 @@
 .sliderPanel {
-    height: 620px;
+    height: 800px;
     width: 80%;
     margin-left: auto;
     margin-right: auto;
     position: fixed;
     left: 10%;
-    bottom: -640px;
+    bottom: -810px;
     padding: 5px;
-    -webkit-transition: all 0.3s ease-in-out;
-}
-
-.sliderPanel-appear {
-
-}
-
-.sliderPanel-active-appear {
-}
-
-.sliderPanel-enter {
-
-}
-
-.sliderPanel-active-enter {
-
+    transition: all 0.3s ease-in-out;
 }
 
 .sliderPanel-enter-done {
-    bottom: -20px;
-}
-
-.sliderPanel-exit {
-}
-
-.sliderPanel-active-exit {
-}
-
-.sliderPanel-done-exit {
-
+    bottom: -10px;
 }
