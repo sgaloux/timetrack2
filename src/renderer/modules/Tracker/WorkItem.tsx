@@ -10,11 +10,12 @@ interface WorkItemProps {
   workItem: WorkItemType;
   onDeleteItem: (item: WorkItemType) => any;
   onInflowButtonClicked: () => any;
+  onYoutrackButtonClicked: () => any;
 }
 
 export default class WorkItem extends React.Component<WorkItemProps> {
   public render() {
-    const { workItem, onInflowButtonClicked } = this.props;
+    const { workItem, onInflowButtonClicked, onYoutrackButtonClicked } = this.props;
     return (
       <Div marginBottom={5}>
         <Card interactive={true} elevation={Elevation.TWO}>
@@ -32,7 +33,12 @@ export default class WorkItem extends React.Component<WorkItemProps> {
               intent={Intent.PRIMARY}
               onClick={onInflowButtonClicked}
             />
-            <Button text="Youtrack..." className={Classes.MINIMAL} intent={Intent.PRIMARY} />
+            <Button
+              text="Youtrack..."
+              className={Classes.MINIMAL}
+              intent={Intent.PRIMARY}
+              onClick={onYoutrackButtonClicked}
+            />
             <ButtonGroup>
               <TooltipButton
                 tooltipContent="Delete work item"

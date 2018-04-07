@@ -55,12 +55,7 @@ export default class TrackerPage extends React.Component<TrackerPageProps, Track
           />
         </Div>
         <hr />
-        <SliderPanel
-          active={this.state.inflowSelectorOverlayOpened}
-          onClosed={() => this.setState({ inflowSelectorOverlayOpened: false })}
-        >
-          <InflowTreeSelector />
-        </SliderPanel>
+
         {workDay.noItems ? (
           <NonIdealState title="No work items found..." visual={IconNames.PREDICTIVE_ANALYSIS} />
         ) : (
@@ -70,16 +65,42 @@ export default class TrackerPage extends React.Component<TrackerPageProps, Track
               workItem={i}
               onDeleteItem={workDay.deleteItem}
               onInflowButtonClicked={this.showInflowSelector}
+              onYoutrackButtonClicked={this.showYoutrackSelector}
             />
           ))
         )}
+
+        <SliderPanel
+          active={this.state.inflowSelectorOverlayOpened}
+          onClosed={() => this.setState({ inflowSelectorOverlayOpened: false })}
+        >
+          <InflowTreeSelector />
+        </SliderPanel>
+        <SliderPanel
+          active={this.state.youtrackSelectorOverlayOpened}
+          onClosed={() => this.setState({ youtrackSelectorOverlayOpened: false })}
+        >
+          <div>YOUTRAAAACK</div>
+        </SliderPanel>
       </div>
     );
   }
 
   private showInflowSelector = () => {
+    if (this.state.youtrackSelectorOverlayOpened) {
+      return;
+    }
     this.setState({
       inflowSelectorOverlayOpened: true,
+    });
+  };
+
+  private showYoutrackSelector = () => {
+    if (this.state.inflowSelectorOverlayOpened) {
+      return;
+    }
+    this.setState({
+      youtrackSelectorOverlayOpened: true,
     });
   };
 }
