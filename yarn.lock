@@ -537,11 +537,11 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"@blueprintjs/core@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@blueprintjs/core/-/core-2.0.0.tgz#0e2fa20c1baf289d1e62902cdc8ab68f2d6085fc"
+"@blueprintjs/core@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@blueprintjs/core/-/core-2.1.1.tgz#8e7178c7bd0faea53a0f9a25392215a1fe62d05e"
   dependencies:
-    "@blueprintjs/icons" "^2.0.0"
+    "@blueprintjs/icons" "^2.1.1"
     "@types/dom4" "^2.0.0"
     classnames "^2.2"
     dom4 "^2.0.1"
@@ -550,31 +550,18 @@
     react-popper "^0.8.2"
     tslib "^1.9.0"
 
-"@blueprintjs/core@^2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@blueprintjs/core/-/core-2.0.1.tgz#0b2cf9b477c8a0d102030a5de0465c1709eb99e7"
+"@blueprintjs/datetime@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@blueprintjs/datetime/-/datetime-2.0.2.tgz#26329a5ab2d96e6151a832948df9cfbf17c357b5"
   dependencies:
-    "@blueprintjs/icons" "^2.0.0"
-    "@types/dom4" "^2.0.0"
-    classnames "^2.2"
-    dom4 "^2.0.1"
-    normalize.css "^7.0.0"
-    popper.js "^1.14.1"
-    react-popper "^0.8.2"
-    tslib "^1.9.0"
-
-"@blueprintjs/datetime@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@blueprintjs/datetime/-/datetime-2.0.0.tgz#f52b97f42ba4f65d07cbbd87d1f3e1c68df7564f"
-  dependencies:
-    "@blueprintjs/core" "^2.0.0"
+    "@blueprintjs/core" "^2.1.1"
     classnames "^2.2"
     react-day-picker "^7.0.7"
     tslib "^1.9.0"
 
-"@blueprintjs/icons@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@blueprintjs/icons/-/icons-2.0.0.tgz#d3c149b0c70de20f16bf46eff30caa60b3e74370"
+"@blueprintjs/icons@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@blueprintjs/icons/-/icons-2.1.1.tgz#426b0291baf198e0181ae8f49bb5c2bc0bb55e9f"
   dependencies:
     classnames "^2.2"
     tslib "^1.9.0"
@@ -601,9 +588,9 @@
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@types/dom4/-/dom4-2.0.0.tgz#00dc42fed6b36a7a6dabb8f7a9c9e678ee644e05"
 
-"@types/electron-devtools-installer@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@types/electron-devtools-installer/-/electron-devtools-installer-2.0.2.tgz#6979d47dee7cf9cce16589c25f25e361e047221d"
+"@types/electron-devtools-installer@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@types/electron-devtools-installer/-/electron-devtools-installer-2.0.3.tgz#905b9f7d9762fa9bfa5fc87ad6cb81945a0dfc79"
 
 "@types/history@*":
   version "4.6.2"
@@ -637,9 +624,9 @@
   dependencies:
     react-day-picker "*"
 
-"@types/react-dom@^16.0.4":
-  version "16.0.4"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.0.4.tgz#2e8fd45f5443780ed49bf2cdd9809e6091177a7d"
+"@types/react-dom@^16.0.5":
+  version "16.0.5"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.0.5.tgz#a757457662e3819409229e8f86795ff37b371f96"
   dependencies:
     "@types/node" "*"
     "@types/react" "*"
@@ -659,9 +646,9 @@
     "@types/history" "*"
     "@types/react" "*"
 
-"@types/react-transition-group@^2.0.7":
-  version "2.0.7"
-  resolved "https://registry.yarnpkg.com/@types/react-transition-group/-/react-transition-group-2.0.7.tgz#2847292d54c5685d982ae5a3ecb6960946689d87"
+"@types/react-transition-group@^2.0.8":
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/@types/react-transition-group/-/react-transition-group-2.0.8.tgz#1ea86f6d8288e4bba8d743317ba9cc61cdacc1ad"
   dependencies:
     "@types/react" "*"
 
@@ -669,11 +656,11 @@
   version "16.0.40"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.0.40.tgz#caabc2296886f40b67f6fc80f0f3464476461df9"
 
-"@types/react@^16.1.0":
-  version "16.3.5"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.3.5.tgz#bd3b21285602ea7cadb4b9e0d9711d96fd5692cc"
+"@types/react@^16.3.10":
+  version "16.3.10"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.3.10.tgz#2f25eef83f7c7f6c51cea4c02660f727c75d3b33"
   dependencies:
-    csstype "^2.0.0"
+    csstype "^2.2.0"
 
 "@types/uuid@^3.4.3":
   version "3.4.3"
@@ -2191,10 +2178,6 @@ caseless@~0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
 
-chain-function@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/chain-function/-/chain-function-1.0.0.tgz#0d4ab37e7e18ead0bdc47b920764118ce58733dc"
-
 chalk@^1.0.0, chalk@^1.1.1, chalk@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-1.1.3.tgz#a8115c55e4a702fe4d150abd3872822a7e09fc98"
@@ -2849,9 +2832,9 @@ csso@~2.3.1:
     clap "^1.0.9"
     source-map "^0.5.3"
 
-csstype@^2.0.0:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.1.1.tgz#37b01a7a9958ef0b88167ff6678deccd732e0ae2"
+csstype@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.2.0.tgz#1656ef97553ac53b77090844a2531c6660ebd902"
 
 currently-unhandled@^0.4.1:
   version "0.4.1"
@@ -3053,7 +3036,7 @@ dom-converter@~0.1:
   dependencies:
     utila "~0.3"
 
-dom-helpers@^3.2.0:
+dom-helpers@^3.3.1:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/dom-helpers/-/dom-helpers-3.3.1.tgz#fc1a4e15ffdf60ddde03a480a9c0fece821dd4a6"
 
@@ -3770,9 +3753,9 @@ fill-range@^4.0.0:
     repeat-string "^1.6.1"
     to-regex-range "^2.1.0"
 
-final-form@^4.2.1:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/final-form/-/final-form-4.4.0.tgz#3eaa1305d7b03d1e5698ace5ff361d4d20d44ac0"
+final-form@^4.5.2:
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/final-form/-/final-form-4.5.2.tgz#f8a9518784bdc2f72e71548a42b04c640963ca49"
 
 finalhandler@1.1.1:
   version "1.1.1"
@@ -4037,11 +4020,12 @@ glamor@^2.20.40:
     prop-types "^15.5.10"
     through "^2.3.8"
 
-glamorous@^4.12.0:
-  version "4.12.1"
-  resolved "https://registry.yarnpkg.com/glamorous/-/glamorous-4.12.1.tgz#bcfa00f3d24c9232da33bc2b415e0d3ca7b10f68"
+glamorous@^4.12.3:
+  version "4.12.3"
+  resolved "https://registry.yarnpkg.com/glamorous/-/glamorous-4.12.3.tgz#29203c37a0a8dfde020b73a86dcfacc824baeec1"
   dependencies:
     brcast "^3.0.0"
+    csstype "^2.2.0"
     fast-memoize "^2.2.7"
     html-tag-names "^1.1.1"
     is-function "^1.0.1"
@@ -6643,7 +6627,11 @@ preserve@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
 
-prettier@^1.11.1, prettier@^1.5.3:
+prettier@^1.12.0:
+  version "1.12.0"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.12.0.tgz#d26fc5894b9230de97629b39cae225b503724ce8"
+
+prettier@^1.5.3:
   version "1.11.1"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.11.1.tgz#61e43fc4cd44e68f2b0dfc2c38cd4bb0fccdcc75"
 
@@ -6694,7 +6682,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1:
+prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.6.0, prop-types@^15.6.1:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.1.tgz#36644453564255ddda391191fb3a125cbdf654ca"
   dependencies:
@@ -6839,11 +6827,18 @@ rc@^1.0.1, rc@^1.1.2, rc@^1.1.6, rc@^1.1.7, rc@^1.2.1:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-day-picker@*, react-day-picker@^7.0.7, react-day-picker@^7.1.2:
+react-day-picker@*, react-day-picker@^7.0.7:
   version "7.1.4"
   resolved "https://registry.yarnpkg.com/react-day-picker/-/react-day-picker-7.1.4.tgz#abd187ba4baea524f765fd4cd0055bcb45c33edc"
   dependencies:
     prop-types "^15.6.1"
+
+react-day-picker@^7.1.5:
+  version "7.1.5"
+  resolved "https://registry.yarnpkg.com/react-day-picker/-/react-day-picker-7.1.5.tgz#ac2a2ab9af0ad843cd91232cdc471ceea8e5ec6a"
+  dependencies:
+    prop-types "^15.6.1"
+    react-lifecycles-compat "^3.0.2"
 
 react-dom@^16.3.0:
   version "16.3.1"
@@ -6854,13 +6849,13 @@ react-dom@^16.3.0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-react-final-form@^3.1.2:
-  version "3.1.5"
-  resolved "https://registry.yarnpkg.com/react-final-form/-/react-final-form-3.1.5.tgz#6fa0e4c61e49b691b679ef4c8a5ad3fe92df0956"
+react-final-form@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/react-final-form/-/react-final-form-3.3.1.tgz#dbe40eec853a9c451e5a8deb3b02d948a2fb7e3c"
 
-react-hotkeys@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/react-hotkeys/-/react-hotkeys-1.1.1.tgz#dc8401d152a8048b1895b0016fba52bb7fbb0c40"
+react-hotkeys@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/react-hotkeys/-/react-hotkeys-1.1.3.tgz#d6db35c19863c067af3b90099e039618300e6faa"
   dependencies:
     lodash.isboolean "^3.0.3"
     lodash.isequal "^4.5.0"
@@ -6873,6 +6868,10 @@ react-html-attributes@^1.3.0:
   resolved "https://registry.yarnpkg.com/react-html-attributes/-/react-html-attributes-1.4.1.tgz#97b5ec710da68833598c8be6f89ac436216840a5"
   dependencies:
     html-element-attributes "^1.0.0"
+
+react-lifecycles-compat@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.2.tgz#7279047275bd727a912e25f734c0559527e84eff"
 
 react-popper@^0.8.2:
   version "0.8.3"
@@ -6904,15 +6903,13 @@ react-router@^4.2.0:
     prop-types "^15.5.4"
     warning "^3.0.0"
 
-react-transition-group@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-2.3.0.tgz#8dd1af58f6af284b19fd057f512e74f20438ad31"
+react-transition-group@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-2.3.1.tgz#31d611b33e143a5e0f2d94c348e026a0f3b474b6"
   dependencies:
-    chain-function "^1.0.0"
-    dom-helpers "^3.2.0"
+    dom-helpers "^3.3.1"
     loose-envify "^1.3.1"
-    prop-types "^15.5.8"
-    warning "^3.0.0"
+    prop-types "^15.6.1"
 
 react@^16.3.0:
   version "16.3.1"
