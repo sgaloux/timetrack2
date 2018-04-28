@@ -16,6 +16,7 @@ interface InflowTreeSelectorProps {
 @observer
 export default class InflowTreeSelector extends React.Component<InflowTreeSelectorProps> {
   public render() {
+    console.log('render');
     return (
       <Div
         css={{
@@ -23,7 +24,7 @@ export default class InflowTreeSelector extends React.Component<InflowTreeSelect
           overflow: 'auto',
         }}
       >
-        <GeneralTree contents={this.buildNodes(this.props.inflowStore!.inflowTree)} />
+        <GeneralTree contents={this.buildNodes(this.props.inflowStore!.inflowTree)} filter={true} />
         {/* <InflowTree data={this.props.inflowStore!.inflowTree} /> */}
       </Div>
     );

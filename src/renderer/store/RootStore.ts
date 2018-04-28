@@ -16,7 +16,7 @@ export const RootStore = types
     initializeMessage: '',
   })
   .actions((self) => {
-    const afterCreate = flow(function* () {
+    const initialize = flow(function*() {
       try {
         self.initializing = true;
         self.initializeMessage = 'Loading parameters';
@@ -24,7 +24,9 @@ export const RootStore = types
         self.initializeMessage = 'Loading inflow types';
         yield self.InflowStore.tryToLoadTypes();
         self.initializeMessage = 'Loading inflow tree';
+        self.initializing = true;
         yield self.InflowStore.tryToLoadNodes();
+        console.timeEnd('node');
         self.initializeMessage = 'Init done !';
       } catch (error) {
         NotificationToast.showError('Error in startup');
@@ -32,9 +34,10 @@ export const RootStore = types
         self.initializeMessage = `Error on startup : ${error}`;
       }
       self.initializing = false;
+      console.log('init done');
     });
 
-    const synchronizeData = flow(function* () {
+    const synchronizeData = flow(function*() {
       try {
         self.initializing = true;
         self.initializeMessage = 'Synchronize inflow types';
@@ -52,7 +55,7 @@ export const RootStore = types
       self.initializing = false;
     });
 
-    const quitApplication = flow(function* () {
+    const quitApplication = flow(function*() {
       const confirm = yield self.ModalStore.confirm.show(
         'Confirm exit',
         'Are you sure you want to quit timetrack2 ? ',
@@ -63,7 +66,7 @@ export const RootStore = types
     });
 
     return {
-      afterCreate,
+      initialize,
       synchronizeData,
       quitApplication,
     };

@@ -29,35 +29,41 @@ const InitializeContentDiv = glamorous.div({
 });
 
 interface AppShellProps {
-  store?: RootStoreType;
+  rootStore?: RootStoreType;
 }
 
-@inject(mapStore(root => ({
-  store: root,
-})))
+@inject(
+  mapStore((root) => ({
+    rootStore: root,
+  })),
+)
 @observer
 export default class AppShell extends React.Component<AppShellProps> {
+  public componentWillMount() {
+    this.props.rootStore!.initialize();
+  }
+
   public render() {
-    const { store } = this.props;
-    const { initializeMessage, initializing } = store!;
+    const { rootStore } = this.props;
+    const { initializeMessage, initializing } = rootStore!;
     return (
       <HashRouter>
         <React.Fragment>
-          <AppConfirm/>
-          <NavigationBar onSync={store!.synchronizeData} onQuit={store!.quitApplication}/>
+          <AppConfirm />
+          <NavigationBar onSync={rootStore!.synchronizeData} onQuit={rootStore!.quitApplication} />
           {initializing ? (
             <InitializeContainerDiv>
               <InitializeContentDiv>
-                <Spinner/>
+                <Spinner />
                 <h1>{initializeMessage}</h1>
               </InitializeContentDiv>
             </InitializeContainerDiv>
           ) : (
             <ContainerDiv>
               <Switch>
-                <Route path="/tracker" component={TrackerPage}/>
-                <Route path="/settings" component={SettingsPage}/>
-                <Redirect to="/tracker"/>
+                <Route path="/tracker" component={TrackerPage} />
+                <Route path="/settings" component={SettingsPage} />
+                <Redirect to="/tracker" />
               </Switch>
             </ContainerDiv>
           )}

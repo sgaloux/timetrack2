@@ -1,9 +1,9 @@
 import { types } from 'mobx-state-tree';
 import { InflowNode } from './InflowNode';
 
-export const InflowType = types.model({
+export const InflowActivity = types.model({
   id: types.string,
   name: types.string,
 });
 
-export type InflowNodeType = typeof InflowNode.Type;
+export type InflowActivityType = typeof InflowNode.Type;

@@ -18,3 +18,7 @@ export function GetModals(model: IStateTreeNode): ModalStoreType {
   const root = getRoot(model) as typeof RootStore.Type;
   return root.ModalStore;
 }
+
+export function GetRootStore(model: IStateTreeNode): RootStoreType {
+  return getRoot(model) as typeof RootStore.Type;
+}

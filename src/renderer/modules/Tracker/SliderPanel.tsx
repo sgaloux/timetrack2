@@ -21,7 +21,6 @@ export default class SliderPanel extends React.Component<SliderPanelProps, Slide
   };
 
   static getDerivedStateFromProps(nextProps: SliderPanelProps) {
-    console.log('derived state slider panel: ', nextProps);
     return {
       active: nextProps.active,
     };

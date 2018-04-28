@@ -55,9 +55,7 @@ function parseTree(data: XmlTree, parentId?: string): InflowNode[] {
   if (data.application) {
     data.application.forEach((app) => {
       const nextParentId = data._attributes ? data._attributes.id : undefined;
-      if (app.application) {
-        nodes.push(...parseTree(app, nextParentId));
-      }
+      nodes.push(...parseTree(app, nextParentId));
     });
   }
   return nodes;

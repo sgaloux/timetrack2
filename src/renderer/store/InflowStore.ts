@@ -5,7 +5,7 @@ import { getInflowTree, getInflowTypes } from '../services/inflowService';
 import { GetParameters } from './utils/utils';
 import { PATHS, readFilePromisified, writeFilePromisified } from '../common';
 import { NotificationToast } from '../modules/Common';
-import { InflowNode, InflowNodeType, InflowType } from './models';
+import { InflowNode, InflowNodeType, InflowActivity } from './models';
 
 export interface InflowNodeTreeType extends InflowNodeType {
   children: InflowNodeTreeType[];
@@ -13,28 +13,31 @@ export interface InflowNodeTreeType extends InflowNodeType {
 
 export const InflowStore = types
   .model({
-    inflowTypes: types.optional(types.array(InflowType), []),
+    inflowActivities: types.optional(types.array(InflowActivity), []),
     inflowNodes: types.optional(types.array(InflowNode), []),
     nodeSearchTerm: types.optional(types.string, ''),
   })
-  .views((self) => ({
-    get inflowTree() {
-      const nodes = self.inflowNodes
-        .filter((node) => node.name.toLowerCase().includes(self.nodeSearchTerm.toLowerCase()))
-        .map((node: InflowNodeType) => ({
-          ...node,
-          children: [],
-        })) as InflowNodeTreeType[];
-      return unflatten(
-        nodes,
-        (node, parentNode) => node.parentId === parentNode.inflowId,
-        (node, parentNode) => parentNode.children.push(node),
-      );
-    },
-  }))
+  .views((self) => {
+    return {
+      get inflowTree() {
+        console.log('getting tree...');
+        const nodes = self.inflowNodes
+          .filter((node: InflowNodeType) => node.name.toLowerCase().includes(self.nodeSearchTerm.toLowerCase()))
+          .map((node: InflowNodeType) => ({
+            ...node,
+            children: [],
+          })) as InflowNodeTreeType[];
+        return unflatten(
+          nodes,
+          (node, parentNode) => node.parentId === parentNode.inflowId,
+          (node, parentNode) => parentNode.children.push(node),
+        );
+      },
+    };
+  })
   .actions((self) => {
     const loadInflowTypesFromServer = flow(function*() {
-      self.inflowTypes = yield getInflowTypes(GetParameters(self));
+      self.inflowActivities = yield getInflowTypes(GetParameters(self));
     });
 
     const loadInflowNodesFromServer = flow(function*() {
@@ -47,7 +50,7 @@ export const InflowStore = types
           const content = yield readFilePromisified(PATHS.inflowTypesFile, {
             encoding: 'utf8',
           });
-          applySnapshot(self.inflowTypes, JSON.parse(content));
+          applySnapshot(self.inflowActivities, JSON.parse(content));
         } catch (error) {
           NotificationToast.showError(`Unable to load inflow types from file ${error}`);
         }
@@ -60,10 +63,19 @@ export const InflowStore = types
     const tryToLoadNodes = flow(function*() {
       if (existsSync(PATHS.inflowNodesFile)) {
         try {
+          console.time('Reading nodes file');
           const content = yield readFilePromisified(PATHS.inflowNodesFile, {
             encoding: 'utf8',
           });
-          applySnapshot(self.inflowNodes, JSON.parse(content));
+
+          console.timeEnd('Reading nodes file');
+
+          console.time('parseJson');
+          const newLocal = JSON.parse(content);
+          console.timeEnd('parseJson');
+          console.time('node snapshot');
+          applySnapshot(self.inflowNodes, newLocal);
+          console.timeEnd('node snapshot');
         } catch (error) {
           NotificationToast.showError(`Unable to load inflow nodes from file ${error}`);
         }
@@ -75,7 +87,7 @@ export const InflowStore = types
 
     const saveInflowTypesToFile = flow(function*() {
       try {
-        const typesContent = JSON.stringify(self.inflowTypes, null, 2);
+        const typesContent = JSON.stringify(self.inflowActivities, null, 2);
         yield writeFilePromisified(PATHS.inflowTypesFile, typesContent, {
           encoding: 'utf8',
         });
