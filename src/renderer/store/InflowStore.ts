@@ -1,15 +1,10 @@
 import { existsSync } from 'fs';
 import { applySnapshot, flow, types } from 'mobx-state-tree';
-import { unflatten } from 'un-flatten-tree';
 import { getInflowTree, getInflowTypes } from '../services/inflowService';
 import { GetParameters } from './utils/utils';
 import { PATHS, readFilePromisified, writeFilePromisified } from '../common';
 import { NotificationToast } from '../modules/Common';
-import { InflowNode, InflowNodeType, InflowActivity } from './models';
-
-export interface InflowNodeTreeType extends InflowNodeType {
-  children: InflowNodeTreeType[];
-}
+import { InflowNode, InflowActivity } from './models';
 
 export const InflowStore = types
   .model({
@@ -20,18 +15,10 @@ export const InflowStore = types
   .views((self) => {
     return {
       get inflowTree() {
-        console.log('getting tree...');
-        const nodes = self.inflowNodes
-          .filter((node: InflowNodeType) => node.name.toLowerCase().includes(self.nodeSearchTerm.toLowerCase()))
-          .map((node: InflowNodeType) => ({
-            ...node,
-            children: [],
-          })) as InflowNodeTreeType[];
-        return unflatten(
-          nodes,
-          (node, parentNode) => node.parentId === parentNode.inflowId,
-          (node, parentNode) => parentNode.children.push(node),
-        );
+        return self.inflowNodes.filter((node) => node.parentId === null);
+      },
+      childNodesForParent(nodeId: string | null) {
+        return nodeId == null ? [] : self.inflowNodes.filter((n) => n.parentId === nodeId);
       },
     };
   })
