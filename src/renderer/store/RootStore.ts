@@ -24,13 +24,10 @@ export const RootStore = types
         self.initializeMessage = 'Loading inflow types';
         yield self.InflowStore.tryToLoadTypes();
         self.initializeMessage = 'Loading inflow tree';
-        self.initializing = true;
         yield self.InflowStore.tryToLoadNodes();
-        console.timeEnd('node');
         self.initializeMessage = 'Init done !';
       } catch (error) {
         NotificationToast.showError('Error in startup');
-        console.error('Error occured on sartup...', error);
         self.initializeMessage = `Error on startup : ${error}`;
       }
       self.initializing = false;

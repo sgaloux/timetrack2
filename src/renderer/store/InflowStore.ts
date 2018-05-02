@@ -1,10 +1,10 @@
 import { existsSync } from 'fs';
-import { applySnapshot, flow, types } from 'mobx-state-tree';
+import { applySnapshot, flow, types, onSnapshot } from 'mobx-state-tree';
 import { getInflowTree, getInflowTypes } from '../services/inflowService';
 import { GetParameters } from './utils/utils';
 import { PATHS, readFilePromisified, writeFilePromisified } from '../common';
 import { NotificationToast } from '../modules/Common';
-import { InflowNode, InflowActivity } from './models';
+import { InflowNode, InflowActivity, InflowNodeType } from './models';
 
 export const InflowStore = types
   .model({
@@ -12,13 +12,28 @@ export const InflowStore = types
     inflowNodes: types.optional(types.array(InflowNode), []),
     nodeSearchTerm: types.optional(types.string, ''),
   })
+  .volatile(() => {
+    let mapOfChildItems: { [key: string]: InflowNodeType[] } = {};
+    return {
+      mapOfChildItems,
+    };
+  })
   .views((self) => {
     return {
       get inflowTree() {
         return self.inflowNodes.filter((node) => node.parentId === null);
       },
-      childNodesForParent(nodeId: string | null) {
-        return nodeId == null ? [] : self.inflowNodes.filter((n) => n.parentId === nodeId);
+      childNodesForParent(nodeId: string | null): InflowNodeType[] {
+        if (nodeId == null) {
+          return [];
+        } else {
+          const data = self.mapOfChildItems[nodeId];
+          if (data) {
+            return data;
+          } else {
+            return [];
+          }
+        }
       },
     };
   })
@@ -50,19 +65,11 @@ export const InflowStore = types
     const tryToLoadNodes = flow(function*() {
       if (existsSync(PATHS.inflowNodesFile)) {
         try {
-          console.time('Reading nodes file');
           const content = yield readFilePromisified(PATHS.inflowNodesFile, {
             encoding: 'utf8',
           });
-
-          console.timeEnd('Reading nodes file');
-
-          console.time('parseJson');
           const newLocal = JSON.parse(content);
-          console.timeEnd('parseJson');
-          console.time('node snapshot');
           applySnapshot(self.inflowNodes, newLocal);
-          console.timeEnd('node snapshot');
         } catch (error) {
           NotificationToast.showError(`Unable to load inflow nodes from file ${error}`);
         }
@@ -98,6 +105,20 @@ export const InflowStore = types
       self.nodeSearchTerm = searchterm;
     };
 
+    const afterCreate = () => {
+      onSnapshot(self.inflowNodes, () => {
+        self.mapOfChildItems = self.inflowNodes.reduce((acc: any, current) => {
+          if (current.parentId !== null) {
+            if (acc[current.parentId!] === undefined) {
+              acc[current.parentId!] = [];
+            }
+            acc[current.parentId!].push(current);
+          }
+          return acc;
+        }, {});
+      });
+    };
+
     return {
       loadInflowTypesFromServer,
       loadInflowNodesFromServer,
@@ -106,6 +127,7 @@ export const InflowStore = types
       tryToLoadTypes,
       tryToLoadNodes,
       searchNodes,
+      afterCreate,
     };
   });
 
