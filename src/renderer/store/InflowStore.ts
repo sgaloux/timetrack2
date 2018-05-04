@@ -5,6 +5,7 @@ import { GetParameters } from './utils/utils';
 import { PATHS, readFilePromisified, writeFilePromisified } from '../common';
 import { NotificationToast } from '../modules/Common';
 import { InflowNode, InflowActivity, InflowNodeType } from './models';
+import { sortBy } from 'lodash';
 
 export const InflowStore = types
   .model({
@@ -21,13 +22,13 @@ export const InflowStore = types
   .views((self) => {
     return {
       get inflowTree() {
-        return self.inflowNodes.filter((node) => node.parentId === null);
+        return sortBy(self.inflowNodes.filter((node) => node.parentId === null), ['name']);
       },
       childNodesForParent(nodeId: string | null): InflowNodeType[] {
         if (nodeId == null) {
           return [];
         } else {
-          const data = self.mapOfChildItems[nodeId];
+          const data = sortBy(self.mapOfChildItems[nodeId], ['name']);
           if (data) {
             return data;
           } else {

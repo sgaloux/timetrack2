@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Div } from 'glamorous';
-import { InflowStoreType, InflowNodeTreeType } from '../../../store';
+import { InflowStoreType, InflowNodeType } from '../../../store';
 import { inject, observer } from 'mobx-react';
 import { mapStore } from '../../../store/utils';
 import GeneralTree, { GeneralTreeNode, TreeNodeData } from '../../Common/GeneralTree';
@@ -16,7 +16,8 @@ interface InflowTreeSelectorProps {
 @observer
 export default class InflowTreeSelector extends React.Component<InflowTreeSelectorProps> {
   public render() {
-    console.log('render');
+    const content = this.buildNodes(this.props.inflowStore!.inflowTree);
+
     return (
       <Div
         css={{
@@ -24,14 +25,14 @@ export default class InflowTreeSelector extends React.Component<InflowTreeSelect
           overflow: 'auto',
         }}
       >
-        <GeneralTree contents={this.buildNodes(this.props.inflowStore!.inflowTree)} filter={true} />
+        <GeneralTree contents={content} filter={true} />
         {/* <InflowTree data={this.props.inflowStore!.inflowTree} /> */}
       </Div>
     );
   }
 
-  private buildNodes = (nodes: InflowNodeTreeType[]): GeneralTreeNode<TreeNodeData>[] => {
-    return nodes.map((n) => {
+  private buildNodes = (nodes: InflowNodeType[]): GeneralTreeNode<TreeNodeData>[] => {
+    const map = nodes.map((n) => {
       return {
         childNodes: this.buildNodes(n.children),
         id: n.inflowId,
@@ -42,5 +43,6 @@ export default class InflowTreeSelector extends React.Component<InflowTreeSelect
         },
       };
     });
+    return map;
   };
 }
