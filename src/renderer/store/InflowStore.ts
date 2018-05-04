@@ -102,10 +102,6 @@ export const InflowStore = types
       }
     });
 
-    const searchNodes = (searchterm: string) => {
-      self.nodeSearchTerm = searchterm;
-    };
-
     const afterCreate = () => {
       onSnapshot(self.inflowNodes, () => {
         self.mapOfChildItems = self.inflowNodes.reduce((acc: any, current) => {
@@ -127,7 +123,6 @@ export const InflowStore = types
       saveInflowNodesToFile,
       tryToLoadTypes,
       tryToLoadNodes,
-      searchNodes,
       afterCreate,
     };
   });
