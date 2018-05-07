@@ -66,7 +66,9 @@ app.on('activate', () => {
 
 function installExtensions() {
   if (isDevelopment) {
+    // noinspection JSIgnoredPromiseFromCall
     installExtension(REACT_DEVELOPER_TOOLS);
+    // noinspection JSIgnoredPromiseFromCall
     installExtension('pfgnfdagidkfgccljigdamigbcnndkod');
   }
 }

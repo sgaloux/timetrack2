@@ -32,7 +32,7 @@ export const WorkDayStore = types
     },
   }))
   .actions((self) => {
-    const loadFromFile = flow(function*() {
+    const loadFromFile = flow(function* () {
       if (!existsSync(self.fullPath)) {
         yield saveToFile();
       }
@@ -46,7 +46,7 @@ export const WorkDayStore = types
       }
     });
 
-    const saveToFile = flow(function*() {
+    const saveToFile = flow(function* () {
       const jsonContent = JSON.stringify(self, null, 2);
       try {
         yield writeFilePromisified(self.fullPath, jsonContent, {
@@ -57,31 +57,37 @@ export const WorkDayStore = types
       }
     });
 
-    function loadDate(newDate: Date = new Date()) {
+    async function loadADate(newDate: Date) {
       self.workItems.clear();
       self.date = newDate;
-      loadFromFile();
+
+      await loadFromFile();
     }
 
-    function loadNextDate() {
-      loadDate(
+    const loadDate = flow(function* (newDate: Date = new Date()) {
+      yield loadADate(newDate);
+    });
+
+    const loadNextDate = flow(function*() {
+      yield loadADate(
         moment(self.date)
           .add(1, 'day')
           .toDate(),
       );
-    }
+    });
 
-    function loadPreviousDate() {
-      loadDate(
+    const loadPreviousDate = flow(function*() {
+      yield loadADate(
         moment(self.date)
           .subtract(1, 'day')
           .toDate(),
       );
-    }
+    });
 
     function addWorkItem() {
       const newItem = WorkItem.create();
       self.workItems.push(newItem);
+      // noinspection JSIgnoredPromiseFromCall
       saveToFile();
     }
 
@@ -90,16 +96,15 @@ export const WorkDayStore = types
       onSnapshot(self.workItems, saveToFile);
     }
 
-    const clearTheDay = flow(function*() {
+    const clearTheDay = flow(function* () {
       const confirmed = yield GetModals(self).confirm.show(
         'Delete all',
         `Are you sure you want to clear the day?\n${
           self.workItems.length
-        } item(s) will be deleted !`,
+          } item(s) will be deleted !`,
       );
       if (confirmed) {
         self.workItems.clear();
-        saveToFile();
       }
     });
 

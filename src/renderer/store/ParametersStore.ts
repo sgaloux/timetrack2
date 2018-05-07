@@ -12,6 +12,7 @@ export const ParametersStore = types
   .actions((self) => {
     function setNewParameters(newParams: typeof ParametersStore.Type) {
       applySnapshot(self, newParams);
+      // noinspection JSIgnoredPromiseFromCall
       saveParameters();
     }
 

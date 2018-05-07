@@ -1,6 +1,5 @@
 import { types } from 'mobx-state-tree';
 import { v4 } from 'uuid';
-import { GetParameters } from '../utils/utils';
 
 export const WorkItem = types
   .model({
@@ -9,18 +8,12 @@ export const WorkItem = types
     durationInSeconds: 0,
   })
   .actions((self) => {
-    function uploadToInflow() {
-      const params = GetParameters(self);
-      console.log(params.inflowUrl);
-    }
-
     function setValues(newValues: WorkItemType) {
       self.title = newValues.title;
       self.durationInSeconds = newValues.durationInSeconds;
     }
 
     return {
-      uploadToInflow,
       setValues,
     };
   });

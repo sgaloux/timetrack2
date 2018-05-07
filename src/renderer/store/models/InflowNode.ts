@@ -1,9 +1,6 @@
 import { types } from 'mobx-state-tree';
 import { GetRootStore } from '../utils';
 
-export function SortByName(a: InflowNodeType, b: InflowNodeType) {
-  return a.name.localeCompare(b.name);
-}
 export const InflowNode = types
   .model({
     name: types.string,

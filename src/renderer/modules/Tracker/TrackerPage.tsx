@@ -10,8 +10,8 @@ import { IconNames } from '@blueprintjs/icons';
 import { WorkDayStoreType } from '../../store';
 import { WorkItemType } from '../../store/models';
 import { mapStore } from '../../store/utils';
-import InflowTreeSelector from './InflowTreeSelector';
 import SliderPanel from './SliderPanel';
+import InflowTreeSelector from './InflowTreeSelector';
 
 interface TrackerPageState {
   inflowSelectorOverlayOpened: boolean;

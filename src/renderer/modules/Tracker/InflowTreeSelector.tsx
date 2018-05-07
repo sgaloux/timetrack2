@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Div } from 'glamorous';
-import { InflowStoreType, InflowNodeType } from '../../../store';
+import { InflowStoreType } from '../../store/index';
 import { inject, observer } from 'mobx-react';
-import { mapStore } from '../../../store/utils';
-import GeneralTree, { GeneralTreeNode, TreeNodeData } from '../../Common/GeneralTree';
+import { mapStore } from '../../store/utils/index';
+import GeneralTree, { GeneralTreeNode, TreeNodeData } from '../Common/GeneralTree';
+import { InflowNodeType } from '../../store/models/index';
 
 interface InflowTreeSelectorProps {
   inflowStore?: InflowStoreType;
@@ -32,7 +33,7 @@ export default class InflowTreeSelector extends React.Component<InflowTreeSelect
   }
 
   private buildNodes = (nodes: InflowNodeType[]): GeneralTreeNode<TreeNodeData>[] => {
-    const map = nodes.map((n) => {
+    return nodes.map((n) => {
       return {
         childNodes: this.buildNodes(n.children),
         id: n.inflowId,
@@ -43,6 +44,5 @@ export default class InflowTreeSelector extends React.Component<InflowTreeSelect
         },
       };
     });
-    return map;
   };
 }
