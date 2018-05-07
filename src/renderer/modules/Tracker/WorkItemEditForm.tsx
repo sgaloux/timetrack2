@@ -1,12 +1,13 @@
-import { TextArea } from '@blueprintjs/core';
 import { observer } from 'mobx-react';
 import React, { Fragment } from 'react';
-import { Form, Field } from 'react-final-form';
+import { Field, Form } from 'react-final-form';
 import AutoSave from '../Common/forms/AutoSave';
 import { WorkItemType } from '../../store/models';
+import { Classes } from '@blueprintjs/core';
 
 interface WorkItemEditFormProps {
   workItem: WorkItemType;
+
   onSave(values: WorkItemType): void;
 }
 
@@ -27,28 +28,27 @@ export default class WorkItemEditForm extends React.Component<WorkItemEditFormPr
   public render() {
     const { workItem } = this.props;
     return (
-      <div>
-        <Form
-          onSubmit={() => ({})}
-          validate={validateForm}
-          initialValues={workItem}
-          render={() => (
-            <Fragment>
-              <AutoSave debounce={500} save={this.props.onSave} />
-              <Field
-                name="title"
-                render={({ input }) => (
-                  <TextArea
-                    style={{ width: '350px' }}
-                    placeholder="Give a task title..."
-                    {...input}
-                  />
-                )}
-              />
-            </Fragment>
-          )}
-        />
-      </div>
+      <Form
+        onSubmit={() => ({})}
+        validate={validateForm}
+        initialValues={workItem}
+        render={() => (
+          <Fragment>
+            <AutoSave debounce={500} save={this.props.onSave}/>
+            <Field
+              name="title"
+              render={({ input }) => (
+                <input
+                  style={{ width: '50%' }}
+                  className={Classes.INPUT}
+                  placeholder="Give a task title..."
+                  {...input}
+                />
+              )}
+            />
+          </Fragment>
+        )}
+      />
     );
   }
 }
