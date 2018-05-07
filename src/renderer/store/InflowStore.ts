@@ -4,8 +4,8 @@ import { getInflowTree, getInflowTypes } from '../services/inflowService';
 import { GetParameters } from './utils/utils';
 import { PATHS, readFilePromisified, writeFilePromisified } from '../common';
 import { NotificationToast } from '../modules/Common';
-import { InflowNode, InflowActivity, InflowNodeType } from './models';
 import { sortBy } from 'lodash';
+import { InflowActivity, InflowNode, InflowNodeType } from './models';
 
 export const InflowStore = types
   .model({

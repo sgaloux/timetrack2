@@ -3,5 +3,3 @@ export * from './ModalStore';
 export * from './ParametersStore';
 export * from './RootStore';
 export * from './WorkDayStore';
-export * from './models';
-
