@@ -57,14 +57,14 @@ export const WorkDayStore = types
       }
     });
 
-    async function loadADate(newDate: Date) {
+    async function loadADate(newDate: Date= new Date()) {
       self.workItems.clear();
       self.date = newDate;
 
       await loadFromFile();
     }
 
-    const loadDate = flow(function* (newDate: Date = new Date()) {
+    const loadDate = flow(function* (newDate: Date) {
       yield loadADate(newDate);
     });
 
@@ -92,7 +92,7 @@ export const WorkDayStore = types
     }
 
     function afterCreate() {
-      loadDate();
+      loadDate(new Date());
       onSnapshot(self.workItems, saveToFile);
     }
 
